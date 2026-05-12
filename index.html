@@ -6,11 +6,18 @@
 
   <title>ZFD – Zukunft für Deutschland</title>
 
-  <!-- FONT -->
+  <!-- GOOGLE FONT -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
   <style>
+
+    /* =========================
+       RESET
+    ========================= */
+
     * {
       margin: 0;
       padding: 0;
@@ -18,76 +25,201 @@
       scroll-behavior: smooth;
     }
 
-    body {
-      font-family: Arial, sans-serif;
-      background:
-        radial-gradient(circle at top, #1e3a8a 0%, #0f172a 45%);
-      color: white;
-      line-height: 1.7;
-      overflow-x: hidden;
+    :root {
+
+      --bg: #08111f;
+      --bg2: #0f172a;
+      --card: rgba(15, 23, 42, 0.72);
+
+      --primary: #38bdf8;
+      --primary-light: #7dd3fc;
+
+      --text: #ffffff;
+      --muted: #cbd5e1;
+
+      --border: rgba(255,255,255,0.08);
+
+      --shadow:
+        0 0 20px rgba(56,189,248,0.12),
+        0 0 60px rgba(56,189,248,0.06);
+
+      --glass:
+        rgba(255,255,255,0.04);
+
     }
 
-    /* SCROLLBAR */
+    body {
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+
+      background:
+      radial-gradient(circle at top left,
+      rgba(56,189,248,0.15),
+      transparent 30%),
+
+      radial-gradient(circle at bottom right,
+      rgba(30,64,175,0.22),
+      transparent 35%),
+
+      linear-gradient(
+      180deg,
+      #020617 0%,
+      #08111f 35%,
+      #0f172a 100%);
+
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    /* =========================
+       CUSTOM SCROLLBAR
+    ========================= */
+
     ::-webkit-scrollbar {
       width: 10px;
     }
 
     ::-webkit-scrollbar-track {
-      background: #0f172a;
+      background: #020617;
     }
 
     ::-webkit-scrollbar-thumb {
-      background: #38bdf8;
-      border-radius: 20px;
+      background: linear-gradient(
+      180deg,
+      #38bdf8,
+      #2563eb);
+
+      border-radius: 999px;
     }
 
-    /* HEADER */
+    /* =========================
+       BACKGROUND PARTICLES
+    ========================= */
+
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+
+      background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+
+      background-size: 40px 40px;
+
+      z-index: -10;
+      mask-image: radial-gradient(circle at center, black 30%, transparent 95%);
+    }
+
+    .floating-glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      filter: blur(100px);
+      z-index: -9;
+      opacity: 0.3;
+      animation: float 12s ease-in-out infinite;
+    }
+
+    .glow1 {
+      background: #38bdf8;
+      top: -250px;
+      left: -150px;
+    }
+
+    .glow2 {
+      background: #2563eb;
+      bottom: -250px;
+      right: -150px;
+      animation-delay: 5s;
+    }
+
+    @keyframes float {
+      0%,100% {
+        transform: translateY(0px) translateX(0px);
+      }
+
+      50% {
+        transform: translateY(25px) translateX(15px);
+      }
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
     header {
       position: sticky;
       top: 0;
       z-index: 999;
-      backdrop-filter: blur(12px);
-      background: rgba(15, 23, 42, 0.85);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+
+      backdrop-filter: blur(20px);
+
+      background:
+      rgba(2, 6, 23, 0.72);
+
+      border-bottom:
+      1px solid rgba(255,255,255,0.06);
 
       display: flex;
       justify-content: space-between;
       align-items: center;
 
-      padding: 18px 8%;
+      padding: 18px 7%;
     }
 
     .logo {
-      font-size: 32px;
-      font-weight: bold;
-      letter-spacing: 2px;
-      color: #38bdf8;
-      text-shadow: 0 0 15px rgba(56,189,248,0.6);
+
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing: 4px;
+
+      background: linear-gradient(
+      to right,
+      white,
+      #38bdf8);
+
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      text-shadow:
+      0 0 25px rgba(56,189,248,0.55);
+
+      cursor: pointer;
     }
 
     nav {
       display: flex;
-      gap: 25px;
+      gap: 28px;
       flex-wrap: wrap;
     }
 
     nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 15px;
-      transition: 0.25s;
       position: relative;
+
+      text-decoration: none;
+      color: white;
+
+      font-size: 15px;
+      font-weight: 500;
+
+      transition: 0.3s;
     }
 
     nav a::after {
       content: "";
+
       position: absolute;
       left: 0;
-      bottom: -5px;
+      bottom: -7px;
+
       width: 0%;
       height: 2px;
-      background: #38bdf8;
-      transition: 0.25s;
+
+      background: var(--primary);
+
+      transition: 0.3s;
+      border-radius: 999px;
     }
 
     nav a:hover::after {
@@ -95,207 +227,505 @@
     }
 
     nav a:hover {
-      color: #38bdf8;
+      color: var(--primary);
     }
 
-    /* HERO */
+    /* =========================
+       HERO
+    ========================= */
+
     .hero {
+
       min-height: 100vh;
 
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
 
       text-align: center;
-      padding: 100px 20px;
+
+      padding: 120px 20px;
       position: relative;
     }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      background: rgba(56,189,248,0.08);
-      border-radius: 50%;
-      filter: blur(100px);
-      z-index: -1;
+    .hero-badge {
+
+      background: rgba(56,189,248,0.12);
+
+      border:
+      1px solid rgba(56,189,248,0.25);
+
+      padding: 10px 18px;
+      border-radius: 999px;
+
+      color: var(--primary-light);
+
+      font-size: 14px;
+      font-weight: 700;
+
+      margin-bottom: 30px;
+
+      box-shadow:
+      0 0 20px rgba(56,189,248,0.12);
+
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0% {
+        box-shadow: 0 0 0 rgba(56,189,248,0.15);
+      }
+
+      50% {
+        box-shadow: 0 0 30px rgba(56,189,248,0.35);
+      }
+
+      100% {
+        box-shadow: 0 0 0 rgba(56,189,248,0.15);
+      }
     }
 
     .hero h1 {
-      font-size: 70px;
-      line-height: 1.1;
-      margin-bottom: 20px;
 
-      background: linear-gradient(to right, white, #38bdf8);
+      font-size: clamp(52px, 9vw, 110px);
+
+      line-height: 0.95;
+
+      max-width: 1100px;
+      margin-bottom: 28px;
+
+      font-weight: 900;
+
+      background: linear-gradient(
+      to bottom,
+      white,
+      #7dd3fc);
+
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .hero p {
-      max-width: 850px;
-      color: #cbd5e1;
+
+      max-width: 900px;
+
       font-size: 20px;
-      margin-bottom: 35px;
+      color: var(--muted);
+
+      margin-bottom: 40px;
     }
 
     .hero-buttons {
       display: flex;
-      gap: 15px;
+      gap: 18px;
       flex-wrap: wrap;
       justify-content: center;
     }
 
     .btn {
-      padding: 14px 28px;
-      border-radius: 12px;
+
+      padding: 15px 32px;
+
+      border-radius: 16px;
+
       text-decoration: none;
-      font-weight: bold;
+
+      font-weight: 700;
+      font-size: 15px;
+
       transition: 0.3s;
     }
 
     .btn-primary {
-      background: #38bdf8;
-      color: #0f172a;
-      box-shadow: 0 0 25px rgba(56,189,248,0.5);
+
+      background:
+      linear-gradient(
+      135deg,
+      #38bdf8,
+      #2563eb);
+
+      color: white;
+
+      box-shadow:
+      0 0 40px rgba(56,189,248,0.35);
     }
 
     .btn-primary:hover {
-      transform: translateY(-3px);
+      transform: translateY(-4px) scale(1.02);
     }
 
     .btn-secondary {
-      border: 1px solid rgba(255,255,255,0.2);
+
+      border:
+      1px solid rgba(255,255,255,0.08);
+
+      background:
+      rgba(255,255,255,0.04);
+
       color: white;
-      background: rgba(255,255,255,0.04);
     }
 
     .btn-secondary:hover {
-      background: rgba(255,255,255,0.1);
+
+      transform: translateY(-4px);
+
+      background:
+      rgba(255,255,255,0.08);
     }
 
-    /* SECTION */
+    .hero-stats {
+
+      margin-top: 80px;
+
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      gap: 20px;
+    }
+
+    .stat {
+
+      min-width: 200px;
+
+      background: rgba(255,255,255,0.04);
+
+      border: 1px solid rgba(255,255,255,0.06);
+
+      backdrop-filter: blur(20px);
+
+      border-radius: 24px;
+
+      padding: 30px;
+
+      transition: 0.3s;
+    }
+
+    .stat:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow);
+    }
+
+    .stat h3 {
+
+      font-size: 38px;
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+
+    .stat p {
+      color: var(--muted);
+    }
+
+    /* =========================
+       GENERAL SECTION
+    ========================= */
+
     section {
-      max-width: 1200px;
+      max-width: 1250px;
       margin: auto;
-      padding: 90px 20px;
+      padding: 110px 20px;
     }
 
     .section-title {
-      font-size: 42px;
-      margin-bottom: 18px;
-      color: #38bdf8;
+
+      font-size: clamp(38px, 5vw, 58px);
+
       text-align: center;
+
+      margin-bottom: 18px;
+
+      background:
+      linear-gradient(to right,
+      white,
+      #7dd3fc);
+
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .section-subtitle {
+
       text-align: center;
-      max-width: 800px;
-      margin: auto;
-      color: #cbd5e1;
-      margin-bottom: 50px;
+      max-width: 850px;
+
+      margin: auto auto 60px auto;
+
+      color: var(--muted);
+
+      font-size: 18px;
     }
 
-    /* CARDS */
+    /* =========================
+       CARDS
+    ========================= */
+
     .grid {
+
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
+
+      grid-template-columns:
+      repeat(auto-fit, minmax(300px, 1fr));
+
+      gap: 28px;
     }
 
     .card {
-      background: rgba(30,41,59,0.8);
-      border: 1px solid rgba(255,255,255,0.08);
 
-      padding: 28px;
-      border-radius: 20px;
+      position: relative;
+
+      overflow: hidden;
+
+      background:
+      rgba(15,23,42,0.68);
+
+      border:
+      1px solid rgba(255,255,255,0.06);
+
+      border-radius: 28px;
+
+      padding: 34px;
+
+      backdrop-filter: blur(18px);
 
       transition: 0.35s;
-      backdrop-filter: blur(10px);
+    }
+
+    .card::before {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      background:
+      linear-gradient(
+      135deg,
+      rgba(56,189,248,0.10),
+      transparent 45%);
+
+      opacity: 0;
+      transition: 0.35s;
+    }
+
+    .card:hover::before {
+      opacity: 1;
     }
 
     .card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(56,189,248,0.45);
-      box-shadow: 0 0 30px rgba(56,189,248,0.15);
+
+      transform: translateY(-10px);
+
+      border-color:
+      rgba(56,189,248,0.3);
+
+      box-shadow: var(--shadow);
     }
 
     .card h3 {
-      color: #38bdf8;
-      margin-bottom: 15px;
-      font-size: 24px;
+
+      font-size: 26px;
+
+      margin-bottom: 20px;
+
+      color: var(--primary-light);
     }
 
     .card ul {
-      padding-left: 18px;
+      padding-left: 20px;
       color: #dbeafe;
     }
 
     .card li {
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .slogan {
-      margin-top: 20px;
-      font-weight: bold;
+
+      margin-top: 22px;
+
       color: #7dd3fc;
+
+      font-weight: 800;
+
+      font-size: 15px;
+
+      letter-spacing: 1px;
     }
 
-    /* VALUES */
+    /* =========================
+       ABOUT BOX
+    ========================= */
+
+    .about-box {
+
+      background:
+      rgba(15,23,42,0.6);
+
+      border:
+      1px solid rgba(255,255,255,0.06);
+
+      border-radius: 30px;
+
+      padding: 50px;
+
+      backdrop-filter: blur(18px);
+
+      box-shadow: var(--shadow);
+    }
+
+    .about-box p {
+
+      color: #dbeafe;
+
+      margin-bottom: 20px;
+
+      font-size: 18px;
+    }
+
+    /* =========================
+       VALUES
+    ========================= */
+
     .values {
+
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+
       gap: 18px;
-      margin-top: 35px;
     }
 
     .value-box {
-      background: rgba(56,189,248,0.1);
-      border: 1px solid rgba(56,189,248,0.25);
 
-      padding: 14px 22px;
-      border-radius: 100px;
-      color: #7dd3fc;
-      font-weight: bold;
+      padding: 16px 28px;
+
+      border-radius: 999px;
+
+      font-weight: 700;
+
+      color: white;
+
+      background:
+      linear-gradient(
+      135deg,
+      rgba(56,189,248,0.15),
+      rgba(37,99,235,0.18));
+
+      border:
+      1px solid rgba(56,189,248,0.25);
+
+      transition: 0.3s;
     }
 
-    /* CONTACT */
-    .contact-box {
-      background: linear-gradient(
-        135deg,
-        rgba(30,41,59,0.9),
-        rgba(15,23,42,0.95)
-      );
+    .value-box:hover {
 
-      padding: 40px;
-      border-radius: 25px;
+      transform: scale(1.06);
+
+      box-shadow:
+      0 0 25px rgba(56,189,248,0.25);
+    }
+
+    /* =========================
+       CONTACT
+    ========================= */
+
+    .contact-box {
+
+      position: relative;
+
+      overflow: hidden;
+
       text-align: center;
 
-      border: 1px solid rgba(255,255,255,0.08);
+      background:
+      linear-gradient(
+      145deg,
+      rgba(15,23,42,0.95),
+      rgba(30,41,59,0.88));
+
+      border-radius: 35px;
+
+      padding: 60px 30px;
+
+      border:
+      1px solid rgba(255,255,255,0.06);
+
+      box-shadow: var(--shadow);
+    }
+
+    .contact-box::before {
+
+      content: "";
+
+      position: absolute;
+
+      width: 400px;
+      height: 400px;
+
+      background:
+      rgba(56,189,248,0.08);
+
+      border-radius: 50%;
+
+      filter: blur(80px);
+
+      top: -150px;
+      right: -150px;
     }
 
     .contact-box p {
-      color: #cbd5e1;
-      margin-bottom: 20px;
+
+      color: var(--muted);
+
+      margin-bottom: 25px;
+
+      font-size: 18px;
     }
 
     .paypal {
-      color: #38bdf8;
-      font-size: 20px;
-      font-weight: bold;
+
+      display: inline-block;
+
+      margin-top: 10px;
+
+      background:
+      rgba(56,189,248,0.12);
+
+      border:
+      1px solid rgba(56,189,248,0.25);
+
+      padding: 18px 24px;
+
+      border-radius: 18px;
+
+      font-size: 22px;
+      font-weight: 800;
+
+      color: #7dd3fc;
     }
 
-    /* FOOTER */
+    /* =========================
+       FOOTER
+    ========================= */
+
     footer {
+
       margin-top: 80px;
-      padding: 40px 20px;
+
+      padding: 45px 20px;
+
       text-align: center;
 
-      border-top: 1px solid rgba(255,255,255,0.08);
+      border-top:
+      1px solid rgba(255,255,255,0.06);
 
-      background: rgba(15,23,42,0.9);
+      background:
+      rgba(2,6,23,0.8);
+
       color: #94a3b8;
     }
 
@@ -303,38 +733,76 @@
       color: white;
     }
 
-    /* MOBILE */
-    @media(max-width: 768px) {
+    /* =========================
+       FADE IN ANIMATION
+    ========================= */
+
+    .fade-up {
+      animation: fadeUp 1s ease forwards;
+    }
+
+    @keyframes fadeUp {
+
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media(max-width: 850px) {
 
       header {
         flex-direction: column;
-        gap: 15px;
+        gap: 18px;
       }
 
-      .hero h1 {
-        font-size: 46px;
+      nav {
+        justify-content: center;
       }
 
       .hero p {
         font-size: 18px;
       }
 
-      .section-title {
-        font-size: 34px;
+      .about-box {
+        padding: 35px;
       }
+
+      .contact-box {
+        padding: 50px 25px;
+      }
+
     }
+
   </style>
 </head>
 
 <body>
 
+  <!-- BACKGROUND EFFECTS -->
+
+  <div class="bg-grid"></div>
+
+  <div class="floating-glow glow1"></div>
+  <div class="floating-glow glow2"></div>
+
   <!-- HEADER -->
+
   <header>
 
     <div class="logo">ZFD</div>
 
     <nav>
-      <a href="#about">Über uns</a>
+      <a href="#about">Über Uns</a>
       <a href="#programm">Programm</a>
       <a href="#werte">Werte</a>
       <a href="#kontakt">Kontakt</a>
@@ -343,17 +811,26 @@
   </header>
 
   <!-- HERO -->
-  <section class="hero">
 
-    <h1>Zukunft für Deutschland</h1>
+  <section class="hero fade-up">
+
+    <div class="hero-badge">
+      🇩🇪 Neue Ideen für Deutschlands Zukunft
+    </div>
+
+    <h1>
+      Zukunft für Deutschland
+    </h1>
 
     <p>
-      Heimat. Freiheit. Zukunft.
-      Eine moderne, bürgernahe und pragmatische Bewegung
-      für ein starkes, sicheres und erfolgreiches Deutschland.
+      Heimat. Freiheit. Innovation.
+      Eine moderne Bewegung für Sicherheit,
+      wirtschaftliche Stärke, digitale Zukunft
+      und eine Politik, die wieder näher an den Bürgern ist.
     </p>
 
     <div class="hero-buttons">
+
       <a href="#programm" class="btn btn-primary">
         Parteiprogramm ansehen
       </a>
@@ -361,42 +838,63 @@
       <a href="#kontakt" class="btn btn-secondary">
         Unterstützen
       </a>
+
+    </div>
+
+    <div class="hero-stats">
+
+      <div class="stat">
+        <h3>2030+</h3>
+        <p>Zukunftsorientierte Politik</p>
+      </div>
+
+      <div class="stat">
+        <h3>100%</h3>
+        <p>Fokus auf Bürgernähe</p>
+      </div>
+
+      <div class="stat">
+        <h3>24/7</h3>
+        <p>Einsatz für Deutschland</p>
+      </div>
+
     </div>
 
   </section>
 
   <!-- ABOUT -->
+
   <section id="about">
 
-    <h2 class="section-title">Was ist die ZFD?</h2>
+    <h2 class="section-title">
+      Was ist die ZFD?
+    </h2>
 
     <p class="section-subtitle">
-      Die Zukunft für Deutschland (ZFD) steht für moderne Politik,
-      klare Entscheidungen und eine starke Zukunft.
+      Die Zukunft für Deutschland steht für moderne Politik,
+      pragmatische Lösungen und ein starkes Land mit Perspektive.
     </p>
 
-    <div class="card">
+    <div class="about-box">
 
       <p>
         Deutschland steht vor großen Herausforderungen:
-        steigende Lebenshaltungskosten, wirtschaftlicher Druck,
-        Unsicherheit und gesellschaftliche Spannungen.
+        wirtschaftlicher Wandel, steigende Lebenshaltungskosten,
+        Digitalisierung, internationale Krisen
+        und gesellschaftliche Spannungen.
       </p>
 
-      <br>
-
       <p>
-        Die ZFD setzt auf pragmatische Lösungen statt Ideologie.
-        Im Mittelpunkt stehen Sicherheit, Leistung, wirtschaftliche Stärke,
-        soziale Verantwortung und Demokratie.
+        Die ZFD setzt auf Innovation statt Stillstand.
+        Wir wollen Leistung fördern, Familien stärken,
+        Chancen schaffen und Vertrauen zurückbringen.
       </p>
 
-      <br>
-
       <p>
-        Ziel ist ein Deutschland, das Chancen schafft,
-        Familien stärkt, Innovation fördert
-        und seinen Bürgern wieder Vertrauen gibt.
+        Unser Ziel ist ein sicheres,
+        modernes und wirtschaftlich starkes Deutschland,
+        das seine Bürger unterstützt
+        und gleichzeitig offen für Fortschritt bleibt.
       </p>
 
     </div>
@@ -404,104 +902,119 @@
   </section>
 
   <!-- PROGRAMM -->
+
   <section id="programm">
 
-    <h2 class="section-title">Unser Parteiprogramm</h2>
+    <h2 class="section-title">
+      Unser Parteiprogramm
+    </h2>
 
     <p class="section-subtitle">
-      Klare Ziele. Moderne Lösungen. Eine starke Zukunft.
+      Moderne Ideen für eine starke Zukunft.
     </p>
 
     <div class="grid">
 
       <div class="card">
+
         <h3>🛡 Sicherheit & Ordnung</h3>
 
         <ul>
           <li>Mehr Polizei auf Straßen und Bahnhöfen</li>
-          <li>Härtere Strafen bei schweren Gewaltverbrechen</li>
-          <li>Moderne Ausstattung für Sicherheitskräfte</li>
-          <li>Konsequentes Vorgehen gegen organisierte Kriminalität</li>
+          <li>Moderne Ausrüstung für Sicherheitskräfte</li>
+          <li>Konsequentes Vorgehen gegen Kriminalität</li>
+          <li>Schutz öffentlicher Räume</li>
         </ul>
 
         <div class="slogan">
-          Sicherheit ist Freiheit.
+          Sicherheit bedeutet Freiheit.
         </div>
+
       </div>
 
       <div class="card">
-        <h3>💼 Wirtschaft & Steuern</h3>
+
+        <h3>💼 Wirtschaft & Innovation</h3>
 
         <ul>
           <li>Weniger Bürokratie</li>
           <li>Entlastung für Mittelstand und Familien</li>
-          <li>Stärkung deutscher Industrie</li>
-          <li>Bezahlbare Energiepreise</li>
+          <li>Förderung deutscher Unternehmen</li>
+          <li>Digitale Modernisierung</li>
         </ul>
 
         <div class="slogan">
-          Arbeit muss sich lohnen.
+          Leistung muss sich lohnen.
         </div>
+
       </div>
 
       <div class="card">
+
         <h3>🌍 Migration & Integration</h3>
 
         <ul>
-          <li>Klare Einwanderungsregeln</li>
+          <li>Klare Regeln für Einwanderung</li>
           <li>Integration durch Sprache und Arbeit</li>
           <li>Schutz der Außengrenzen</li>
           <li>Konsequentes Vorgehen gegen Extremismus</li>
         </ul>
 
         <div class="slogan">
-          Integration braucht Regeln.
+          Integration braucht Ordnung.
         </div>
+
       </div>
 
       <div class="card">
-        <h3>🏫 Familie & Bildung</h3>
+
+        <h3>🏫 Bildung & Familie</h3>
 
         <ul>
           <li>Moderne Schulen</li>
-          <li>Mehr Digitalisierung</li>
+          <li>Mehr Digitalisierung im Unterricht</li>
           <li>Förderung von Ausbildung und Handwerk</li>
           <li>Mehr Unterstützung für Familien</li>
         </ul>
 
         <div class="slogan">
-          Starke Familien. Starke Zukunft.
+          Familien stärken die Zukunft.
         </div>
+
       </div>
 
       <div class="card">
+
         <h3>⚡ Energie & Umwelt</h3>
 
         <ul>
-          <li>Bezahlbare Energie</li>
+          <li>Bezahlbare Energiepreise</li>
           <li>Technologieoffene Umweltpolitik</li>
+          <li>Förderung moderner Innovationen</li>
           <li>Schutz von Natur und Landwirtschaft</li>
-          <li>Innovation statt Verbote</li>
         </ul>
 
         <div class="slogan">
-          Umweltschutz mit Vernunft.
+          Fortschritt statt Verbote.
         </div>
+
       </div>
 
       <div class="card">
+
         <h3>🏛 Demokratie & Bürgernähe</h3>
 
         <ul>
-          <li>Mehr direkte Demokratie</li>
-          <li>Volksentscheide stärken</li>
           <li>Mehr Transparenz</li>
-          <li>Politik näher an den Bürgern</li>
+          <li>Stärkere Bürgerbeteiligung</li>
+          <li>Digitale Verwaltungsreformen</li>
+          <li>Politik näher an den Menschen</li>
         </ul>
 
         <div class="slogan">
-          Mehr Stimme für die Bürger.
+          Demokratie lebt vom Vertrauen.
         </div>
+
       </div>
 
     </div>
@@ -509,28 +1022,34 @@
   </section>
 
   <!-- VALUES -->
+
   <section id="werte">
 
-    <h2 class="section-title">Unsere Werte</h2>
+    <h2 class="section-title">
+      Unsere Werte
+    </h2>
 
     <p class="section-subtitle">
-      Die Grundlage unserer Politik.
+      Die Grundlage unserer Politik und unseres Handelns.
     </p>
 
     <div class="values">
 
       <div class="value-box">Freiheit</div>
       <div class="value-box">Sicherheit</div>
+      <div class="value-box">Innovation</div>
       <div class="value-box">Leistung</div>
-      <div class="value-box">Demokratie</div>
       <div class="value-box">Verantwortung</div>
       <div class="value-box">Zusammenhalt</div>
+      <div class="value-box">Demokratie</div>
+      <div class="value-box">Zukunft</div>
 
     </div>
 
   </section>
 
   <!-- CONTACT -->
+
   <section id="kontakt">
 
     <div class="contact-box">
@@ -540,7 +1059,8 @@
       </h2>
 
       <p>
-        Du möchtest die ZFD unterstützen oder Kontakt aufnehmen?
+        Du möchtest die ZFD unterstützen,
+        Ideen einbringen oder Kontakt aufnehmen?
       </p>
 
       <div class="paypal">
@@ -552,6 +1072,7 @@
   </section>
 
   <!-- FOOTER -->
+
   <footer>
 
     <p>
@@ -559,7 +1080,7 @@
     </p>
 
     <p style="margin-top: 10px;">
-      Erstellt von <strong>Jakob</strong> & <strong>Jason</strong>
+      Entwickelt von <strong>Jakob</strong> & <strong>Jason</strong>
     </p>
 
   </footer>
