@@ -1438,47 +1438,62 @@
       }
     });
 /* =========================
-   SECRET ADMIN PANEL
-   ↑ ↑ ↓ ↓ B P
+   SECRET ADMIN PANEL V2
 ========================= */
 
 let zfd_keys = [];
-
 const zfd_combo = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","b","p"];
 
 const zfd_admin = document.createElement("div");
+zfd_admin.id = "zfd_admin_panel";
+
 zfd_admin.style = `
 position:fixed;
 inset:0;
 background:rgba(0,0,0,0.85);
 z-index:999999;
 display:none;
-backdrop-filter:blur(12px);
+backdrop-filter:blur(15px);
 color:white;
 font-family:Inter,sans-serif;
 `;
 
 zfd_admin.innerHTML = `
-<div style="max-width:700px;margin:100px auto;padding:30px;background:#0f172a;border-radius:20px;">
-  <h1>ADMIN PANEL</h1>
+<div style="max-width:750px;margin:80px auto;padding:30px;background:#0f172a;border-radius:20px;box-shadow:0 0 40px rgba(56,189,248,0.2);">
+
+  <h1 style="color:#38bdf8;">🛠 ZFD ADMIN PANEL</h1>
+
   <p id="zfd_info"></p>
 
-  <button onclick="document.body.style.filter='invert(1)'">Dev Mode</button>
-  <button onclick="localStorage.clear();alert('Reset complete')">Reset</button>
-  <button onclick="zfd_admin.style.display='none'">Close</button>
+  <hr style="margin:15px 0;opacity:0.2">
+
+  <button onclick="toggleTheme()" style="margin:5px;padding:10px;">🌗 Theme Switch</button>
+  <button onclick="enableMatrix()" style="margin:5px;padding:10px;">💚 Matrix Mode</button>
+  <button onclick="speedMode()" style="margin:5px;padding:10px;">⚡ Speed Mode</button>
+  <button onclick="clearAll()" style="margin:5px;padding:10px;">🗑 Reset</button>
+  <button onclick="zfd_admin.style.display='none'" style="margin:5px;padding:10px;">❌ Close</button>
+
+  <div style="margin-top:20px;font-size:13px;opacity:0.7">
+    Secret System v2.0 | ZFD Core Engine Active
+  </div>
+
 </div>
 `;
 
 document.body.appendChild(zfd_admin);
 
+/* OPEN PANEL */
 function openZFDAdmin(){
   document.getElementById("zfd_info").innerHTML =
-    "Visits: " + (localStorage.getItem("zfd_visits") || 0) +
-    "<br>Theme: " + document.documentElement.dataset.theme;
+    "📈 Visits: " + (localStorage.getItem("zfd_visits") || 0) +
+    "<br>🕒 Time: " + new Date().toLocaleString() +
+    "<br>🌐 URL: " + location.href +
+    "<br>🎨 Theme: " + (document.documentElement.dataset.theme || "dark");
 
   zfd_admin.style.display = "block";
 }
 
+/* KEY COMBO LISTENER */
 document.addEventListener("keydown",(e)=>{
   zfd_keys.push(e.key);
   zfd_keys = zfd_keys.slice(-6);
@@ -1487,7 +1502,7 @@ document.addEventListener("keydown",(e)=>{
     const code = prompt("Admin Code eingeben:");
     if(code === "hraPPur5!06122006"){
       openZFDAdmin();
-      alert("ADMIN MODE AKTIVIERT");
+      console.log("ADMIN MODE ACTIVE");
     } else {
       alert("Falscher Code");
     }
@@ -1495,7 +1510,33 @@ document.addEventListener("keydown",(e)=>{
   }
 });
 
-/* visits tracking */
+/* =========================
+   ADMIN FUNCTIONS
+========================= */
+
+function toggleTheme(){
+  document.documentElement.dataset.theme =
+    document.documentElement.dataset.theme === "light"
+      ? "dark"
+      : "light";
+}
+
+function clearAll(){
+  localStorage.clear();
+  alert("System reset complete");
+}
+
+function speedMode(){
+  document.body.style.transition = "all 0.1s linear";
+  alert("Speed Mode aktiviert ⚡");
+}
+
+function enableMatrix(){
+  document.body.style.filter = "hue-rotate(120deg) contrast(1.2)";
+  alert("Matrix Mode aktiviert 💚");
+}
+
+/* VISITS */
 let zfd_visits = localStorage.getItem("zfd_visits") || 0;
 localStorage.setItem("zfd_visits", ++zfd_visits);
   </script>
