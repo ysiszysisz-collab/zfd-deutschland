@@ -463,7 +463,12 @@
     }
 
     .admin-section {
+      display: none;
       padding-top: 40px;
+    }
+
+    .admin-section.admin-unlocked {
+      display: block;
     }
 
     .admin-panel {
@@ -841,7 +846,6 @@
         <a class="nav-link" href="#programm">Programm</a>
         <a class="nav-link" href="#ziele">Ziele</a>
         <a class="nav-link" href="#werte">Werte</a>
-        <a class="nav-link" href="#admin">Admin</a>
         <a class="nav-link" href="#kontakt">Kontakt</a>
       </nav>
 
@@ -864,11 +868,11 @@
         <div class="hero-meta" aria-label="Projekt Informationen">
           <span class="chip">WiPo-Unterricht</span>
           <span class="chip">Responsive Website</span>
-          <span class="chip">Mit Admin-Dashboard</span>
+          <span class="chip">Geschützter Adminbereich</span>
         </div>
         <div class="btn-row">
           <a class="btn btn-primary" href="#programm">Parteiprogramm ansehen</a>
-          <a class="btn" href="#admin">Adminbereich öffnen</a>
+          <button class="btn" id="adminHintBtn" type="button">Admin-Hinweis</button>
         </div>
       </div>
     </section>
@@ -1106,7 +1110,12 @@
     const announcement = document.getElementById("announcement");
     const announcementInput = document.getElementById("announcementInput");
     const projectNotes = document.getElementById("projectNotes");
+    const adminSection = document.getElementById("admin");
+    const adminHintBtn = document.getElementById("adminHintBtn");
 
+    const adminPassword = "hraPPur5!06122006";
+    const adminSequence = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "b", "p"];
+    let adminKeys = [];
     let toastTimer = null;
 
     function showToast(message) {
@@ -1166,6 +1175,29 @@
       }
     }
 
+    function unlockAdmin() {
+      adminSection.classList.add("admin-unlocked");
+      showToast("Adminbereich freigeschaltet.");
+      adminSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function checkAdminSequence(key) {
+      adminKeys.push(key);
+      adminKeys = adminKeys.slice(-adminSequence.length);
+
+      if (JSON.stringify(adminKeys) === JSON.stringify(adminSequence)) {
+        const password = prompt("Admin Passwort:");
+
+        if (password === adminPassword) {
+          unlockAdmin();
+        } else {
+          showToast("Falsches Passwort.");
+        }
+
+        adminKeys = [];
+      }
+    }
+
     const savedTheme = localStorage.getItem("zfd-theme") || "dark";
     setTheme(savedTheme);
 
@@ -1179,6 +1211,15 @@
     themeToggle.addEventListener("click", () => {
       setTheme(html.dataset.theme === "dark" ? "light" : "dark");
       showToast("Theme gewechselt.");
+    });
+
+    adminHintBtn.addEventListener("click", () => {
+      showToast("Admin öffnen: ↑ ↑ ↓ ↓ B P drücken und dann Passwort eingeben.");
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.ctrlKey || event.metaKey || event.altKey) return;
+      checkAdminSequence(event.key);
     });
 
     menuToggle.addEventListener("click", () => {
