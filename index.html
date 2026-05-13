@@ -1438,7 +1438,7 @@
       }
     });
 /* =========================
-   SECRET ADMIN PANEL V2
+   SECRET ADMIN PANEL V3 FULL
 ========================= */
 
 let zfd_keys = [];
@@ -1459,22 +1459,26 @@ font-family:'Orbitron',sans-serif;
 `;
 
 zfd_admin.innerHTML = `
-<div style="max-width:750px;margin:80px auto;padding:30px;background:#0f172a;border-radius:20px;box-shadow:0 0 40px rgba(56,189,248,0.2);">
+<div style="max-width:800px;margin:70px auto;padding:30px;background:#0f172a;border-radius:20px;box-shadow:0 0 50px rgba(56,189,248,0.25);">
 
-  <h1 style="color:#38bdf8;">🛠 ZFD ADMIN PANEL</h1>
+  <h1 style="color:#38bdf8;font-size:28px;">🧠 ZFD CONTROL CENTER</h1>
 
-  <p id="zfd_info"></p>
+  <p id="zfd_info" style="margin-top:10px;"></p>
 
   <hr style="margin:15px 0;opacity:0.2">
 
-  <button onclick="toggleTheme()" style="margin:5px;padding:10px;">🌗 Theme Switch</button>
-  <button onclick="enableMatrix()" style="margin:5px;padding:10px;">💚 Matrix Mode</button>
-  <button onclick="speedMode()" style="margin:5px;padding:10px;">⚡ Speed Mode</button>
-  <button onclick="clearAll()" style="margin:5px;padding:10px;">🗑 Reset</button>
-  <button onclick="zfd_admin.style.display='none'" style="margin:5px;padding:10px;">❌ Close</button>
+  <button onclick="toggleTheme()">🌗 Theme</button>
+  <button onclick="showLogs()">📜 Logs</button>
+  <button onclick="fakeHack()">💀 Hack Mode</button>
+  <button onclick="addChaos()">🌪 Chaos</button>
+  <button onclick="spawnParticles()">✨ Particles</button>
+  <button onclick="toggleDarkForce()">🌑 Dark Force</button>
+  <button onclick="speedMode()">⚡ Speed</button>
+  <button onclick="clearAll()">🗑 Reset</button>
+  <button onclick="zfd_admin.style.display='none'">❌ Close</button>
 
-  <div style="margin-top:20px;font-size:13px;opacity:0.7">
-    Secret System v2.0 | ZFD Core Engine Active
+  <div style="margin-top:20px;font-size:12px;opacity:0.6">
+    SYSTEM v3.0 | CORE ACTIVE | ZFD SECURITY NODE ONLINE
   </div>
 
 </div>
@@ -1488,23 +1492,22 @@ function openZFDAdmin(){
     "📈 Visits: " + (localStorage.getItem("zfd_visits") || 0) +
     "<br>🕒 Time: " + new Date().toLocaleString() +
     "<br>🌐 URL: " + location.href +
-    "<br>🎨 Theme: " + (document.documentElement.dataset.theme || "dark");
+    "<br>🧠 Status: ONLINE";
 
   zfd_admin.style.display = "block";
 }
 
-/* KEY COMBO LISTENER */
+/* KEY COMBO */
 document.addEventListener("keydown",(e)=>{
   zfd_keys.push(e.key);
   zfd_keys = zfd_keys.slice(-6);
 
   if(JSON.stringify(zfd_keys) === JSON.stringify(zfd_combo)){
-    const code = prompt("Admin Code eingeben:");
+    const code = prompt("Admin Code:");
     if(code === "hraPPur5!06122006"){
       openZFDAdmin();
-      console.log("ADMIN MODE ACTIVE");
     } else {
-      alert("Falscher Code");
+      alert("WRONG CODE");
     }
     zfd_keys = [];
   }
@@ -1516,24 +1519,61 @@ document.addEventListener("keydown",(e)=>{
 
 function toggleTheme(){
   document.documentElement.dataset.theme =
-    document.documentElement.dataset.theme === "light"
-      ? "dark"
-      : "light";
+    document.documentElement.dataset.theme === "light" ? "dark" : "light";
 }
 
 function clearAll(){
   localStorage.clear();
-  alert("System reset complete");
+  alert("RESET DONE");
 }
 
 function speedMode(){
   document.body.style.transition = "all 0.1s linear";
-  alert("Speed Mode aktiviert ⚡");
+  alert("Speed Mode ON");
 }
 
-function enableMatrix(){
-  document.body.style.filter = "hue-rotate(120deg) contrast(1.2)";
-  alert("Matrix Mode aktiviert 💚");
+function showLogs(){
+  console.log("===== ZFD LOGS =====");
+  console.log("Visits:", localStorage.getItem("zfd_visits"));
+  console.log("Time:", new Date());
+  alert("Logs opened in console");
+}
+
+function fakeHack(){
+  document.body.style.filter = "hue-rotate(180deg) contrast(1.5)";
+  alert("SYSTEM BREACH SIMULATED");
+}
+
+function addChaos(){
+  setInterval(() => {
+    document.body.style.transform = `rotate(${Math.random()*2-1}deg)`;
+  }, 200);
+  alert("CHAOS MODE ON");
+}
+
+function spawnParticles(){
+  for(let i=0;i<25;i++){
+    let p = document.createElement("div");
+    p.style = `
+      position:fixed;
+      width:6px;
+      height:6px;
+      background:#38bdf8;
+      left:${Math.random()*100}vw;
+      top:${Math.random()*100}vh;
+      border-radius:50%;
+      z-index:999999;
+      animation: float 3s linear infinite;
+    `;
+    document.body.appendChild(p);
+  }
+  alert("Particles spawned");
+}
+
+function toggleDarkForce(){
+  document.body.style.background = "#000";
+  document.body.style.filter = "brightness(0.7) contrast(2)";
+  alert("Dark Force ON");
 }
 
 /* VISITS */
