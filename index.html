@@ -1,1485 +1,552 @@
 <!DOCTYPE html>
 <html lang="de" data-theme="dark">
+
 <head>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="dark light" />
-  <meta name="theme-color" content="#08111f" />
 
   <title>ZFD – Zukunft für Deutschland</title>
-  <meta name="description" content="ZFD – Zukunft für Deutschland. Moderne Politik, Sicherheit, Innovation, Bildung und Bürgernähe in einem starken, modernen Design." />
-  <meta name="author" content="ZFD" />
-  <meta property="og:title" content="ZFD – Zukunft für Deutschland" />
-  <meta property="og:description" content="Moderne Politik mit Fokus auf Sicherheit, Innovation und Bürgernähe." />
-  <meta property="og:type" content="website" />
 
-  <!-- GOOGLE FONT -->
+  <meta name="description" content="ZFD – Zukunft für Deutschland. Heimat. Freiheit. Zukunft.">
+  <meta name="theme-color" content="#020617">
+
+  <!-- FONT -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --bg: #08111f;
-      --bg-2: #0f172a;
-      --bg-3: #020617;
-      --card: rgba(15, 23, 42, 0.72);
-      --card-2: rgba(255, 255, 255, 0.04);
-      --text: #ffffff;
-      --muted: #cbd5e1;
-      --muted-2: #94a3b8;
-      --primary: #38bdf8;
-      --primary-2: #2563eb;
-      --primary-soft: rgba(56, 189, 248, 0.14);
-      --border: rgba(255, 255, 255, 0.08);
-      --shadow:
-        0 0 20px rgba(56,189,248,0.12),
-        0 0 60px rgba(56,189,248,0.06);
-      --radius-xl: 32px;
-      --radius-lg: 24px;
-      --radius-md: 18px;
-      --radius-sm: 14px;
-      --container: 1260px;
-      --transition: 240ms ease;
-    }
+  <!-- STYLE -->
 
-    html[data-theme="light"] {
-      --bg: #f7fbff;
-      --bg-2: #eaf3ff;
-      --bg-3: #ffffff;
-      --card: rgba(255, 255, 255, 0.78);
-      --card-2: rgba(2, 6, 23, 0.04);
-      --text: #0f172a;
-      --muted: #334155;
-      --muted-2: #64748b;
-      --primary: #0284c7;
-      --primary-2: #2563eb;
-      --primary-soft: rgba(2, 132, 199, 0.12);
-      --border: rgba(15, 23, 42, 0.10);
-      --shadow:
-        0 10px 40px rgba(2, 8, 23, 0.10),
-        0 0 0 1px rgba(255,255,255,0.5);
-    }
+  <link rel="stylesheet" href="style.css">
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 110px;
-    }
-
-    body {
-      font-family: "Inter", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 28%),
-        radial-gradient(circle at bottom right, rgba(37,99,235,0.18), transparent 32%),
-        linear-gradient(180deg, var(--bg-3) 0%, var(--bg) 38%, var(--bg-2) 100%);
-      overflow-x: hidden;
-      line-height: 1.65;
-      min-height: 100vh;
-      transition: background 300ms ease, color 300ms ease;
-    }
-
-    ::selection {
-      background: rgba(56, 189, 248, 0.28);
-      color: inherit;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    button,
-    input,
-    textarea,
-    select {
-      font: inherit;
-    }
-
-    .skip-link {
-      position: absolute;
-      left: 16px;
-      top: -50px;
-      z-index: 2000;
-      background: var(--primary);
-      color: white;
-      padding: 12px 16px;
-      border-radius: 999px;
-      text-decoration: none;
-      transition: top var(--transition);
-    }
-
-    .skip-link:focus {
-      top: 16px;
-    }
-
-    .bg-grid {
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 42px 42px;
-      z-index: -10;
-      mask-image: radial-gradient(circle at center, black 26%, transparent 92%);
-      pointer-events: none;
-      opacity: .7;
-    }
-
-    .floating-glow {
-      position: fixed;
-      width: 620px;
-      height: 620px;
-      border-radius: 50%;
-      filter: blur(100px);
-      z-index: -9;
-      opacity: 0.28;
-      animation: float 14s ease-in-out infinite;
-      pointer-events: none;
-    }
-
-    .glow1 { background: #38bdf8; top: -260px; left: -170px; }
-    .glow2 { background: #2563eb; bottom: -260px; right: -160px; animation-delay: 5s; }
-    .glow3 { background: #0ea5e9; top: 42%; right: 10%; width: 340px; height: 340px; animation-delay: 8s; opacity: .12; }
-
-    @keyframes float {
-      0%, 100% { transform: translate3d(0,0,0) scale(1); }
-      50% { transform: translate3d(20px, 22px, 0) scale(1.04); }
-    }
-
-    .progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 4px;
-      width: 0%;
-      z-index: 2001;
-      background: linear-gradient(90deg, var(--primary), var(--primary-2));
-      box-shadow: 0 0 20px rgba(56,189,248,.45);
-    }
-
-    .container {
-      width: min(var(--container), calc(100% - 40px));
-      margin: 0 auto;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(18px);
-      background: color-mix(in srgb, var(--bg-3) 75%, transparent);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .header-inner {
-      min-height: 82px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 14px 0;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      min-width: fit-content;
-    }
-
-    .brand-mark {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      font-weight: 900;
-      letter-spacing: 1px;
-      color: white;
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      box-shadow: var(--shadow);
-      flex: 0 0 auto;
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-
-    .brand-text strong {
-      font-size: 1.1rem;
-      letter-spacing: .5px;
-    }
-
-    .brand-text span {
-      font-size: .83rem;
-      color: var(--muted-2);
-      margin-top: 3px;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 26px;
-      flex-wrap: wrap;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
-      position: relative;
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--muted);
-      transition: color var(--transition);
-      outline-offset: 6px;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -8px;
-      width: 0;
-      height: 2px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--primary), var(--primary-2));
-      transition: width var(--transition);
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--text);
-    }
-
-    .nav-links a:hover::after,
-    .nav-links a.active::after {
-      width: 100%;
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .icon-btn,
-    .menu-btn {
-      border: 1px solid var(--border);
-      background: var(--card-2);
-      color: var(--text);
-      border-radius: 16px;
-      height: 46px;
-      min-width: 46px;
-      padding: 0 14px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: transform var(--transition), background var(--transition), border-color var(--transition);
-      box-shadow: none;
-    }
-
-    .icon-btn:hover,
-    .menu-btn:hover {
-      transform: translateY(-1px);
-      border-color: color-mix(in srgb, var(--primary) 30%, var(--border));
-    }
-
-    .menu-btn {
-      display: none;
-      gap: 8px;
-    }
-
-    .menu-lines {
-      display: grid;
-      gap: 4px;
-    }
-
-    .menu-lines span {
-      width: 18px;
-      height: 2px;
-      border-radius: 999px;
-      background: currentColor;
-      display: block;
-      transition: transform var(--transition), opacity var(--transition);
-    }
-
-    .mobile-nav {
-      display: none;
-      border-top: 1px solid var(--border);
-      background: color-mix(in srgb, var(--bg-3) 88%, transparent);
-      padding: 16px 0 20px;
-    }
-
-    .mobile-nav.open {
-      display: block;
-    }
-
-    .mobile-nav a {
-      display: block;
-      padding: 14px 4px;
-      text-decoration: none;
-      font-weight: 600;
-      color: var(--muted);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .mobile-nav a:last-child {
-      border-bottom: 0;
-    }
-
-    .hero {
-      min-height: calc(100vh - 82px);
-      display: grid;
-      place-items: center;
-      padding: 84px 0 70px;
-      position: relative;
-    }
-
-    .hero-inner {
-      text-align: center;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--primary-soft);
-      border: 1px solid color-mix(in srgb, var(--primary) 30%, transparent);
-      padding: 10px 18px;
-      border-radius: 999px;
-      color: color-mix(in srgb, var(--primary) 75%, var(--text));
-      font-size: 0.92rem;
-      font-weight: 700;
-      margin-bottom: 28px;
-      box-shadow: 0 0 24px rgba(56,189,248,.10);
-    }
-
-    .hero h1 {
-      font-size: clamp(3rem, 9vw, 6.8rem);
-      line-height: .94;
-      letter-spacing: -0.06em;
-      margin-bottom: 24px;
-      font-weight: 900;
-      background: linear-gradient(180deg, var(--text), color-mix(in srgb, var(--primary) 45%, var(--text)));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-wrap: balance;
-    }
-
-    .hero p {
-      max-width: 900px;
-      margin: 0 auto;
-      font-size: clamp(1.05rem, 2vw, 1.28rem);
-      color: var(--muted);
-      text-wrap: balance;
-    }
-
-    .hero-buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 34px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 15px 22px;
-      border-radius: 18px;
-      text-decoration: none;
-      font-weight: 800;
-      font-size: 0.98rem;
-      border: 1px solid transparent;
-      transition: transform var(--transition), box-shadow var(--transition), background var(--transition), border-color var(--transition);
-      will-change: transform;
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-    }
-
-    .btn-primary {
-      color: white;
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      box-shadow: 0 18px 40px rgba(37,99,235,.18), 0 14px 40px rgba(56,189,248,.16);
-    }
-
-    .btn-secondary {
-      color: var(--text);
-      background: var(--card-2);
-      border-color: var(--border);
-      backdrop-filter: blur(10px);
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 58px;
-    }
-
-    .stat {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
-      padding: 28px 24px;
-      backdrop-filter: blur(18px);
-      box-shadow: var(--shadow);
-      transition: transform var(--transition), border-color var(--transition);
-    }
-
-    .stat:hover {
-      transform: translateY(-6px);
-      border-color: color-mix(in srgb, var(--primary) 25%, var(--border));
-    }
-
-    .stat .num {
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1;
-      font-weight: 900;
-      color: var(--primary);
-      margin-bottom: 8px;
-      letter-spacing: -0.05em;
-    }
-
-    .stat p {
-      color: var(--muted);
-      font-weight: 600;
-      font-size: 0.98rem;
-    }
-
-    section {
-      padding: 100px 0;
-    }
-
-    .section-title {
-      font-size: clamp(2.2rem, 4.8vw, 4rem);
-      line-height: 1.04;
-      text-align: center;
-      margin-bottom: 14px;
-      letter-spacing: -0.05em;
-      text-wrap: balance;
-      background: linear-gradient(180deg, var(--text), color-mix(in srgb, var(--primary) 50%, var(--text)));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .section-subtitle {
-      text-align: center;
-      max-width: 860px;
-      margin: 0 auto 54px;
-      color: var(--muted);
-      font-size: 1.05rem;
-      text-wrap: balance;
-    }
-
-    .about-box,
-    .contact-box {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
-      backdrop-filter: blur(18px);
-      box-shadow: var(--shadow);
-    }
-
-    .about-box {
-      padding: clamp(28px, 4vw, 50px);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 28px;
-      align-items: start;
-    }
-
-    .about-text p {
-      color: var(--muted);
-      margin-bottom: 18px;
-      font-size: 1.05rem;
-    }
-
-    .highlight-panel {
-      background: linear-gradient(180deg, var(--card-2), transparent);
-      border: 1px solid var(--border);
-      border-radius: 28px;
-      padding: 24px;
-      display: grid;
-      gap: 14px;
-    }
-
-    .mini-feature {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .mini-feature:last-child {
-      border-bottom: 0;
-      padding-bottom: 0;
-    }
-
-    .mini-feature strong {
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .mini-feature span {
-      color: var(--muted-2);
-      font-size: 0.95rem;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 28px;
-    }
-
-    .pill {
-      padding: 14px 20px;
-      border-radius: 999px;
-      font-weight: 700;
-      color: var(--text);
-      background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 20%, transparent), color-mix(in srgb, var(--primary-2) 18%, transparent));
-      border: 1px solid color-mix(in srgb, var(--primary) 22%, var(--border));
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-
-    .pill:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(56,189,248,0.16);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 24px;
-    }
-
-    .card {
-      position: relative;
-      overflow: hidden;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
-      padding: 30px;
-      backdrop-filter: blur(18px);
-      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
-      box-shadow: none;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(56,189,248,0.12), transparent 50%);
-      opacity: 0;
-      transition: opacity var(--transition);
-    }
-
-    .card:hover {
-      transform: translateY(-8px);
-      border-color: color-mix(in srgb, var(--primary) 28%, var(--border));
-      box-shadow: var(--shadow);
-    }
-
-    .card:hover::before {
-      opacity: 1;
-    }
-
-    .card h3 {
-      font-size: 1.34rem;
-      margin-bottom: 18px;
-      color: color-mix(in srgb, var(--primary) 80%, var(--text));
-      letter-spacing: -0.03em;
-    }
-
-    .card ul {
-      list-style: none;
-      display: grid;
-      gap: 12px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .card li {
-      color: var(--muted);
-      padding-left: 26px;
-      position: relative;
-    }
-
-    .card li::before {
-      content: "✦";
-      position: absolute;
-      left: 0;
-      top: 0;
-      color: var(--primary);
-    }
-
-    .slogan {
-      margin-top: 22px;
-      color: color-mix(in srgb, var(--primary) 80%, var(--text));
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      font-size: 0.95rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .timeline {
-      display: grid;
-      gap: 18px;
-      max-width: 980px;
-      margin: 0 auto;
-    }
-
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 80px 1fr;
-      gap: 18px;
-      align-items: start;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 22px;
-      backdrop-filter: blur(18px);
-    }
-
-    .timeline-step {
-      width: 68px;
-      height: 68px;
-      border-radius: 22px;
-      display: grid;
-      place-items: center;
-      font-weight: 900;
-      font-size: 1.2rem;
-      color: white;
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      box-shadow: var(--shadow);
-    }
-
-    .timeline-item h3 {
-      margin-bottom: 6px;
-      font-size: 1.2rem;
-    }
-
-    .timeline-item p {
-      color: var(--muted);
-    }
-
-    .faq {
-      display: grid;
-      gap: 14px;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    details.faq-item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 18px 20px;
-      backdrop-filter: blur(18px);
-      transition: border-color var(--transition), transform var(--transition);
-    }
-
-    details.faq-item[open] {
-      border-color: color-mix(in srgb, var(--primary) 28%, var(--border));
-    }
-
-    summary {
-      cursor: pointer;
-      list-style: none;
-      font-weight: 800;
-      font-size: 1.03rem;
-      color: var(--text);
-    }
-
-    summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .faq-item p {
-      color: var(--muted);
-      padding-top: 12px;
-    }
-
-    .contact-box {
-      position: relative;
-      overflow: hidden;
-      padding: clamp(30px, 5vw, 56px);
-      text-align: center;
-    }
-
-    .contact-box::before {
-      content: "";
-      position: absolute;
-      width: 420px;
-      height: 420px;
-      border-radius: 50%;
-      right: -180px;
-      top: -180px;
-      filter: blur(90px);
-      background: rgba(56,189,248,.10);
-      pointer-events: none;
-    }
-
-    .contact-grid {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      gap: 20px;
-      justify-items: center;
-    }
-
-    .contact-copy {
-      max-width: 760px;
-      color: var(--muted);
-      font-size: 1.05rem;
-    }
-
-    .contact-card {
-      display: grid;
-      gap: 12px;
-      padding: 22px 24px;
-      border-radius: 24px;
-      background: var(--card-2);
-      border: 1px solid var(--border);
-      min-width: min(100%, 520px);
-    }
-
-    .contact-card strong {
-      font-size: 1.02rem;
-    }
-
-    .contact-card a {
-      color: color-mix(in srgb, var(--primary) 75%, var(--text));
-      text-decoration: none;
-      font-weight: 700;
-      word-break: break-word;
-    }
-
-    .contact-actions {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 6px;
-    }
-
-    .footer {
-      margin-top: 40px;
-      padding: 34px 0 44px;
-      border-top: 1px solid var(--border);
-      color: var(--muted-2);
-      text-align: center;
-      background: color-mix(in srgb, var(--bg-3) 82%, transparent);
-    }
-
-    .footer strong {
-      color: var(--text);
-    }
-
-    .back-to-top {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      background: var(--card);
-      color: var(--text);
-      backdrop-filter: blur(18px);
-      box-shadow: var(--shadow);
-      cursor: pointer;
-      display: grid;
-      place-items: center;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(8px);
-      transition: opacity var(--transition), transform var(--transition), border-color var(--transition);
-      z-index: 999;
-    }
-
-    .back-to-top.show {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
-    }
-
-    .back-to-top:hover {
-      border-color: color-mix(in srgb, var(--primary) 28%, var(--border));
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 700ms ease, transform 700ms ease;
-    }
-
-    .reveal.in-view {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .hero .reveal:nth-child(2) { transition-delay: 40ms; }
-    .hero .reveal:nth-child(3) { transition-delay: 90ms; }
-    .hero .reveal:nth-child(4) { transition-delay: 140ms; }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    :focus-visible {
-      outline: 3px solid color-mix(in srgb, var(--primary) 70%, white);
-      outline-offset: 4px;
-      border-radius: 10px;
-    }
-
-    @media (max-width: 1080px) {
-      .grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .about-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-stats {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 860px) {
-      nav .nav-links,
-      .header-actions .icon-btn {
-        display: none;
-      }
-
-      .menu-btn {
-        display: inline-flex;
-      }
-
-      .hero {
-        min-height: auto;
-        padding-top: 70px;
-      }
-
-      .hero-stats {
-        grid-template-columns: 1fr;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .timeline-item {
-        grid-template-columns: 1fr;
-      }
-
-      .timeline-step {
-        width: 58px;
-        height: 58px;
-      }
-
-      .contact-card {
-        min-width: 100%;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .header-inner {
-        gap: 12px;
-      }
-
-      .brand-text span {
-        display: none;
-      }
-
-      .hero-buttons {
-        flex-direction: column;
-      }
-
-      .btn {
-        width: 100%;
-      }
-
-      .section-title {
-        text-align: left;
-      }
-
-      .section-subtitle {
-        text-align: left;
-      }
-
-      .pill-row {
-        justify-content: flex-start;
-      }
-
-      section {
-        padding: 80px 0;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *,
-      *::before,
-      *::after {
-        animation: none !important;
-        transition: none !important;
-      }
-
-      .reveal {
-        opacity: 1;
-        transform: none;
-      }
-    }
-  </style>
 </head>
 
 <body>
-  <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
 
-  <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+  <!-- BACKGROUND -->
 
   <div class="bg-grid"></div>
-  <div class="floating-glow glow1"></div>
-  <div class="floating-glow glow2"></div>
-  <div class="floating-glow glow3"></div>
+
+  <div class="glow glow1"></div>
+  <div class="glow glow2"></div>
+  <div class="glow glow3"></div>
+
+  <!-- HEADER -->
 
   <header>
-    <div class="container">
-      <div class="header-inner">
-        <a class="brand" href="#top" aria-label="Zur Startseite">
-          <div class="brand-mark">Z</div>
-          <div class="brand-text">
-            <strong>ZFD</strong>
-            <span>Zukunft für Deutschland</span>
-          </div>
-        </a>
 
-        <nav aria-label="Hauptnavigation">
-          <div class="nav-links" id="navLinks">
-            <a href="#about">Über uns</a>
-            <a href="#programm">Programm</a>
-            <a href="#werte">Werte</a>
-            <a href="#roadmap">Umsetzung</a>
-            <a href="#faq">FAQ</a>
-            <a href="#kontakt">Kontakt</a>
-          </div>
+    <div class="header-inner">
 
-          <div class="header-actions">
-            <button class="icon-btn" id="themeToggle" type="button" aria-label="Theme wechseln">
-              <span id="themeIcon">🌙</span>
-              <span class="sr-only">Theme wechseln</span>
-            </button>
-
-            <button class="menu-btn" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Menü öffnen">
-              <span class="menu-lines" aria-hidden="true"><span></span><span></span><span></span></span>
-            </button>
-          </div>
-        </nav>
+      <div class="logo">
+        ZFD
       </div>
 
-      <div class="mobile-nav" id="mobileNav">
-        <a href="#about">Über uns</a>
+      <nav>
+
+        <a href="#about">Über Uns</a>
         <a href="#programm">Programm</a>
+        <a href="#ziele">Ziele</a>
         <a href="#werte">Werte</a>
-        <a href="#roadmap">Umsetzung</a>
-        <a href="#faq">FAQ</a>
         <a href="#kontakt">Kontakt</a>
-      </div>
+
+      </nav>
+
+      <!-- THEME TOGGLE -->
+
+      <button class="theme-toggle" id="themeToggle">
+        🌙
+      </button>
+
     </div>
+
   </header>
 
-  <main id="main-content">
-    <section class="hero" id="top">
-      <div class="container hero-inner">
-        <div class="hero-badge reveal">🇩🇪 Neue Ideen für Deutschlands Zukunft</div>
+  <!-- HERO -->
 
-        <h1 class="reveal">Zukunft für Deutschland</h1>
+  <section class="hero fade-up">
 
-        <p class="reveal">
-          Heimat. Freiheit. Innovation. Eine moderne Bewegung für Sicherheit,
-          wirtschaftliche Stärke, digitale Zukunft und eine Politik, die wieder näher
-          an den Bürgern ist.
-        </p>
-
-        <div class="hero-buttons reveal">
-          <a href="#programm" class="btn btn-primary">Parteiprogramm ansehen</a>
-          <a href="#kontakt" class="btn btn-secondary">Unterstützen</a>
-        </div>
-
-        <div class="hero-stats">
-          <div class="stat reveal">
-            <div class="num" data-target="2030" data-suffix="+">0+</div>
-            <p>Zukunftsorientierte Politik</p>
-          </div>
-
-          <div class="stat reveal">
-            <div class="num" data-target="100" data-suffix="%">0%</div>
-            <p>Fokus auf Bürgernähe</p>
-          </div>
-
-          <div class="stat reveal">
-            <div class="num" data-target="24" data-suffix="/7">0/7</div>
-            <p>Einsatz für Deutschland</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about">
-      <div class="container">
-        <h2 class="section-title reveal">Was ist die ZFD?</h2>
-        <p class="section-subtitle reveal">
-          Die Zukunft für Deutschland steht für moderne Politik, pragmatische Lösungen und ein starkes Land mit Perspektive.
-        </p>
-
-        <div class="about-box reveal">
-          <div class="about-grid">
-            <div class="about-text">
-              <p>
-                Deutschland steht vor großen Herausforderungen: wirtschaftlicher Wandel,
-                steigende Lebenshaltungskosten, Digitalisierung, internationale Krisen
-                und gesellschaftliche Spannungen.
-              </p>
-
-              <p>
-                Die ZFD setzt auf Innovation statt Stillstand. Wir wollen Leistung fördern,
-                Familien stärken, Chancen schaffen und Vertrauen zurückbringen.
-              </p>
-
-              <p>
-                Unser Ziel ist ein sicheres, modernes und wirtschaftlich starkes Deutschland,
-                das seine Bürger unterstützt und gleichzeitig offen für Fortschritt bleibt.
-              </p>
-            </div>
-
-            <div class="highlight-panel">
-              <div class="mini-feature">
-                <div>🚀</div>
-                <div>
-                  <strong>Modernisierung</strong>
-                  <span>Digitale Verwaltung, schnellere Abläufe, weniger Papier.</span>
-                </div>
-              </div>
-
-              <div class="mini-feature">
-                <div>🛡️</div>
-                <div>
-                  <strong>Sicherheit</strong>
-                  <span>Starke öffentliche Ordnung und verlässliche Strukturen.</span>
-                </div>
-              </div>
-
-              <div class="mini-feature">
-                <div>📈</div>
-                <div>
-                  <strong>Wirtschaft</strong>
-                  <span>Mehr Entlastung, weniger Bürokratie, mehr Wachstum.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="pill-row reveal" aria-label="Werte">
-          <div class="pill">Freiheit</div>
-          <div class="pill">Sicherheit</div>
-          <div class="pill">Innovation</div>
-          <div class="pill">Leistung</div>
-          <div class="pill">Verantwortung</div>
-          <div class="pill">Zusammenhalt</div>
-          <div class="pill">Demokratie</div>
-          <div class="pill">Zukunft</div>
-        </div>
-      </div>
-    </section>
-
-    <section id="programm">
-      <div class="container">
-        <h2 class="section-title reveal">Unser Parteiprogramm</h2>
-        <p class="section-subtitle reveal">
-          Moderne Ideen für eine starke Zukunft.
-        </p>
-
-        <div class="grid">
-          <article class="card reveal">
-            <h3>🛡 Sicherheit & Ordnung</h3>
-            <ul>
-              <li>Mehr Polizei auf Straßen und Bahnhöfen</li>
-              <li>Moderne Ausrüstung für Sicherheitskräfte</li>
-              <li>Konsequentes Vorgehen gegen Kriminalität</li>
-              <li>Schutz öffentlicher Räume</li>
-            </ul>
-            <div class="slogan">Sicherheit bedeutet Freiheit.</div>
-          </article>
-
-          <article class="card reveal">
-            <h3>💼 Wirtschaft & Innovation</h3>
-            <ul>
-              <li>Weniger Bürokratie</li>
-              <li>Entlastung für Mittelstand und Familien</li>
-              <li>Förderung deutscher Unternehmen</li>
-              <li>Digitale Modernisierung</li>
-            </ul>
-            <div class="slogan">Leistung muss sich lohnen.</div>
-          </article>
-
-          <article class="card reveal">
-            <h3>🌍 Migration & Integration</h3>
-            <ul>
-              <li>Klare Regeln für Einwanderung</li>
-              <li>Integration durch Sprache und Arbeit</li>
-              <li>Schutz der Außengrenzen</li>
-              <li>Konsequentes Vorgehen gegen Extremismus</li>
-            </ul>
-            <div class="slogan">Integration braucht Ordnung.</div>
-          </article>
-
-          <article class="card reveal">
-            <h3>🏫 Bildung & Familie</h3>
-            <ul>
-              <li>Moderne Schulen</li>
-              <li>Mehr Digitalisierung im Unterricht</li>
-              <li>Förderung von Ausbildung und Handwerk</li>
-              <li>Mehr Unterstützung für Familien</li>
-            </ul>
-            <div class="slogan">Familien stärken die Zukunft.</div>
-          </article>
-
-          <article class="card reveal">
-            <h3>⚡ Energie & Umwelt</h3>
-            <ul>
-              <li>Bezahlbare Energiepreise</li>
-              <li>Technologieoffene Umweltpolitik</li>
-              <li>Förderung moderner Innovationen</li>
-              <li>Schutz von Natur und Landwirtschaft</li>
-            </ul>
-            <div class="slogan">Fortschritt statt Verbote.</div>
-          </article>
-
-          <article class="card reveal">
-            <h3>🏛 Demokratie & Bürgernähe</h3>
-            <ul>
-              <li>Mehr Transparenz</li>
-              <li>Stärkere Bürgerbeteiligung</li>
-              <li>Digitale Verwaltungsreformen</li>
-              <li>Politik näher an den Menschen</li>
-            </ul>
-            <div class="slogan">Demokratie lebt vom Vertrauen.</div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="werte">
-      <div class="container">
-        <h2 class="section-title reveal">Unsere Werte</h2>
-        <p class="section-subtitle reveal">
-          Die Grundlage unserer Politik und unseres Handelns.
-        </p>
-
-        <div class="timeline">
-          <div class="timeline-item reveal">
-            <div class="timeline-step">01</div>
-            <div>
-              <h3>Verantwortung</h3>
-              <p>Politik soll Folgen verstehen, Entscheidungen erklären und Ergebnisse liefern.</p>
-            </div>
-          </div>
-
-          <div class="timeline-item reveal">
-            <div class="timeline-step">02</div>
-            <div>
-              <h3>Leistung</h3>
-              <p>Wer arbeitet, gründet, lernt und anpackt, soll mehr Chancen und mehr Anerkennung bekommen.</p>
-            </div>
-          </div>
-
-          <div class="timeline-item reveal">
-            <div class="timeline-step">03</div>
-            <div>
-              <h3>Zusammenhalt</h3>
-              <p>Ein starkes Land entsteht dort, wo Menschen einander respektieren und gemeinsam Lösungen suchen.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="roadmap">
-      <div class="container">
-        <h2 class="section-title reveal">Wie wir vorgehen</h2>
-        <p class="section-subtitle reveal">
-          Nicht nur große Worte, sondern klare Schritte.
-        </p>
-
-        <div class="grid">
-          <article class="card reveal">
-            <h3>1. Zuhören</h3>
-            <ul>
-              <li>Bürgerfeedback sammeln</li>
-              <li>Lokale Probleme sichtbar machen</li>
-              <li>Echte Sorgen ernst nehmen</li>
-            </ul>
-          </article>
-
-          <article class="card reveal">
-            <h3>2. Umsetzen</h3>
-            <ul>
-              <li>Klare Prioritäten setzen</li>
-              <li>Pragmatische Lösungen bauen</li>
-              <li>Verwaltung entschlacken</li>
-            </ul>
-          </article>
-
-          <article class="card reveal">
-            <h3>3. Prüfen</h3>
-            <ul>
-              <li>Ergebnisse transparent machen</li>
-              <li>Fehler korrigieren</li>
-              <li>Fortschritt messbar halten</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="faq">
-      <div class="container">
-        <h2 class="section-title reveal">FAQ</h2>
-        <p class="section-subtitle reveal">
-          Häufige Fragen auf einen Blick.
-        </p>
-
-        <div class="faq">
-          <details class="faq-item reveal">
-            <summary>Wie wird die Seite Dark und Light Mode wechseln?</summary>
-            <p>Über den Button oben rechts. Die Einstellung wird gespeichert, damit sie beim nächsten Besuch erhalten bleibt.</p>
-          </details>
-
-          <details class="faq-item reveal">
-            <summary>Kann ich die Seite auch auf dem Handy gut bedienen?</summary>
-            <p>Ja. Das Layout passt sich automatisch an und nutzt ein mobiles Menü mit großen, gut klickbaren Elementen.</p>
-          </details>
-
-          <details class="faq-item reveal">
-            <summary>Was macht diese Version „moderner“?</summary>
-            <p>Sticky Header, Scroll-Animationen, aktive Navigation, Fortschrittsbalken, Back-to-Top-Button, bessere Struktur und Accessibility.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <section id="kontakt">
-      <div class="container">
-        <div class="contact-box reveal">
-          <div class="contact-grid">
-            <h2 class="section-title">Kontakt & Unterstützung</h2>
-
-            <p class="contact-copy">
-              Du möchtest die ZFD unterstützen, Ideen einbringen oder Kontakt aufnehmen?
-              Hier ist der direkte Kontakt.
-            </p>
-
-            <div class="contact-card">
-              <strong>E-Mail</strong>
-              <a href="mailto:ysiszysisz@gmail.com">ysiszysisz@gmail.com</a>
-            </div>
-
-            <div class="contact-actions">
-              <a class="btn btn-primary" href="mailto:ysiszysisz@gmail.com">E-Mail senden</a>
-              <a class="btn btn-secondary" href="#top">Zurück nach oben</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <button class="back-to-top" id="backToTop" type="button" aria-label="Nach oben scrollen">↑</button>
-
-  <footer class="footer">
-    <div class="container">
-      <p>© 2026 ZFD – Zukunft für Deutschland</p>
-      <p style="margin-top: 10px;">Entwickelt von <strong>Jakob</strong> & <strong>Jason</strong></p>
+    <div class="hero-badge">
+      🇩🇪 Neue Ideen für Deutschlands Zukunft
     </div>
+
+    <h1>
+      Zukunft für Deutschland
+    </h1>
+
+    <p>
+      Die ZFD steht für ein starkes, sicheres und modernes Deutschland.
+      Wir glauben an Freiheit, Verantwortung, Leistung und den Zusammenhalt
+      unserer Gesellschaft. Unser Ziel ist ein Staat, der seine Bürger schützt,
+      Familien stärkt, die Wirtschaft fördert und Zukunftschancen
+      für kommende Generationen schafft.
+    </p>
+
+    <div class="hero-buttons">
+
+      <a href="#programm" class="btn btn-primary">
+        Parteiprogramm ansehen
+      </a>
+
+      <a href="#kontakt" class="btn btn-secondary">
+        Unterstützen
+      </a>
+
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+
+  <section id="about">
+
+    <h2 class="section-title">
+      Was ist die ZFD?
+    </h2>
+
+    <p class="section-subtitle">
+      Heimat. Freiheit. Zukunft.
+    </p>
+
+    <div class="about-box glass fade-up">
+
+      <p>
+        Deutschland steht vor großen Herausforderungen:
+        wirtschaftlicher Wandel, steigende Lebenshaltungskosten,
+        Digitalisierung, internationale Krisen
+        und gesellschaftliche Spannungen.
+      </p>
+
+      <p>
+        Die ZFD setzt auf Innovation statt Stillstand.
+        Wir wollen Leistung fördern, Familien stärken,
+        Chancen schaffen und Vertrauen zurückbringen.
+      </p>
+
+      <p>
+        Unser Ziel ist ein sicheres,
+        modernes und wirtschaftlich starkes Deutschland,
+        das seine Bürger unterstützt
+        und gleichzeitig offen für Fortschritt bleibt.
+      </p>
+
+      <p>
+        Patriotismus und internationale Zusammenarbeit
+        schließen sich nicht aus.
+        Deutschland soll selbstbewusst auftreten,
+        seine Interessen vertreten und gleichzeitig
+        ein verlässlicher Partner in Europa bleiben.
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- PROGRAMM -->
+
+  <section id="programm">
+
+    <h2 class="section-title">
+      Parteiprogramm 2026
+    </h2>
+
+    <p class="section-subtitle">
+      Moderne Ideen für eine starke Zukunft.
+    </p>
+
+    <div class="grid">
+
+      <!-- 1 -->
+
+      <div class="card fade-up">
+
+        <h3>🛡 Sicherheit & Ordnung</h3>
+
+        <ul>
+
+          <li>Mehr Polizeipräsenz auf Straßen, Bahnhöfen und öffentlichen Plätzen</li>
+
+          <li>Schnellere Abschiebung von Straftätern ohne Aufenthaltsrecht</li>
+
+          <li>Konsequente Bekämpfung von Clan-, Banden- und organisierter Kriminalität</li>
+
+          <li>Härtere Strafen für Gewalt-, Sexual- und Wiederholungstäter</li>
+
+          <li>Moderne Ausrüstung und bessere Unterstützung für Polizei, Feuerwehr und Rettungsdienste</li>
+
+          <li>Null-Toleranz gegenüber Extremismus und Gewalt</li>
+
+        </ul>
+
+        <div class="slogan">
+          „Sicherheit ist Freiheit.“
+        </div>
+
+      </div>
+
+      <!-- 2 -->
+
+      <div class="card fade-up">
+
+        <h3>💼 Wirtschaft & Steuern</h3>
+
+        <ul>
+
+          <li>Weniger Bürokratie für Unternehmen, Handwerk und Mittelstand</li>
+
+          <li>Niedrigere Steuerbelastung für Familien und Arbeitnehmer</li>
+
+          <li>Förderung deutscher Industrie, Technologie und Innovation</li>
+
+          <li>Bezahlbare Energiepreise für Bürger und Unternehmen</li>
+
+          <li>Unterstützung regionaler Betriebe statt übermäßiger Konzernabhängigkeit</li>
+
+          <li>Stärkung von Ausbildung, Handwerk und Unternehmertum</li>
+
+        </ul>
+
+        <div class="slogan">
+          „Arbeit muss sich wieder lohnen.“
+        </div>
+
+      </div>
+
+      <!-- 3 -->
+
+      <div class="card fade-up">
+
+        <h3>🌍 Migration & Integration</h3>
+
+        <ul>
+
+          <li>Bessere Kontrolle der Außengrenzen</li>
+
+          <li>Klare und nachvollziehbare Regeln für Einwanderung</li>
+
+          <li>Integration durch Sprache, Bildung, Arbeit und Respekt vor deutschen Gesetzen</li>
+
+          <li>Konsequentes Vorgehen gegen Extremismus jeder Art</li>
+
+          <li>Sozialleistungen stärker an Eigenleistung und Integration koppeln</li>
+
+          <li>Schnellere Verfahren bei Asyl- und Aufenthaltsfragen</li>
+
+        </ul>
+
+        <div class="slogan">
+          „Integration braucht Regeln.“
+        </div>
+
+      </div>
+
+      <!-- 4 -->
+
+      <div class="card fade-up">
+
+        <h3>🏫 Familie & Bildung</h3>
+
+        <ul>
+
+          <li>Mehr finanzielle Unterstützung für Familien mit Kindern</li>
+
+          <li>Ausbau moderner Kitas und Schulen</li>
+
+          <li>Fokus auf Leistung, Respekt und Disziplin im Unterricht</li>
+
+          <li>Mehr Digitalisierung und moderne Technologien an Schulen</li>
+
+          <li>Förderung von Ausbildung, Handwerk und dualem Studium</li>
+
+          <li>Bessere Chancen für junge Menschen unabhängig von Herkunft</li>
+
+        </ul>
+
+        <div class="slogan">
+          „Starke Familien, starke Zukunft.“
+        </div>
+
+      </div>
+
+      <!-- 5 -->
+
+      <div class="card fade-up">
+
+        <h3>⚡ Energie & Umwelt</h3>
+
+        <ul>
+
+          <li>Bezahlbare Energiepreise für Haushalte und Unternehmen</li>
+
+          <li>Ausbau erneuerbarer Energien und moderner Forschungstechnologien</li>
+
+          <li>Förderung innovativer Lösungen statt ideologischer Verbote</li>
+
+          <li>Schutz regionaler Landwirtschaft und natürlicher Lebensräume</li>
+
+          <li>Versorgungssicherheit und stabile Energieversorgung</li>
+
+          <li>Nachhaltigkeit mit wirtschaftlicher Vernunft verbinden</li>
+
+        </ul>
+
+        <div class="slogan">
+          „Umweltschutz mit Vernunft.“
+        </div>
+
+      </div>
+
+      <!-- 6 -->
+
+      <div class="card fade-up">
+
+        <h3>🏛 Demokratie & Bürgernähe</h3>
+
+        <ul>
+
+          <li>Mehr direkte Demokratie nach Schweizer Vorbild</li>
+
+          <li>Volksentscheide bei wichtigen nationalen Fragen</li>
+
+          <li>Mehr Transparenz bei Lobbyismus und Politikergehältern</li>
+
+          <li>Begrenzung von Amtszeiten für Spitzenpolitiker</li>
+
+          <li>Stärkung kommunaler Entscheidungen und regionaler Mitbestimmung</li>
+
+          <li>Digitale Bürgerbeteiligung ausbauen</li>
+
+        </ul>
+
+        <div class="slogan">
+          „Mehr Macht für die Bürger.“
+        </div>
+
+      </div>
+
+      <!-- 7 -->
+
+      <div class="card fade-up">
+
+        <h3>🇩🇪 Deutschland & Europa</h3>
+
+        <ul>
+
+          <li>Stärkere Vertretung deutscher Interessen in Europa</li>
+
+          <li>Zusammenarbeit in Europa ohne übermäßige Zentralisierung</li>
+
+          <li>Unterstützung europäischer Sicherheit und Verteidigung</li>
+
+          <li>Schutz deutscher Kultur, Sprache und Traditionen</li>
+
+          <li>Ausbau nationaler Infrastruktur und Versorgungssicherheit</li>
+
+          <li>Förderung von Innovation, Forschung und Wettbewerbsfähigkeit</li>
+
+        </ul>
+
+        <div class="slogan">
+          „Patriotisch. Demokratisch. Zukunftsorientiert.“
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- GOALS -->
+
+  <section id="ziele">
+
+    <h2 class="section-title">
+      Unsere 3 zentralen Ziele
+    </h2>
+
+    <p class="section-subtitle">
+      Klare Prioritäten für Deutschlands Zukunft.
+    </p>
+
+    <div class="grid">
+
+      <div class="card fade-up">
+
+        <h3>1️⃣ Sichere Straßen</h3>
+
+        <p>
+          Ein starker Rechtsstaat schützt seine Bürger.
+        </p>
+
+      </div>
+
+      <div class="card fade-up">
+
+        <h3>2️⃣ Bezahlbares Leben</h3>
+
+        <p>
+          Wohnen, Energie und Alltag müssen wieder bezahlbar werden.
+        </p>
+
+      </div>
+
+      <div class="card fade-up">
+
+        <h3>3️⃣ Starke deutsche Wirtschaft</h3>
+
+        <p>
+          Arbeitsplätze, Innovation und Wohlstand sichern unsere Zukunft.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- VALUES -->
+
+  <section id="werte">
+
+    <h2 class="section-title">
+      Unsere Kernwerte
+    </h2>
+
+    <p class="section-subtitle">
+      Die Grundlage unserer Politik und unseres Handelns.
+    </p>
+
+    <div class="values">
+
+      <div class="value-box">Freiheit</div>
+      <div class="value-box">Sicherheit</div>
+      <div class="value-box">Verantwortung</div>
+      <div class="value-box">Demokratie</div>
+      <div class="value-box">Heimat</div>
+      <div class="value-box">Leistung</div>
+      <div class="value-box">Zusammenhalt</div>
+      <div class="value-box">Zukunft</div>
+
+    </div>
+
+  </section>
+
+  <!-- CONTACT -->
+
+  <section id="kontakt">
+
+    <div class="contact-box fade-up">
+
+      <h2 class="section-title">
+        Kontakt & Unterstützung
+      </h2>
+
+      <p>
+        Du möchtest die ZFD unterstützen,
+        Ideen einbringen oder Kontakt aufnehmen?
+        Gemeinsam gestalten wir Deutschlands Zukunft.
+      </p>
+
+      <div class="paypal">
+        PayPal: ysiszysisz@gmail.com
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <p>
+      „Heimat. Freiheit. Zukunft.“
+    </p>
+
+    <p style="margin-top: 10px;">
+      © 2026 ZFD – Zukunft für Deutschland
+    </p>
+
+    <p style="margin-top: 10px;">
+      Entwickelt von <strong>Jakob</strong> & <strong>Jason</strong>
+    </p>
+
   </footer>
 
+  <!-- SCRIPT -->
+
   <script>
-    const root = document.documentElement;
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    const menuToggle = document.getElementById('menuToggle');
-    const mobileNav = document.getElementById('mobileNav');
-    const progressBar = document.getElementById('progressBar');
-    const backToTop = document.getElementById('backToTop');
-    const navLinks = Array.from(document.querySelectorAll('.nav-links a, .mobile-nav a'));
-    const revealEls = Array.from(document.querySelectorAll('.reveal'));
-    const statNums = Array.from(document.querySelectorAll('.stat .num'));
 
-    const storageKey = 'zfd-theme';
+    /* =========================
+       THEME TOGGLE
+    ========================= */
 
-    function applyTheme(theme) {
-      root.setAttribute('data-theme', theme);
-      localStorage.setItem(storageKey, theme);
-      themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
-      const themeColor = theme === 'dark' ? '#08111f' : '#f7fbff';
-      document.querySelector('meta[name="theme-color"]').setAttribute('content', themeColor);
-    }
+    const toggleBtn = document.getElementById("themeToggle");
+    const html = document.documentElement;
 
-    const savedTheme = localStorage.getItem(storageKey);
-    const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-    applyTheme(savedTheme || (prefersLight ? 'light' : 'dark'));
+    toggleBtn.addEventListener("click", () => {
 
-    themeToggle.addEventListener('click', () => {
-      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      applyTheme(next);
-    });
+      if (html.dataset.theme === "dark") {
 
-    function setMenu(open) {
-      mobileNav.classList.toggle('open', open);
-      menuToggle.setAttribute('aria-expanded', String(open));
-      menuToggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
-      menuToggle.innerHTML = open
-        ? '<span aria-hidden="true" style="font-size:1.4rem;line-height:1;">×</span>'
-        : '<span class="menu-lines" aria-hidden="true"><span></span><span></span><span></span></span>';
-    }
+        html.dataset.theme = "light";
+        toggleBtn.textContent = "☀️";
 
-    menuToggle.addEventListener('click', () => {
-      setMenu(!mobileNav.classList.contains('open'));
-    });
+      } else {
 
-    mobileNav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => setMenu(false));
-    });
+        html.dataset.theme = "dark";
+        toggleBtn.textContent = "🌙";
 
-    document.addEventListener('click', (e) => {
-      if (!mobileNav.contains(e.target) && !menuToggle.contains(e.target) && mobileNav.classList.contains('open')) {
-        setMenu(false);
       }
+
     });
 
-    function updateProgress() {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      progressBar.style.width = `${progress}%`;
-      backToTop.classList.toggle('show', scrollTop > 700);
-    }
+    /* =========================
+       CARD SPOTLIGHT EFFECT
+    ========================= */
 
-    window.addEventListener('scroll', updateProgress, { passive: true });
-    updateProgress();
+    const cards = document.querySelectorAll(".card");
 
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    cards.forEach(card => {
 
-    const sections = ['about', 'programm', 'werte', 'roadmap', 'faq', 'kontakt']
-      .map(id => document.getElementById(id))
-      .filter(Boolean);
+      card.addEventListener("mousemove", e => {
 
-    const activeObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        navLinks.forEach(link => {
-          const target = link.getAttribute('href');
-          link.classList.toggle('active', target === `#${entry.target.id}`);
-        });
+        const rect = card.getBoundingClientRect();
+
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        card.style.setProperty("--x", `${x}px`);
+        card.style.setProperty("--y", `${y}px`);
+
       });
-    }, { root: null, threshold: 0.45 });
 
-    sections.forEach(section => activeObserver.observe(section));
+    });
 
-    const revealObserver = new IntersectionObserver((entries) => {
+    /* =========================
+       SCROLL ANIMATION
+    ========================= */
+
+    const observer = new IntersectionObserver(entries => {
+
       entries.forEach(entry => {
+
         if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          revealObserver.unobserve(entry.target);
+
+          entry.target.classList.add("fade-up");
+
         }
+
       });
-    }, { threshold: 0.15 });
 
-    revealEls.forEach(el => revealObserver.observe(el));
-
-    function animateNumber(el) {
-      const target = Number(el.dataset.target || 0);
-      const suffix = el.dataset.suffix || '';
-      const duration = 1400;
-      const start = performance.now();
-
-      function frame(now) {
-        const progress = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        const value = Math.round(target * eased);
-        el.textContent = `${value}${suffix}`;
-        if (progress < 1) requestAnimationFrame(frame);
-      }
-
-      requestAnimationFrame(frame);
-    }
-
-    const statObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.querySelectorAll('.num').forEach(animateNumber);
-        statObserver.unobserve(entry.target);
-      });
-    }, { threshold: 0.35 });
-
-    const statsWrap = document.querySelector('.hero-stats');
-    if (statsWrap) statObserver.observe(statsWrap);
-
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
-        setMenu(false);
-      }
     });
+
+    document.querySelectorAll("section, .card").forEach(el => {
+      observer.observe(el);
+    });
+
   </script>
+
 </body>
 </html>
