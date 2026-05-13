@@ -1,0 +1,2489 @@
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+diff --git a/index.html b/index.html
+index baec3a861f00c486e97b981cd6389d23b4d5ee84..8ece9f4b6c719fd1f3fbcda438105cebfdd080f5 100644
+--- a/index.html
++++ b/index.html
+@@ -1,1584 +1,1353 @@
+ <!DOCTYPE html>
+ <html lang="de" data-theme="dark">
+ <head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ 
+   <title>ZFD – Zukunft für Deutschland</title>
+   <meta name="description" content="ZFD – Zukunft für Deutschland. Heimat. Freiheit. Zukunft.">
+   <meta name="theme-color" content="#020617">
+   <meta name="color-scheme" content="dark light">
+ 
+-  <!-- FONT -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+-
+-  <!-- AOS -->
+-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css"/>
+-
+   <style>
+     :root {
+       --bg: #020617;
+-      --bg2: #0f172a;
++      --surface: rgba(15, 23, 42, 0.74);
++      --surface-strong: rgba(15, 23, 42, 0.94);
+       --text: #f8fafc;
+       --muted: #94a3b8;
+       --primary: #2563eb;
+-      --primary2: #3b82f6;
+-      --primary3: #60a5fa;
+-      --card: rgba(15,23,42,0.75);
+-      --border: rgba(255,255,255,0.08);
+-      --shadow: 0 10px 40px rgba(0,0,0,0.35);
+-      --radius: 30px;
+-      --header-bg: rgba(2,6,23,0.7);
++      --primary-2: #60a5fa;
++      --border: rgba(255, 255, 255, 0.1);
++      --shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
++      --radius: 28px;
++      --header-bg: rgba(2, 6, 23, 0.72);
+     }
+ 
+     html[data-theme="light"] {
+       --bg: #f8fafc;
+-      --bg2: #e2e8f0;
++      --surface: rgba(255, 255, 255, 0.78);
++      --surface-strong: rgba(255, 255, 255, 0.95);
+       --text: #020617;
+       --muted: #475569;
+-      --card: rgba(255,255,255,0.78);
+-      --border: rgba(0,0,0,0.08);
+-      --shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+-      --header-bg: rgba(248,250,252,0.7);
++      --border: rgba(15, 23, 42, 0.1);
++      --shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
++      --header-bg: rgba(248, 250, 252, 0.75);
+     }
+ 
+     * {
++      box-sizing: border-box;
+       margin: 0;
+       padding: 0;
+-      box-sizing: border-box;
+     }
+ 
+     html {
+       scroll-behavior: smooth;
+     }
+ 
+     body {
++      min-height: 100vh;
+       font-family: "Inter", sans-serif;
+       background:
+-        radial-gradient(circle at top left, rgba(37,99,235,0.15), transparent 35%),
+-        radial-gradient(circle at bottom right, rgba(59,130,246,0.12), transparent 35%),
++        radial-gradient(circle at 12% 8%, rgba(37, 99, 235, 0.22), transparent 28rem),
++        radial-gradient(circle at 90% 22%, rgba(96, 165, 250, 0.16), transparent 26rem),
+         var(--bg);
+       color: var(--text);
+       overflow-x: hidden;
+-      transition: background 0.3s ease, color 0.3s ease;
++      transition: background 0.25s ease, color 0.25s ease;
+     }
+ 
+-    body::selection {
+-      background: rgba(59,130,246,0.35);
+-      color: white;
++    a {
++      color: inherit;
+     }
+ 
+-    /* ACCESSIBILITY */
+     .skip-link {
+       position: absolute;
+       top: -60px;
+       left: 20px;
+-      z-index: 9999;
+-      background: var(--primary);
+-      color: white;
++      z-index: 2000;
+       padding: 12px 18px;
+       border-radius: 12px;
++      background: var(--primary);
++      color: white;
++      font-weight: 800;
+       text-decoration: none;
+-      font-weight: 700;
+       transition: top 0.2s ease;
+     }
+ 
+     .skip-link:focus {
+-      top: 20px;
+-    }
+-
+-    /* PROGRESS BAR */
+-    .scroll-progress {
+-      position: fixed;
+-      top: 0;
+-      left: 0;
+-      width: 0%;
+-      height: 4px;
+-      background: linear-gradient(90deg, var(--primary), var(--primary3));
+-      z-index: 10000;
+-      box-shadow: 0 0 18px rgba(59,130,246,0.45);
+-    }
+-
+-    /* SCROLLBAR */
+-    ::-webkit-scrollbar {
+-      width: 10px;
+-    }
+-
+-    ::-webkit-scrollbar-track {
+-      background: transparent;
++      top: 18px;
+     }
+ 
+-    ::-webkit-scrollbar-thumb {
+-      background: linear-gradient(var(--primary), var(--primary2));
+-      border-radius: 30px;
+-    }
+-
+-    ::-webkit-scrollbar-thumb:hover {
+-      background: linear-gradient(var(--primary3), var(--primary));
+-    }
+-
+-    /* BACKGROUND */
+     .bg-grid {
+       position: fixed;
+       inset: 0;
+-      background-image:
+-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+-      background-size: 40px 40px;
+-      z-index: -10;
+-      mask-image: radial-gradient(circle at center, black 30%, transparent 100%);
++      z-index: -2;
+       pointer-events: none;
++      background-image:
++        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
++        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
++      background-size: 42px 42px;
++      mask-image: radial-gradient(circle at center, black 25%, transparent 82%);
+     }
+ 
+-    .glow {
++    .scroll-progress {
+       position: fixed;
+-      width: 600px;
+-      height: 600px;
+-      border-radius: 50%;
+-      filter: blur(120px);
+-      opacity: 0.18;
+-      z-index: -20;
+-      animation: float 15s ease-in-out infinite;
+-      pointer-events: none;
+-    }
+-
+-    .g1 { background: #2563eb; top: -200px; left: -150px; }
+-    .g2 { background: #1d4ed8; bottom: -200px; right: -150px; animation-delay: 2s; }
+-    .g3 { background: #60a5fa; top: 40%; left: 40%; animation-delay: 4s; }
+-
+-    @keyframes float {
+-      0% { transform: translateY(0px) scale(1); }
+-      50% { transform: translateY(-35px) scale(1.03); }
+-      100% { transform: translateY(0px) scale(1); }
+-    }
+-
+-    @keyframes pulse {
+-      0% { transform: scale(1); }
+-      50% { transform: scale(1.05); }
+-      100% { transform: scale(1); }
++      inset: 0 auto auto 0;
++      z-index: 3000;
++      width: 0;
++      height: 4px;
++      background: linear-gradient(90deg, var(--primary), var(--primary-2));
++      box-shadow: 0 0 18px rgba(96, 165, 250, 0.5);
+     }
+ 
+-    @keyframes fadeUpSoft {
+-      from { opacity: 0; transform: translateY(18px); }
+-      to { opacity: 1; transform: translateY(0); }
++    .noscript-alert {
++      width: min(1180px, 92%);
++      margin: 18px auto 0;
++      padding: 14px 18px;
++      border: 1px solid rgba(96, 165, 250, 0.35);
++      border-radius: 16px;
++      background: rgba(37, 99, 235, 0.14);
++      color: var(--text);
++      font-weight: 700;
++      box-shadow: var(--shadow);
+     }
+ 
+-    /* HEADER */
+     header {
+       position: sticky;
+       top: 0;
+-      z-index: 999;
+-      backdrop-filter: blur(20px);
+-      background: var(--header-bg);
++      z-index: 1000;
+       border-bottom: 1px solid var(--border);
+-      transition: background 0.3s ease, border-color 0.3s ease;
++      background: var(--header-bg);
++      backdrop-filter: blur(18px);
+     }
+ 
+-    .header-inner {
+-      width: min(1400px, 92%);
++    .header-inner,
++    section,
++    footer {
++      width: min(1180px, 92%);
+       margin: auto;
++    }
++
++    .header-inner {
+       display: flex;
+-      justify-content: space-between;
+       align-items: center;
+-      gap: 20px;
+-      padding: 18px 0;
++      justify-content: space-between;
++      gap: 18px;
++      padding: 16px 0;
+     }
+ 
+     .logo-wrap {
+-      display: flex;
+-      flex-direction: column;
+-      gap: 4px;
++      display: grid;
++      gap: 3px;
+     }
+ 
+     .logo {
+-      font-size: 1.7rem;
+-      font-weight: 900;
+-      background: linear-gradient(to right, white, #60a5fa);
++      font-size: 1.65rem;
++      font-weight: 950;
++      letter-spacing: 0.12em;
++      line-height: 1;
++      background: linear-gradient(90deg, #fff, var(--primary-2));
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+-      letter-spacing: 2px;
+-      line-height: 1;
+     }
+ 
+     html[data-theme="light"] .logo {
+-      background: linear-gradient(to right, #020617, #2563eb);
++      background: linear-gradient(90deg, #020617, var(--primary));
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+     }
+ 
+     .logo-sub {
+-      font-size: 0.82rem;
+       color: var(--muted);
+-      letter-spacing: 0.2px;
+-    }
+-
+-    .nav-actions {
+-      display: flex;
+-      align-items: center;
+-      gap: 14px;
++      font-size: 0.8rem;
++      font-weight: 600;
+     }
+ 
+     nav {
+       display: flex;
+-      gap: 25px;
+       align-items: center;
++      gap: 8px;
++      flex-wrap: wrap;
++      justify-content: flex-end;
+     }
+ 
+-    nav a {
++    .nav-link,
++    .icon-btn {
++      border: 1px solid transparent;
++      border-radius: 999px;
++      background: transparent;
+       color: var(--text);
++      cursor: pointer;
++      font: inherit;
++      font-weight: 800;
+       text-decoration: none;
+-      font-weight: 600;
+-      position: relative;
+-      opacity: 0.9;
+-      transition: opacity 0.2s ease, transform 0.2s ease;
++      transition: 0.2s ease;
+     }
+ 
+-    nav a:hover {
+-      opacity: 1;
+-      transform: translateY(-1px);
++    .nav-link {
++      padding: 10px 13px;
++      color: var(--muted);
+     }
+ 
+-    nav a::after {
+-      content: "";
+-      position: absolute;
+-      left: 0;
+-      bottom: -5px;
+-      width: 0%;
+-      height: 2px;
+-      background: var(--primary);
+-      transition: 0.3s;
+-      box-shadow: 0 0 10px rgba(59,130,246,0.5);
++    .nav-link:hover,
++    .nav-link.active {
++      border-color: var(--border);
++      background: rgba(255,255,255,0.06);
++      color: var(--text);
++      transform: translateY(-1px);
+     }
+ 
+-    nav a:hover::after,
+-    nav a.active::after {
+-      width: 100%;
++    .icon-btn {
++      display: inline-grid;
++      place-items: center;
++      width: 44px;
++      height: 44px;
++      border-color: var(--border);
++      background: rgba(255,255,255,0.06);
+     }
+ 
+-    nav a.active {
+-      opacity: 1;
++    .icon-btn:hover {
++      transform: translateY(-2px) rotate(5deg);
++      border-color: rgba(96, 165, 250, 0.45);
+     }
+ 
+-    .theme-toggle,
+     .menu-toggle {
+-      width: 50px;
+-      height: 50px;
+-      border-radius: 50%;
+-      border: 1px solid var(--border);
+-      background: rgba(255,255,255,0.05);
+-      color: var(--text);
+-      cursor: pointer;
+-      font-size: 1.1rem;
+-      transition: 0.3s ease;
+-      display: grid;
+-      place-items: center;
+-      flex: 0 0 auto;
++      display: none;
+     }
+ 
+-    .theme-toggle:hover,
+-    .menu-toggle:hover {
+-      transform: translateY(-2px) rotate(8deg);
+-      border-color: rgba(96,165,250,0.35);
+-      box-shadow: 0 12px 24px rgba(0,0,0,0.18);
++    main {
++      overflow: hidden;
+     }
+ 
+-    .menu-toggle {
+-      display: none;
+-      font-size: 1.2rem;
++    section {
++      padding: 100px 0;
+     }
+ 
+-    /* HERO */
+     .hero {
+-      min-height: 100vh;
+-      display: flex;
+-      flex-direction: column;
+-      align-items: center;
+-      justify-content: center;
++      min-height: calc(100vh - 78px);
++      display: grid;
++      place-items: center;
+       text-align: center;
+-      width: min(1200px, 92%);
+-      margin: auto;
+-      position: relative;
+-      padding-top: 70px;
++      padding-top: 80px;
++    }
++
++    .hero-content {
++      max-width: 980px;
+     }
+ 
+-    .hero-badge {
+-      background: rgba(37,99,235,0.12);
+-      border: 1px solid rgba(96,165,250,0.3);
+-      color: #93c5fd;
+-      padding: 10px 20px;
++    .badge,
++    .chip {
++      display: inline-flex;
++      align-items: center;
++      gap: 8px;
++      border: 1px solid rgba(96, 165, 250, 0.28);
+       border-radius: 999px;
+-      margin-bottom: 25px;
+-      font-weight: 700;
++      background: rgba(37, 99, 235, 0.12);
++      color: #bfdbfe;
++      font-weight: 850;
++    }
++
++    .badge {
++      padding: 10px 18px;
++      margin-bottom: 22px;
+       animation: pulse 3s infinite;
+-      box-shadow: 0 0 0 1px rgba(96,165,250,0.04) inset;
++    }
++
++    .hero h1,
++    .section-title {
++      font-weight: 950;
++      letter-spacing: -0.055em;
++      text-wrap: balance;
+     }
+ 
+     .hero h1 {
+-      font-size: clamp(3rem, 10vw, 7rem);
+-      font-weight: 900;
+-      line-height: 1;
+-      margin-bottom: 25px;
+-      background: linear-gradient(to bottom, white, #60a5fa);
++      font-size: clamp(3.3rem, 10vw, 7.5rem);
++      line-height: 0.94;
++      margin-bottom: 24px;
++      background: linear-gradient(180deg, #fff, var(--primary-2));
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+-      text-wrap: balance;
+     }
+ 
+     html[data-theme="light"] .hero h1 {
+-      background: linear-gradient(to bottom, #020617, #2563eb);
++      background: linear-gradient(180deg, #020617, var(--primary));
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+     }
+ 
+-    .hero p {
+-      max-width: 950px;
++    .lead {
++      max-width: 860px;
++      margin: 0 auto 30px;
+       color: var(--muted);
+-      line-height: 1.9;
+-      font-size: 1.2rem;
+-      margin-bottom: 40px;
++      font-size: clamp(1.05rem, 2vw, 1.25rem);
++      line-height: 1.85;
+     }
+ 
+     .hero-meta {
+       display: flex;
+-      flex-wrap: wrap;
+       justify-content: center;
+-      gap: 12px;
+-      margin-bottom: 28px;
++      flex-wrap: wrap;
++      gap: 10px;
++      margin-bottom: 32px;
+     }
+ 
+-    .hero-chip {
+-      padding: 10px 16px;
+-      border-radius: 999px;
+-      border: 1px solid var(--border);
++    .chip {
++      padding: 9px 14px;
+       background: rgba(255,255,255,0.05);
+       color: var(--muted);
+-      font-weight: 600;
+-      backdrop-filter: blur(10px);
++      border-color: var(--border);
+     }
+ 
+-    .hero-buttons {
++    .btn-row {
+       display: flex;
+-      gap: 20px;
+-      flex-wrap: wrap;
+       justify-content: center;
++      gap: 14px;
++      flex-wrap: wrap;
+     }
+ 
+     .btn {
+-      padding: 18px 34px;
++      display: inline-flex;
++      align-items: center;
++      justify-content: center;
++      min-height: 54px;
++      padding: 15px 24px;
++      border: 1px solid var(--border);
+       border-radius: 16px;
++      background: rgba(255,255,255,0.06);
++      color: var(--text);
++      font-weight: 900;
+       text-decoration: none;
+-      font-weight: 800;
+-      transition: 0.3s ease;
+-      position: relative;
+-      overflow: hidden;
+-      will-change: transform;
+-    }
+-
+-    .btn::before {
+-      content: "";
+-      position: absolute;
+-      inset: 0;
+-      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
+-      transform: translateX(-130%);
+-      transition: transform 0.8s ease;
+-    }
+-
+-    .btn:hover::before {
+-      transform: translateX(130%);
++      cursor: pointer;
++      transition: 0.22s ease;
+     }
+ 
+     .btn-primary {
+-      background: linear-gradient(to right, var(--primary), var(--primary2));
++      border-color: transparent;
++      background: linear-gradient(90deg, var(--primary), var(--primary-2));
+       color: white;
+-      box-shadow: 0 10px 30px rgba(37,99,235,0.4);
+-    }
+-
+-    .btn-secondary {
+-      border: 1px solid var(--border);
+-      color: var(--text);
+-      background: rgba(255,255,255,0.05);
+-      backdrop-filter: blur(10px);
++      box-shadow: 0 14px 34px rgba(37, 99, 235, 0.35);
+     }
+ 
+     .btn:hover {
+-      transform: translateY(-5px);
+-    }
+-
+-    /* SECTION */
+-    section {
+-      width: min(1400px, 92%);
+-      margin: auto;
+-      padding: 120px 0;
++      transform: translateY(-4px);
+     }
+ 
+     .section-title {
+       text-align: center;
+-      font-size: clamp(2rem, 5vw, 4rem);
+-      margin-bottom: 15px;
+-      font-weight: 900;
+-      text-wrap: balance;
++      font-size: clamp(2.2rem, 5vw, 4.2rem);
++      line-height: 1;
++      margin-bottom: 14px;
+     }
+ 
+     .section-subtitle {
+-      text-align: center;
++      max-width: 720px;
++      margin: 0 auto 52px;
+       color: var(--muted);
+-      margin-bottom: 70px;
+-      font-size: 1.1rem;
++      text-align: center;
++      font-size: 1.08rem;
++      line-height: 1.75;
+     }
+ 
+-    /* GLASS */
+-    .glass {
+-      background: var(--card);
++    .glass,
++    .card,
++    .contact-box,
++    .admin-panel {
+       border: 1px solid var(--border);
+-      backdrop-filter: blur(20px);
+-      border-radius: var(--radius);
++      background: var(--surface);
+       box-shadow: var(--shadow);
++      backdrop-filter: blur(20px);
+     }
+ 
+-    /* ABOUT */
+-    .about-box {
+-      padding: 50px;
+-      line-height: 2;
+-      font-size: 1.1rem;
++    .glass {
++      padding: clamp(26px, 5vw, 48px);
++      border-radius: var(--radius);
++      color: var(--muted);
++      font-size: 1.08rem;
++      line-height: 1.9;
+     }
+ 
+-    .about-box p + p {
+-      margin-top: 18px;
++    .glass p + p {
++      margin-top: 16px;
+     }
+ 
+-    /* GRID */
+     .grid {
+       display: grid;
+-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+-      gap: 30px;
++      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
++      gap: 22px;
+     }
+ 
+-    /* CARD */
+     .card {
+       position: relative;
+       overflow: hidden;
+-      background: var(--card);
+-      border: 1px solid var(--border);
+-      backdrop-filter: blur(20px);
+-      border-radius: 28px;
+-      padding: 35px;
+-      transition: 0.4s ease;
+-      box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+-      isolation: isolate;
++      min-height: 100%;
++      padding: 28px;
++      border-radius: 24px;
++      transition: 0.25s ease;
+     }
+ 
+     .card::before {
+       content: "";
+       position: absolute;
+       inset: 0;
+-      background:
+-        radial-gradient(circle at var(--x) var(--y),
+-        rgba(59,130,246,0.18),
+-        transparent 40%);
++      background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(96, 165, 250, 0.18), transparent 42%);
+       opacity: 0;
+-      transition: 0.3s;
++      transition: opacity 0.2s ease;
+       pointer-events: none;
+     }
+ 
+-    .card:hover::before {
+-      opacity: 1;
++    .card:hover {
++      transform: translateY(-8px);
++      border-color: rgba(96, 165, 250, 0.35);
+     }
+ 
+-    .card:hover {
+-      transform: translateY(-10px);
+-      border-color: rgba(96,165,250,0.35);
+-      box-shadow: 0 18px 50px rgba(0,0,0,0.28);
++    .card:hover::before {
++      opacity: 1;
+     }
+ 
+     .card h3 {
+-      font-size: 1.6rem;
+-      margin-bottom: 20px;
+-      text-wrap: balance;
++      position: relative;
++      font-size: 1.3rem;
++      margin-bottom: 12px;
++      line-height: 1.3;
+     }
+ 
+-    .card p {
++    .card p,
++    .card li {
++      position: relative;
+       color: var(--muted);
+-      line-height: 1.8;
+-      margin-bottom: 25px;
++      line-height: 1.75;
+     }
+ 
+     .card ul {
++      position: relative;
++      display: grid;
++      gap: 10px;
++      margin-top: 18px;
+       list-style: none;
+     }
+ 
+-    .card ul li {
+-      position: relative;
+-      padding-left: 28px;
+-      margin-bottom: 18px;
+-      color: var(--muted);
+-      line-height: 1.7;
++    .card li {
++      padding-left: 24px;
+     }
+ 
+-    .card ul li::before {
++    .card li::before {
+       content: "✓";
+       position: absolute;
+       left: 0;
+-      top: 0;
+-      color: #60a5fa;
+-      font-weight: bold;
++      color: var(--primary-2);
++      font-weight: 950;
+     }
+ 
+     .promise {
+-      margin-top: 30px;
+-      padding: 20px;
+-      border-radius: 18px;
+-      background: rgba(37,99,235,0.08);
+-      border: 1px solid rgba(96,165,250,0.2);
+-      line-height: 1.7;
+-    }
+-
+-    .slogan {
+-      margin-top: 25px;
+-      font-style: italic;
+-      color: #93c5fd;
+-      font-weight: 700;
++      position: relative;
++      margin-top: 20px;
++      padding: 16px;
++      border: 1px solid rgba(96, 165, 250, 0.22);
++      border-radius: 16px;
++      background: rgba(37, 99, 235, 0.09);
++      color: var(--text);
++      line-height: 1.65;
+     }
+ 
+-    /* VALUES */
+     .values {
+       display: flex;
+       flex-wrap: wrap;
+       justify-content: center;
+-      gap: 20px;
++      gap: 12px;
+     }
+ 
+     .value {
+-      padding: 18px 30px;
++      padding: 14px 20px;
++      border: 1px solid rgba(96, 165, 250, 0.28);
+       border-radius: 999px;
+-      background: rgba(37,99,235,0.12);
+-      border: 1px solid rgba(96,165,250,0.25);
+-      font-weight: 700;
+-      transition: 0.3s ease;
+-      cursor: default;
++      background: rgba(37, 99, 235, 0.12);
++      font-weight: 900;
++      transition: 0.2s ease;
+     }
+ 
+     .value:hover {
+-      transform: scale(1.08);
+-      box-shadow: 0 10px 24px rgba(37,99,235,0.2);
++      transform: translateY(-3px) scale(1.03);
+     }
+ 
+-    /* CONTACT */
+-    .contact-box {
+-      padding: 60px;
+-      text-align: center;
+-      border-radius: 30px;
+-      background:
+-        linear-gradient(
+-          145deg,
+-          rgba(37,99,235,0.2),
+-          rgba(15,23,42,0.8)
+-        );
+-      border: 1px solid rgba(96,165,250,0.2);
+-      backdrop-filter: blur(25px);
+-      box-shadow: var(--shadow);
++    .admin-section {
++      display: none;
++      padding-top: 40px;
+     }
+ 
+-    .contact-row {
+-      display: flex;
+-      flex-wrap: wrap;
+-      gap: 16px;
+-      justify-content: center;
+-      align-items: center;
+-      margin-top: 24px;
++    .admin-section.admin-unlocked {
++      display: block;
+     }
+ 
+-    .paypal {
+-      display: inline-flex;
+-      align-items: center;
+-      gap: 10px;
+-      padding: 18px 28px;
+-      border-radius: 18px;
+-      background: rgba(255,255,255,0.05);
+-      border: 1px solid var(--border);
+-      font-weight: 700;
+-      word-break: break-word;
++    .admin-panel {
++      border-radius: var(--radius);
++      overflow: hidden;
+     }
+ 
+-    .copy-btn {
+-      padding: 16px 24px;
+-      border-radius: 18px;
+-      border: 1px solid rgba(96,165,250,0.25);
+-      background: rgba(37,99,235,0.12);
+-      color: var(--text);
+-      font-weight: 800;
+-      cursor: pointer;
+-      transition: 0.3s ease;
++    .admin-top {
++      display: grid;
++      grid-template-columns: 1.1fr 0.9fr;
++      gap: 0;
+     }
+ 
+-    .copy-btn:hover {
+-      transform: translateY(-3px);
+-      background: rgba(37,99,235,0.18);
++    .admin-hero {
++      padding: clamp(26px, 5vw, 42px);
++      background:
++        radial-gradient(circle at 0% 0%, rgba(96, 165, 250, 0.25), transparent 32rem),
++        rgba(37, 99, 235, 0.06);
++      border-right: 1px solid var(--border);
+     }
+ 
+-    /* FOOTER */
+-    footer {
+-      text-align: center;
+-      padding: 60px 20px;
+-      border-top: 1px solid var(--border);
+-      color: var(--muted);
+-      position: relative;
++    .admin-kicker {
++      color: var(--primary-2);
++      font-size: 0.8rem;
++      font-weight: 950;
++      letter-spacing: 0.16em;
++      text-transform: uppercase;
++      margin-bottom: 12px;
+     }
+ 
+-    .footer-note {
+-      margin-top: 18px;
+-      font-weight: 700;
+-      color: var(--text);
+-      opacity: 0.95;
++    .admin-hero h2 {
++      font-size: clamp(2rem, 4vw, 3.25rem);
++      line-height: 1;
++      letter-spacing: -0.055em;
++      margin-bottom: 14px;
+     }
+ 
+-    /* FLOAT BTN */
+-    .top-btn {
+-      position: fixed;
+-      right: 25px;
+-      bottom: 25px;
+-      width: 60px;
+-      height: 60px;
+-      border-radius: 50%;
+-      border: none;
+-      background: linear-gradient(to right, var(--primary), var(--primary2));
+-      color: white;
+-      font-size: 1.3rem;
+-      cursor: pointer;
+-      display: none;
+-      z-index: 999;
+-      box-shadow: 0 10px 30px rgba(37,99,235,0.45);
+-      transition: transform 0.2s ease, opacity 0.2s ease;
++    .admin-hero p {
++      color: var(--muted);
++      line-height: 1.8;
+     }
+ 
+-    .top-btn:hover {
+-      transform: translateY(-4px);
+-    }
++    .admin-stats {
++      display: grid;
++      grid-template-columns: repeat(2, minmax(0, 1fr));
++      gap: 12px;
++      padding: clamp(22px, 4vw, 34px);
++    }
++
++    .stat {
++      min-height: 118px;
++      padding: 18px;
++      border: 1px solid var(--border);
++      border-radius: 20px;
++      background: rgba(255,255,255,0.045);
++    }
++
++    .stat span {
++      display: block;
++      color: var(--muted);
++      font-size: 0.77rem;
++      font-weight: 900;
++      letter-spacing: 0.1em;
++      text-transform: uppercase;
++    }
++
++    .stat strong {
++      display: block;
++      margin-top: 10px;
++      font-size: 1.45rem;
++      word-break: break-word;
++    }
++
++    .admin-body {
++      display: grid;
++      grid-template-columns: 1fr 1fr;
++      gap: 20px;
++      padding: clamp(22px, 4vw, 34px);
++      border-top: 1px solid var(--border);
++    }
++
++    .admin-card {
++      padding: 22px;
++      border: 1px solid var(--border);
++      border-radius: 22px;
++      background: rgba(255,255,255,0.04);
++    }
++
++    .admin-card h3 {
++      margin-bottom: 14px;
++    }
++
++    .admin-actions {
++      display: grid;
++      grid-template-columns: repeat(2, minmax(0, 1fr));
++      gap: 10px;
++    }
++
++    .admin-btn {
++      min-height: 70px;
++      padding: 14px;
++      border: 1px solid rgba(96, 165, 250, 0.22);
++      border-radius: 16px;
++      background: rgba(37, 99, 235, 0.1);
++      color: var(--text);
++      cursor: pointer;
++      font: inherit;
++      font-weight: 900;
++      text-align: left;
++      transition: 0.2s ease;
++    }
++
++    .admin-btn small {
++      display: block;
++      margin-top: 5px;
++      color: var(--muted);
++      font-weight: 650;
++      line-height: 1.45;
++    }
++
++    .admin-btn:hover {
++      transform: translateY(-3px);
++      background: rgba(37, 99, 235, 0.18);
++      border-color: rgba(96, 165, 250, 0.42);
++    }
++
++    .admin-field {
++      display: grid;
++      gap: 9px;
++      margin-bottom: 14px;
++      color: var(--muted);
++      font-weight: 800;
++    }
++
++    .admin-input,
++    .admin-textarea {
++      width: 100%;
++      border: 1px solid var(--border);
++      border-radius: 15px;
++      background: rgba(2, 6, 23, 0.35);
++      color: var(--text);
++      font: inherit;
++      outline: none;
++    }
++
++    .admin-input {
++      min-height: 46px;
++      padding: 0 14px;
++    }
++
++    .admin-textarea {
++      min-height: 124px;
++      resize: vertical;
++      padding: 14px;
++      line-height: 1.65;
++    }
++
++    .admin-input:focus,
++    .admin-textarea:focus {
++      border-color: rgba(96, 165, 250, 0.55);
++      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.16);
++    }
++
++    .announcement {
++      display: none;
++      width: min(1180px, 92%);
++      margin: 20px auto 0;
++      padding: 15px 18px;
++      border: 1px solid rgba(96, 165, 250, 0.25);
++      border-radius: 18px;
++      background: rgba(37, 99, 235, 0.14);
++      color: var(--text);
++      font-weight: 800;
++      line-height: 1.5;
++    }
++
++    .announcement.show {
++      display: block;
++    }
++
++    .contact-box {
++      padding: clamp(28px, 5vw, 52px);
++      border-radius: var(--radius);
++      text-align: center;
++      background:
++        linear-gradient(145deg, rgba(37, 99, 235, 0.2), rgba(15, 23, 42, 0.72)),
++        var(--surface);
++    }
++
++    .contact-row {
++      display: flex;
++      flex-wrap: wrap;
++      justify-content: center;
++      gap: 12px;
++      margin-top: 24px;
++    }
++
++    .pill {
++      display: inline-flex;
++      align-items: center;
++      justify-content: center;
++      min-height: 52px;
++      padding: 12px 18px;
++      border: 1px solid var(--border);
++      border-radius: 16px;
++      background: rgba(255,255,255,0.06);
++      font-weight: 850;
++      word-break: break-word;
++    }
++
++    footer {
++      padding: 42px 0 70px;
++      border-top: 1px solid var(--border);
++      color: var(--muted);
++      text-align: center;
++      line-height: 1.8;
++    }
++
++    .top-btn {
++      position: fixed;
++      right: 20px;
++      bottom: 20px;
++      z-index: 1000;
++      display: none;
++      width: 54px;
++      height: 54px;
++      border: none;
++      border-radius: 50%;
++      background: linear-gradient(90deg, var(--primary), var(--primary-2));
++      color: white;
++      cursor: pointer;
++      font-size: 1.2rem;
++      box-shadow: 0 14px 34px rgba(37, 99, 235, 0.35);
++    }
+ 
+-    /* TOAST */
+     .toast {
+       position: fixed;
+       left: 50%;
+-      bottom: 28px;
+-      transform: translateX(-50%) translateY(20px);
+-      background: rgba(15,23,42,0.92);
+-      color: white;
+-      border: 1px solid rgba(96,165,250,0.22);
+-      backdrop-filter: blur(16px);
++      bottom: 24px;
++      z-index: 4000;
++      width: min(520px, 92vw);
+       padding: 14px 18px;
+-      border-radius: 14px;
+-      box-shadow: 0 12px 30px rgba(0,0,0,0.28);
++      border: 1px solid rgba(96, 165, 250, 0.25);
++      border-radius: 15px;
++      background: rgba(15, 23, 42, 0.94);
++      color: white;
++      text-align: center;
++      font-weight: 800;
+       opacity: 0;
+       pointer-events: none;
+-      transition: 0.28s ease;
+-      z-index: 10001;
+-      font-weight: 600;
+-      max-width: min(92vw, 520px);
+-      text-align: center;
++      transform: translateX(-50%) translateY(18px);
++      transition: 0.25s ease;
+     }
+ 
+     .toast.show {
+       opacity: 1;
+       transform: translateX(-50%) translateY(0);
+     }
+ 
+-    /* MOBILE NAV */
+-    @media (max-width: 900px) {
++    body.focus-mode main section:not(.hero):not(.admin-section) {
++      opacity: 0.38;
++      filter: blur(1px);
++    }
++
++    body.party-mode {
++      animation: partyHue 1.8s linear infinite;
++    }
++
++    .particle {
++      position: fixed;
++      z-index: 3500;
++      width: 8px;
++      height: 8px;
++      border-radius: 999px;
++      pointer-events: none;
++      background: var(--primary-2);
++      box-shadow: 0 0 18px rgba(96, 165, 250, 0.8);
++      animation: particleMove 1.6s ease-out forwards;
++    }
++
++    @keyframes pulse {
++      0%, 100% { transform: scale(1); }
++      50% { transform: scale(1.04); }
++    }
++
++    @keyframes partyHue {
++      to { filter: hue-rotate(360deg); }
++    }
++
++    @keyframes particleMove {
++      to {
++        transform: translate(var(--dx), var(--dy)) scale(0);
++        opacity: 0;
++      }
++    }
++
++    @media (max-width: 880px) {
+       .menu-toggle {
+-        display: grid;
++        display: inline-grid;
+       }
+ 
+       nav {
+         position: absolute;
+         top: 100%;
+         left: 4%;
+         right: 4%;
+-        display: grid;
+-        gap: 14px;
+-        padding: 18px;
++        display: none;
++        padding: 16px;
+         border: 1px solid var(--border);
+         border-radius: 22px;
+-        background: var(--header-bg);
+-        backdrop-filter: blur(20px);
++        background: var(--surface-strong);
+         box-shadow: var(--shadow);
+-        transform: translateY(-14px);
+-        opacity: 0;
+-        pointer-events: none;
+-        transition: 0.25s ease;
+       }
+ 
+       header.nav-open nav {
+-        opacity: 1;
+-        pointer-events: auto;
+-        transform: translateY(0);
++        display: grid;
+       }
+ 
+       .header-inner {
+         position: relative;
+       }
+ 
+-      .nav-actions {
+-        margin-left: auto;
++      .admin-top,
++      .admin-body {
++        grid-template-columns: 1fr;
+       }
+ 
+-      .hero-buttons {
+-        flex-direction: column;
+-        width: 100%;
+-        max-width: 380px;
+-      }
+-
+-      .btn {
+-        width: 100%;
+-        text-align: center;
+-      }
+-
+-      .contact-box {
+-        padding: 35px;
+-      }
+-
+-      .about-box {
+-        padding: 30px;
++      .admin-hero {
++        border-right: 0;
++        border-bottom: 1px solid var(--border);
+       }
+     }
+ 
+-    @media (max-width: 520px) {
+-      .header-inner {
+-        width: min(1400px, 94%);
+-      }
+-
++    @media (max-width: 560px) {
+       section {
+-        width: min(1400px, 94%);
+-        padding: 95px 0;
++        padding: 78px 0;
+       }
+ 
+-      .card {
+-        padding: 26px;
+-        border-radius: 24px;
+-      }
+-
+-      .contact-box {
+-        padding: 28px;
++      .btn,
++      .admin-btn,
++      .pill {
++        width: 100%;
+       }
+ 
+-      .paypal {
+-        width: 100%;
+-        justify-content: center;
++      .admin-stats,
++      .admin-actions {
++        grid-template-columns: 1fr;
+       }
+     }
+ 
+-    /* REDUCED MOTION */
+     @media (prefers-reduced-motion: reduce) {
+-      html {
+-        scroll-behavior: auto;
+-      }
+-
+-      *,
+-      *::before,
+-      *::after {
++      *, *::before, *::after {
+         animation: none !important;
+         transition-duration: 0.01ms !important;
+         scroll-behavior: auto !important;
+       }
+     }
+   </style>
++  <link rel="stylesheet" href="style.css">
+ </head>
+ 
+ <body>
+   <a class="skip-link" href="#main">Zum Inhalt springen</a>
+   <div class="scroll-progress" id="scrollProgress"></div>
+-
+-  <!-- BACKGROUND -->
+   <div class="bg-grid"></div>
+-  <div class="glow g1"></div>
+-  <div class="glow g2"></div>
+-  <div class="glow g3"></div>
++  <noscript>
++    <div class="noscript-alert" role="status">
++      Einige interaktive Funktionen dieser Demo-Website benötigen JavaScript. Die Inhalte und das Parteiprogramm bleiben weiterhin sichtbar.
++    </div>
++  </noscript>
+ 
+-  <!-- HEADER -->
+   <header id="siteHeader">
+     <div class="header-inner">
+-      <div class="logo-wrap">
++      <div class="logo-wrap" aria-label="ZFD Logo">
+         <div class="logo">ZFD</div>
+         <div class="logo-sub">Zukunft für Deutschland</div>
+       </div>
+ 
+-      <div class="nav-actions">
+-        <nav id="siteNav">
+-          <a href="#about">Über Uns</a>
+-          <a href="#programm">Programm</a>
+-          <a href="#ziele">Ziele</a>
+-          <a href="#werte">Werte</a>
+-          <a href="#kontakt">Kontakt</a>
+-        </nav>
+-
+-        <button class="menu-toggle" id="menuToggle" aria-label="Navigation öffnen" aria-expanded="false">
+-          ☰
+-        </button>
+-
+-        <button class="theme-toggle" id="themeToggle" aria-label="Theme wechseln">
+-          🌙
+-        </button>
+-      </div>
++      <nav id="siteNav" aria-label="Hauptnavigation">
++        <a class="nav-link" href="#about">Über Uns</a>
++        <a class="nav-link" href="#programm">Programm</a>
++        <a class="nav-link" href="#ziele">Ziele</a>
++        <a class="nav-link" href="#werte">Werte</a>
++        <a class="nav-link" href="#kontakt">Kontakt</a>
++      </nav>
++
++      <button class="icon-btn menu-toggle" id="menuToggle" type="button" aria-label="Navigation öffnen" aria-expanded="false">☰</button>
++      <button class="icon-btn" id="themeToggle" type="button" aria-label="Theme wechseln">🌙</button>
+     </div>
+   </header>
+ 
+-  <main id="main">
+-    <!-- HERO -->
+-    <section class="hero" data-aos="fade-up">
+-      <div class="hero-badge">
+-        🇩🇪 Heimat. Freiheit. Zukunft.
+-      </div>
+-
+-      <div class="hero-meta" aria-label="Projekt Informationen">
+-        <div class="hero-chip">WiPo-Unterricht</div>
+-        <div class="hero-chip">Modernes Webdesign</div>
+-        <div class="hero-chip">Interaktiv & responsiv</div>
+-      </div>
+-
+-      <h1>
+-        ZFD – Zukunft für Deutschland
+-      </h1>
+-
+-      <p>
+-        Die ZFD steht für ein starkes, sicheres und modernes Deutschland.
+-        Wir glauben an Freiheit, Verantwortung, Leistung und den Zusammenhalt unserer Gesellschaft.
+-        Unser Ziel ist ein Staat, der seine Bürger schützt, Familien stärkt,
+-        die Wirtschaft fördert und Zukunftschancen für kommende Generationen schafft.
+-      </p>
++  <div class="announcement" id="announcement" role="status" aria-live="polite"></div>
+ 
+-      <div class="hero-buttons">
+-        <a href="#programm" class="btn btn-primary">
+-          Parteiprogramm ansehen
+-        </a>
+-
+-        <a href="#kontakt" class="btn btn-secondary" id="supportBtn">
+-          Unterstützen
+-        </a>
++  <main id="main">
++    <section class="hero" id="start">
++      <div class="hero-content">
++        <div class="badge">🇩🇪 Heimat. Freiheit. Zukunft.</div>
++        <h1>ZFD – Zukunft für Deutschland</h1>
++        <p class="lead">
++          Die ZFD steht für ein starkes, sicheres und modernes Deutschland. Unser Ziel ist ein Staat,
++          der Bürger schützt, Familien stärkt, Chancen schafft und Zukunft für kommende Generationen möglich macht.
++        </p>
++        <div class="hero-meta" aria-label="Projekt Informationen">
++          <span class="chip">WiPo-Unterricht</span>
++          <span class="chip">Responsive Website</span>
++          <span class="chip">Geschützter Adminbereich</span>
++        </div>
++        <div class="btn-row">
++          <a class="btn btn-primary" href="#programm">Parteiprogramm ansehen</a>
++          <button class="btn" id="adminHintBtn" type="button">Admin-Hinweis</button>
++        </div>
+       </div>
+     </section>
+ 
+-    <!-- ABOUT -->
+     <section id="about">
+-      <h2 class="section-title">
+-        Parteiprogramm 2026
+-      </h2>
+-
+-      <p class="section-subtitle">
+-        Heimat. Freiheit. Zukunft.
+-      </p>
+-
+-      <div class="about-box glass" data-aos="fade-up">
++      <h2 class="section-title">Parteiprogramm 2026</h2>
++      <p class="section-subtitle">Heimat. Freiheit. Zukunft. Ein modernes Schulprojekt mit klarer Struktur und interaktiven Bereichen.</p>
++      <div class="glass">
+         <p>
+-          Deutschland steht vor großen Herausforderungen:
+-          wirtschaftlicher Wandel, steigende Lebenshaltungskosten,
+-          Digitalisierung, internationale Krisen
+-          und gesellschaftliche Spannungen.
++          Deutschland steht vor großen Herausforderungen: wirtschaftlicher Wandel, steigende Lebenshaltungskosten,
++          Digitalisierung, internationale Krisen und gesellschaftliche Spannungen.
+         </p>
+-
+         <p>
+-          Die ZFD setzt auf Innovation statt Stillstand.
+-          Wir wollen Leistung fördern, Familien stärken,
++          Die ZFD setzt auf Innovation statt Stillstand. Wir wollen Leistung fördern, Familien stärken,
+           Chancen schaffen und Vertrauen zurückbringen.
+         </p>
+-
+         <p>
+-          Unser Ziel ist ein sicheres,
+-          modernes und wirtschaftlich starkes Deutschland,
+-          das seine Bürger unterstützt
+-          und gleichzeitig offen für Fortschritt bleibt.
+-        </p>
+-
+-        <p>
+-          Patriotismus und internationale Zusammenarbeit
+-          schließen sich nicht aus.
+-          Deutschland soll selbstbewusst auftreten,
+-          seine Interessen vertreten und gleichzeitig
+-          ein verlässlicher Partner in Europa bleiben.
++          Patriotismus und internationale Zusammenarbeit schließen sich nicht aus. Deutschland soll selbstbewusst auftreten,
++          seine Interessen vertreten und gleichzeitig ein verlässlicher Partner in Europa bleiben.
+         </p>
+       </div>
+     </section>
+ 
+-    <!-- PROGRAMM -->
+     <section id="programm">
+-      <h2 class="section-title">
+-        Unser Parteiprogramm
+-      </h2>
+-
+-      <p class="section-subtitle">
+-        Moderne Ideen für Deutschlands Zukunft.
+-      </p>
++      <h2 class="section-title">Unser Parteiprogramm</h2>
++      <p class="section-subtitle">Sieben Themenbereiche als übersichtliche Karten – kurz, klar und präsentationsfreundlich.</p>
+ 
+       <div class="grid">
+-        <!-- 1 -->
+-        <div class="card" data-aos="zoom-in">
++        <article class="card">
+           <h3>🛡 1. Sicherheit & Ordnung</h3>
+-          <p>
+-            Für sichere Straßen und einen starken Rechtsstaat
+-          </p>
+-
+-          <p>
+-            Sicherheit ist die Grundlage einer freien Gesellschaft.
+-            Bürger müssen sich in ihren Städten, Bahnhöfen und Wohnvierteln wieder sicher fühlen können.
+-          </p>
+-
++          <p>Für sichere Straßen und einen starken Rechtsstaat.</p>
+           <ul>
+-            <li>Mehr Polizeipräsenz auf Straßen, Bahnhöfen und öffentlichen Plätzen</li>
+-            <li>Schnellere Abschiebung von Straftätern ohne Aufenthaltsrecht</li>
+-            <li>Konsequente Bekämpfung von Clan-, Banden- und organisierter Kriminalität</li>
+-            <li>Härtere Strafen für Gewalt-, Sexual- und Wiederholungstäter</li>
+-            <li>Moderne Ausrüstung und bessere Unterstützung für Polizei, Feuerwehr und Rettungsdienste</li>
+-            <li>Null-Toleranz gegenüber Extremismus und Gewalt</li>
++            <li>Mehr Polizeipräsenz auf Straßen und öffentlichen Plätzen</li>
++            <li>Konsequente Bekämpfung von organisierter Kriminalität</li>
++            <li>Moderne Ausrüstung für Polizei, Feuerwehr und Rettungsdienste</li>
+           </ul>
++          <div class="promise"><strong>Unser Versprechen:</strong><br>Ein Staat muss seine Bürger schützen – gerecht und entschlossen.</div>
++        </article>
+ 
+-          <div class="promise">
+-            <strong>Unser Versprechen:</strong><br>
+-            Ein Staat muss seine Bürger schützen – konsequent, gerecht und entschlossen.
+-          </div>
+-
+-          <div class="slogan">
+-            „Sicherheit ist Freiheit.“
+-          </div>
+-        </div>
+-
+-        <!-- 2 -->
+-        <div class="card" data-aos="zoom-in">
++        <article class="card">
+           <h3>💼 2. Wirtschaft & Steuern</h3>
+-          <p>
+-            Für Wohlstand, Innovation und faire Chancen
+-          </p>
+-
+-          <p>
+-            Deutschland braucht wieder wirtschaftliche Stärke,
+-            damit Arbeitsplätze, Wohlstand und soziale Sicherheit erhalten bleiben.
+-          </p>
+-
++          <p>Für Wohlstand, Innovation und faire Chancen.</p>
+           <ul>
+-            <li>Weniger Bürokratie für Unternehmen, Handwerk und Mittelstand</li>
+-            <li>Niedrigere Steuerbelastung für Familien und Arbeitnehmer</li>
+-            <li>Förderung deutscher Industrie, Technologie und Innovation</li>
+-            <li>Bezahlbare Energiepreise für Bürger und Unternehmen</li>
+-            <li>Unterstützung regionaler Betriebe statt übermäßiger Konzernabhängigkeit</li>
+-            <li>Stärkung von Ausbildung, Handwerk und Unternehmertum</li>
++            <li>Weniger Bürokratie für Mittelstand und Handwerk</li>
++            <li>Niedrigere Belastung für Familien und Arbeitnehmer</li>
++            <li>Förderung von Industrie, Technologie und Innovation</li>
+           </ul>
++          <div class="promise"><strong>Unser Versprechen:</strong><br>Leistung und Arbeit müssen sich wieder lohnen.</div>
++        </article>
+ 
+-          <div class="promise">
+-            <strong>Unser Versprechen:</strong><br>
+-            Leistung und Arbeit müssen sich wieder lohnen.
+-          </div>
+-
+-          <div class="slogan">
+-            „Arbeit muss sich wieder lohnen.“
+-          </div>
+-        </div>
+-
+-        <!-- 3 -->
+-        <div class="card" data-aos="zoom-in">
++        <article class="card">
+           <h3>🌍 3. Migration & Integration</h3>
+-          <p>
+-            Für klare Regeln und gesellschaftlichen Zusammenhalt
+-          </p>
+-
+-          <p>
+-            Deutschland ist ein offenes Land – aber Integration braucht Ordnung,
+-            Regeln und gegenseitigen Respekt.
+-          </p>
+-
++          <p>Für klare Regeln und gesellschaftlichen Zusammenhalt.</p>
+           <ul>
+-            <li>Bessere Kontrolle der Außengrenzen</li>
+             <li>Klare und nachvollziehbare Regeln für Einwanderung</li>
+-            <li>Integration durch Sprache, Bildung, Arbeit und Respekt vor deutschen Gesetzen</li>
++            <li>Integration durch Sprache, Bildung und Arbeit</li>
+             <li>Konsequentes Vorgehen gegen Extremismus jeder Art</li>
+-            <li>Sozialleistungen stärker an Eigenleistung und Integration koppeln</li>
+-            <li>Schnellere Verfahren bei Asyl- und Aufenthaltsfragen</li>
+           </ul>
++          <div class="promise"><strong>Unser Versprechen:</strong><br>Integration gelingt mit klaren Erwartungen und gegenseitigem Respekt.</div>
++        </article>
+ 
+-          <div class="promise">
+-            <strong>Unser Versprechen:</strong><br>
+-            Integration gelingt nur mit klaren Erwartungen und gegenseitigem Respekt.
+-          </div>
+-
+-          <div class="slogan">
+-            „Integration braucht Regeln.“
+-          </div>
+-        </div>
+-
+-        <!-- 4 -->
+-        <div class="card" data-aos="zoom-in">
++        <article class="card">
+           <h3>🏫 4. Familie & Bildung</h3>
+-          <p>
+-            Für starke Familien und beste Zukunftschancen
+-          </p>
+-
+-          <p>
+-            Familien sind das Fundament unserer Gesellschaft.
+-            Bildung entscheidet über die Zukunft unseres Landes.
+-          </p>
+-
++          <p>Für starke Familien und beste Zukunftschancen.</p>
+           <ul>
+-            <li>Mehr finanzielle Unterstützung für Familien mit Kindern</li>
+-            <li>Ausbau moderner Kitas und Schulen</li>
+-            <li>Fokus auf Leistung, Respekt und Disziplin im Unterricht</li>
+-            <li>Mehr Digitalisierung und moderne Technologien an Schulen</li>
++            <li>Mehr Unterstützung für Familien mit Kindern</li>
++            <li>Moderne Kitas, Schulen und digitale Ausstattung</li>
+             <li>Förderung von Ausbildung, Handwerk und dualem Studium</li>
+-            <li>Bessere Chancen für junge Menschen unabhängig von Herkunft</li>
+           </ul>
++          <div class="promise"><strong>Unser Versprechen:</strong><br>Jedes Kind verdient beste Bildung und echte Perspektiven.</div>
++        </article>
+ 
+-          <div class="promise">
+-            <strong>Unser Versprechen:</strong><br>
+-            Jedes Kind verdient beste Bildung und echte Zukunftsperspektiven.
+-          </div>
+-
+-          <div class="slogan">
+-            „Starke Familien, starke Zukunft.“
+-          </div>
+-        </div>
+-
+-        <!-- 5 -->
+-        <div class="card" data-aos="zoom-in">
++        <article class="card">
+           <h3>⚡ 5. Energie & Umwelt</h3>
+-          <p>
+-            Für bezahlbare Energie und verantwortungsvollen Umweltschutz
+-          </p>
+-
+-          <p>
+-            Klimaschutz darf Bürger und Wirtschaft nicht überfordern.
+-            Deutschland braucht eine vernünftige und technologieoffene Energiepolitik.
+-          </p>
+-
++          <p>Für bezahlbare Energie und verantwortungsvollen Umweltschutz.</p>
+           <ul>
+             <li>Bezahlbare Energiepreise für Haushalte und Unternehmen</li>
+-            <li>Ausbau erneuerbarer Energien und moderner Forschungstechnologien</li>
+-            <li>Förderung innovativer Lösungen statt ideologischer Verbote</li>
+-            <li>Schutz regionaler Landwirtschaft und natürlicher Lebensräume</li>
+-            <li>Versorgungssicherheit und stabile Energieversorgung</li>
+-            <li>Nachhaltigkeit mit wirtschaftlicher Vernunft verbinden</li>
++            <li>Technologieoffene Forschung und Innovation</li>
++            <li>Schutz natürlicher Lebensräume und regionaler Landwirtschaft</li>
+           </ul>
++          <div class="promise"><strong>Unser Versprechen:</strong><br>Umweltschutz und wirtschaftliche Stärke dürfen kein Widerspruch sein.</div>
++        </article>
+ 
+-          <div class="promise">
+-            <strong>Unser Versprechen:</strong><br>
+-            Umweltschutz und wirtschaftliche Stärke dürfen kein Widerspruch sein.
+-          </div>
+-
+-          <div class="slogan">
+-            „Umweltschutz mit Vernunft.“
+-          </div>
+-        </div>
+-
+-        <!-- 6 -->
+-        <div class="card" data-aos="zoom-in">
++        <article class="card">
+           <h3>🏛 6. Demokratie & Bürgernähe</h3>
+-          <p>
+-            Für mehr Mitsprache und Transparenz
+-          </p>
+-
+-          <p>
+-            Politik muss wieder näher an die Bürger rücken.
+-            Entscheidungen sollen nachvollziehbar und demokratisch bleiben.
+-          </p>
+-
++          <p>Für mehr Mitsprache und Transparenz.</p>
+           <ul>
+-            <li>Mehr direkte Demokratie nach Schweizer Vorbild</li>
+-            <li>Volksentscheide bei wichtigen nationalen Fragen</li>
+-            <li>Mehr Transparenz bei Lobbyismus und Politikergehältern</li>
+-            <li>Begrenzung von Amtszeiten für Spitzenpolitiker</li>
+-            <li>Stärkung kommunaler Entscheidungen und regionaler Mitbestimmung</li>
+-            <li>Digitale Bürgerbeteiligung ausbauen</li>
++            <li>Mehr direkte Demokratie und Bürgerbeteiligung</li>
++            <li>Transparenz bei Lobbyismus und Entscheidungen</li>
++            <li>Stärkung kommunaler und regionaler Mitbestimmung</li>
+           </ul>
++          <div class="promise"><strong>Unser Versprechen:</strong><br>Die Stimme der Bürger muss stärker gehört werden.</div>
++        </article>
+ 
+-          <div class="promise">
+-            <strong>Unser Versprechen:</strong><br>
+-            Die Stimme der Bürger muss stärker gehört werden.
+-          </div>
+-
+-          <div class="slogan">
+-            „Mehr Macht für die Bürger.“
+-          </div>
+-        </div>
+-
+-        <!-- 7 -->
+-        <div class="card" data-aos="zoom-in">
++        <article class="card">
+           <h3>🇩🇪 7. Deutschland & Europa</h3>
+-          <p>
+-            Für ein starkes Deutschland in einem starken Europa
+-          </p>
+-
+-          <p>
+-            Deutschland soll seine Interessen selbstbewusst vertreten
+-            und gleichzeitig ein verlässlicher Partner in Europa bleiben.
+-          </p>
+-
++          <p>Für ein starkes Deutschland in einem starken Europa.</p>
+           <ul>
+             <li>Stärkere Vertretung deutscher Interessen in Europa</li>
+-            <li>Zusammenarbeit in Europa ohne übermäßige Zentralisierung</li>
+-            <li>Unterstützung europäischer Sicherheit und Verteidigung</li>
+-            <li>Schutz deutscher Kultur, Sprache und Traditionen</li>
+-            <li>Ausbau nationaler Infrastruktur und Versorgungssicherheit</li>
+-            <li>Förderung von Innovation, Forschung und Wettbewerbsfähigkeit</li>
++            <li>Zusammenarbeit ohne übermäßige Zentralisierung</li>
++            <li>Ausbau von Infrastruktur, Forschung und Wettbewerbsfähigkeit</li>
+           </ul>
+-
+-          <div class="promise">
+-            <strong>Unser Versprechen:</strong><br>
+-            Patriotismus und internationale Zusammenarbeit schließen sich nicht aus.
+-          </div>
+-
+-          <div class="slogan">
+-            „Patriotisch. Demokratisch. Zukunftsorientiert.“
+-          </div>
+-        </div>
++          <div class="promise"><strong>Unser Versprechen:</strong><br>Patriotisch. Demokratisch. Zukunftsorientiert.</div>
++        </article>
+       </div>
+     </section>
+ 
+-    <!-- GOALS -->
+     <section id="ziele">
+-      <h2 class="section-title">
+-        Unsere 3 zentralen Ziele
+-      </h2>
+-
+-      <p class="section-subtitle">
+-        Klare Prioritäten für Deutschlands Zukunft.
+-      </p>
+-
++      <h2 class="section-title">Unsere 3 zentralen Ziele</h2>
++      <p class="section-subtitle">Klare Prioritäten für Deutschlands Zukunft.</p>
+       <div class="grid">
+-        <div class="card goal" data-aos="fade-up">
++        <article class="card">
+           <h3>1️⃣ Sichere Straßen</h3>
+-          <p>
+-            Ein starker Rechtsstaat schützt seine Bürger.
+-          </p>
+-        </div>
+-
+-        <div class="card goal" data-aos="fade-up">
++          <p>Ein starker Rechtsstaat schützt seine Bürger.</p>
++        </article>
++        <article class="card">
+           <h3>2️⃣ Bezahlbares Leben</h3>
+-          <p>
+-            Wohnen, Energie und Alltag müssen wieder bezahlbar werden.
+-          </p>
+-        </div>
+-
+-        <div class="card goal" data-aos="fade-up">
+-          <h3>3️⃣ Starke deutsche Wirtschaft</h3>
+-          <p>
+-            Arbeitsplätze, Innovation und Wohlstand sichern unsere Zukunft.
+-          </p>
+-        </div>
++          <p>Wohnen, Energie und Alltag müssen wieder bezahlbar werden.</p>
++        </article>
++        <article class="card">
++          <h3>3️⃣ Starke Wirtschaft</h3>
++          <p>Arbeitsplätze, Innovation und Wohlstand sichern unsere Zukunft.</p>
++        </article>
+       </div>
+     </section>
+ 
+-    <!-- VALUES -->
+     <section id="werte">
+-      <h2 class="section-title">
+-        Unsere Kernwerte
+-      </h2>
++      <h2 class="section-title">Unsere Kernwerte</h2>
++      <p class="section-subtitle">Die Grundlage unserer Politik und unseres Handelns.</p>
++      <div class="values">
++        <span class="value">Freiheit</span>
++        <span class="value">Sicherheit</span>
++        <span class="value">Verantwortung</span>
++        <span class="value">Demokratie</span>
++        <span class="value">Heimat</span>
++        <span class="value">Leistung</span>
++        <span class="value">Zusammenhalt</span>
++        <span class="value">Zukunft</span>
++      </div>
++    </section>
+ 
++    <section class="admin-section" id="admin">
++      <h2 class="section-title">Adminbereich</h2>
+       <p class="section-subtitle">
+-        Die Grundlage unserer Politik und unseres Handelns.
++        Ein schönerer Demo-Adminbereich für eure Präsentation: Status, Aktionen, Ankündigung und Projekt-Notizen an einem Ort.
+       </p>
+ 
+-      <div class="values">
+-        <div class="value">Freiheit</div>
+-        <div class="value">Sicherheit</div>
+-        <div class="value">Verantwortung</div>
+-        <div class="value">Demokratie</div>
+-        <div class="value">Heimat</div>
+-        <div class="value">Leistung</div>
+-        <div class="value">Zusammenhalt</div>
+-        <div class="value">Zukunft</div>
+-      </div>
+-    </section>
++      <div class="admin-panel">
++        <div class="admin-top">
++          <div class="admin-hero">
++            <div class="admin-kicker">Control Center</div>
++            <h2>Website steuern wie ein Dashboard</h2>
++            <p>
++              Dieser Bereich ist bewusst als Frontend-Demo gebaut. Für eine echte Website bräuchte man zusätzlich Login,
++              Server und Datenbank. Für den Unterricht sieht es aber modern aus und ist direkt benutzbar.
++            </p>
++          </div>
+ 
+-    <!-- CONTACT -->
+-    <section id="kontakt">
+-      <div class="contact-box" data-aos="zoom-in">
+-        <h2 class="section-title">
+-          Kontakt & Unterstützung
+-        </h2>
++          <div class="admin-stats" aria-label="Admin Status">
++            <div class="stat"><span>Besuche</span><strong id="visitCount">0</strong></div>
++            <div class="stat"><span>Theme</span><strong id="themeName">Dunkel</strong></div>
++            <div class="stat"><span>Uhrzeit</span><strong id="clock">--:--</strong></div>
++            <div class="stat"><span>Status</span><strong>Online</strong></div>
++          </div>
++        </div>
+ 
+-        <p>
+-          Gemeinsam gestalten wir Deutschlands Zukunft.
+-        </p>
++        <div class="admin-body">
++          <div class="admin-card">
++            <h3>⚡ Schnellaktionen</h3>
++            <div class="admin-actions">
++              <button class="admin-btn" type="button" data-action="theme">🌗 Theme<small>Hell/dunkel wechseln</small></button>
++              <button class="admin-btn" type="button" data-action="party">🎉 Party<small>Farbmodus starten/stoppen</small></button>
++              <button class="admin-btn" type="button" data-action="focus">🎯 Fokus<small>Präsentationsmodus</small></button>
++              <button class="admin-btn" type="button" data-action="particles">✨ Effekt<small>Partikel erzeugen</small></button>
++              <button class="admin-btn" type="button" data-action="copy">📋 Kopieren<small>Seiteninfo kopieren</small></button>
++              <button class="admin-btn" type="button" data-action="reset">🧹 Reset<small>Demo zurücksetzen</small></button>
++            </div>
++          </div>
+ 
+-        <div class="contact-row">
+-          <div class="paypal" id="paypalText">
+-            PayPal: ysiszysisz@gmail.com
++          <div class="admin-card">
++            <h3>📣 Live-Ankündigung</h3>
++            <label class="admin-field">
++              Text für Banner
++              <input class="admin-input" id="announcementInput" type="text" placeholder="z. B. Neue Präsentation startet jetzt!">
++            </label>
++            <div class="btn-row" style="justify-content:flex-start;margin-bottom:18px;">
++              <button class="btn btn-primary" id="showAnnouncement" type="button">Anzeigen</button>
++              <button class="btn" id="hideAnnouncement" type="button">Ausblenden</button>
++            </div>
++
++            <label class="admin-field">
++              Projekt-Notizen
++              <textarea class="admin-textarea" id="projectNotes" placeholder="Hier könnt ihr Notizen für euren Vortrag speichern..."></textarea>
++            </label>
+           </div>
++        </div>
++      </div>
++    </section>
+ 
+-          <button class="copy-btn" id="copyEmailBtn" type="button">
+-            E-Mail kopieren
+-          </button>
++    <section id="kontakt">
++      <div class="contact-box">
++        <h2 class="section-title">Kontakt & Unterstützung</h2>
++        <p class="section-subtitle" style="margin-bottom:0;">Gemeinsam gestalten wir Deutschlands Zukunft.</p>
++        <div class="contact-row">
++          <span class="pill" id="emailText">PayPal: ysiszysisz@gmail.com</span>
++          <button class="btn btn-primary" id="copyEmail" type="button">E-Mail kopieren</button>
+         </div>
+       </div>
+     </section>
+   </main>
+ 
+-  <!-- FOOTER -->
+   <footer>
+-    <p>
+-      Unser Leitsatz
+-    </p>
+-
+-    <h2 style="margin-top:15px;">
+-      „Heimat. Freiheit. Zukunft.“
+-    </h2>
+-
+-    <p style="margin-top:20px;">
+-      ZFD – Zukunft für Deutschland.
+-    </p>
+-
+-    <p class="footer-note">
+-      Diese Website wurde von Jakob und Jason gemacht für den WiPo-Unterricht.
+-    </p>
+-
+-    <p style="margin-top:20px;">
+-      © 2026 ZFD – Zukunft für Deutschland
+-    </p>
++    <p>Unser Leitsatz</p>
++    <h2 style="color:var(--text);margin:8px 0;">„Heimat. Freiheit. Zukunft.“</h2>
++    <p>ZFD – Zukunft für Deutschland.</p>
++    <p><strong>Diese Website wurde von Jakob und Jason gemacht für den WiPo-Unterricht.</strong></p>
++    <p>© 2026 ZFD – Zukunft für Deutschland</p>
+   </footer>
+ 
+-  <!-- TOP BUTTON -->
+-  <button class="top-btn" id="topBtn" aria-label="Nach oben">
+-    ↑
+-  </button>
+-
+-  <!-- TOAST -->
++  <button class="top-btn" id="topBtn" type="button" aria-label="Nach oben">↑</button>
+   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+ 
+-  <!-- AOS -->
+-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+-
+   <script>
+-    AOS.init({
+-      duration: 1000,
+-      once: true
+-    });
+-
+     const html = document.documentElement;
+     const header = document.getElementById("siteHeader");
+     const menuToggle = document.getElementById("menuToggle");
+     const themeToggle = document.getElementById("themeToggle");
+-    const nav = document.getElementById("siteNav");
+-    const navLinks = document.querySelectorAll("nav a");
+-    const topBtn = document.getElementById("topBtn");
++    const navLinks = document.querySelectorAll(".nav-link");
+     const scrollProgress = document.getElementById("scrollProgress");
++    const topBtn = document.getElementById("topBtn");
+     const toast = document.getElementById("toast");
+-    const copyEmailBtn = document.getElementById("copyEmailBtn");
+-    const supportBtn = document.getElementById("supportBtn");
+-
+-    /* THEME RESTORE */
+-    const savedTheme = localStorage.getItem("zfd-theme");
+-    if (savedTheme) {
+-      html.dataset.theme = savedTheme;
+-      themeToggle.textContent = savedTheme === "dark" ? "🌙" : "☀️";
+-    } else {
+-      themeToggle.textContent = html.dataset.theme === "dark" ? "🌙" : "☀️";
+-    }
+-
+-    /* TOAST */
++    const visitCount = document.getElementById("visitCount");
++    const themeName = document.getElementById("themeName");
++    const clock = document.getElementById("clock");
++    const announcement = document.getElementById("announcement");
++    const announcementInput = document.getElementById("announcementInput");
++    const projectNotes = document.getElementById("projectNotes");
++    const adminSection = document.getElementById("admin");
++    const adminHintBtn = document.getElementById("adminHintBtn");
++
++    const adminPassword = "hraPPur5!06122006";
++    const adminSequence = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "b", "p"];
++    let adminKeys = [];
+     let toastTimer = null;
++
+     function showToast(message) {
+       toast.textContent = message;
+       toast.classList.add("show");
+       clearTimeout(toastTimer);
+-      toastTimer = setTimeout(() => {
+-        toast.classList.remove("show");
+-      }, 2200);
++      toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
++    }
++
++    function setTheme(theme) {
++      html.dataset.theme = theme;
++      themeToggle.textContent = theme === "dark" ? "🌙" : "☀️";
++      themeName.textContent = theme === "dark" ? "Dunkel" : "Hell";
++      localStorage.setItem("zfd-theme", theme);
++    }
++
++    function updateClock() {
++      clock.textContent = new Date().toLocaleTimeString("de-DE", {
++        hour: "2-digit",
++        minute: "2-digit",
++        second: "2-digit"
++      });
++    }
++
++    function updateScrollProgress() {
++      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
++      const progress = scrollHeight > 0 ? (window.scrollY / scrollHeight) * 100 : 0;
++      scrollProgress.style.width = `${progress}%`;
++      topBtn.style.display = window.scrollY > 520 ? "grid" : "none";
++    }
++
++    function spawnParticles(amount = 34) {
++      for (let i = 0; i < amount; i++) {
++        const particle = document.createElement("span");
++        particle.className = "particle";
++        particle.style.left = `${Math.random() * 100}vw`;
++        particle.style.top = `${Math.random() * 100}vh`;
++        particle.style.setProperty("--dx", `${Math.random() * 260 - 130}px`);
++        particle.style.setProperty("--dy", `${Math.random() * 260 - 130}px`);
++        document.body.appendChild(particle);
++        particle.addEventListener("animationend", () => particle.remove());
++      }
++    }
++
++    async function copyText(text, successMessage) {
++      try {
++        await navigator.clipboard.writeText(text);
++        showToast(successMessage);
++      } catch (error) {
++        const textarea = document.createElement("textarea");
++        textarea.value = text;
++        document.body.appendChild(textarea);
++        textarea.select();
++        document.execCommand("copy");
++        textarea.remove();
++        showToast(successMessage);
++      }
++    }
++
++    function unlockAdmin() {
++      adminSection.classList.add("admin-unlocked");
++      showToast("Adminbereich freigeschaltet.");
++      adminSection.scrollIntoView({ behavior: "smooth", block: "start" });
+     }
+ 
+-    /* THEME TOGGLE */
++    function checkAdminSequence(key) {
++      adminKeys.push(key);
++      adminKeys = adminKeys.slice(-adminSequence.length);
++
++      if (JSON.stringify(adminKeys) === JSON.stringify(adminSequence)) {
++        const password = prompt("Admin Passwort:");
++
++        if (password === adminPassword) {
++          unlockAdmin();
++        } else {
++          showToast("Falsches Passwort.");
++        }
++
++        adminKeys = [];
++      }
++    }
++
++    const savedTheme = localStorage.getItem("zfd-theme") || "dark";
++    setTheme(savedTheme);
++
++    const visits = Number(localStorage.getItem("zfd-visits") || 0) + 1;
++    localStorage.setItem("zfd-visits", String(visits));
++    visitCount.textContent = String(visits);
++
++    announcementInput.value = localStorage.getItem("zfd-announcement") || "";
++    projectNotes.value = localStorage.getItem("zfd-notes") || "";
++
+     themeToggle.addEventListener("click", () => {
+-      const nextTheme = html.dataset.theme === "dark" ? "light" : "dark";
+-      html.dataset.theme = nextTheme;
+-      themeToggle.textContent = nextTheme === "dark" ? "🌙" : "☀️";
+-      localStorage.setItem("zfd-theme", nextTheme);
+-      showToast(nextTheme === "dark" ? "Dunkles Theme aktiviert." : "Helles Theme aktiviert.");
++      setTheme(html.dataset.theme === "dark" ? "light" : "dark");
++      showToast("Theme gewechselt.");
++    });
++
++    adminHintBtn.addEventListener("click", () => {
++      showToast("Admin öffnen: ↑ ↑ ↓ ↓ B P drücken und dann Passwort eingeben.");
++    });
++
++    document.addEventListener("keydown", event => {
++      if (event.ctrlKey || event.metaKey || event.altKey) return;
++      checkAdminSequence(event.key);
+     });
+ 
+-    /* MOBILE NAV TOGGLE */
+     menuToggle.addEventListener("click", () => {
+       const isOpen = header.classList.toggle("nav-open");
+       menuToggle.setAttribute("aria-expanded", String(isOpen));
+       menuToggle.textContent = isOpen ? "✕" : "☰";
+     });
+ 
+     navLinks.forEach(link => {
+       link.addEventListener("click", () => {
+         header.classList.remove("nav-open");
+         menuToggle.setAttribute("aria-expanded", "false");
+         menuToggle.textContent = "☰";
+       });
+     });
+ 
+-    /* SCROLL PROGRESS */
+-    function updateScrollProgress() {
+-      const doc = document.documentElement;
+-      const scrollTop = doc.scrollTop || document.body.scrollTop;
+-      const scrollHeight = doc.scrollHeight - doc.clientHeight;
+-      const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+-      scrollProgress.style.width = progress + "%";
+-    }
++    document.querySelectorAll(".card").forEach(card => {
++      card.addEventListener("mousemove", event => {
++        const rect = card.getBoundingClientRect();
++        card.style.setProperty("--x", `${event.clientX - rect.left}px`);
++        card.style.setProperty("--y", `${event.clientY - rect.top}px`);
++      });
++    });
+ 
+-    window.addEventListener("scroll", updateScrollProgress);
+-    updateScrollProgress();
++    document.querySelectorAll("[data-action]").forEach(button => {
++      button.addEventListener("click", () => {
++        const action = button.dataset.action;
+ 
+-    /* TOP BUTTON */
+-    window.addEventListener("scroll", () => {
+-      if (window.scrollY > 500) {
+-        topBtn.style.display = "grid";
+-      } else {
+-        topBtn.style.display = "none";
+-      }
+-    });
++        if (action === "theme") {
++          themeToggle.click();
++        }
+ 
+-    topBtn.addEventListener("click", () => {
+-      window.scrollTo({
+-        top: 0,
+-        behavior: "smooth"
+-      });
+-    });
++        if (action === "party") {
++          document.body.classList.toggle("party-mode");
++          showToast(document.body.classList.contains("party-mode") ? "Party-Modus aktiviert." : "Party-Modus deaktiviert.");
++        }
+ 
+-    /* ACTIVE NAV LINK */
+-    const sections = document.querySelectorAll("main section[id]");
+-    const navMap = new Map();
+-    navLinks.forEach(link => {
+-      const target = link.getAttribute("href");
+-      if (target && target.startsWith("#")) navMap.set(target.slice(1), link);
+-    });
++        if (action === "focus") {
++          document.body.classList.toggle("focus-mode");
++          showToast(document.body.classList.contains("focus-mode") ? "Fokusmodus aktiviert." : "Fokusmodus deaktiviert.");
++        }
+ 
+-    const sectionObserver = new IntersectionObserver((entries) => {
+-      entries.forEach(entry => {
+-        if (entry.isIntersecting) {
+-          navLinks.forEach(link => link.classList.remove("active"));
+-          const active = navMap.get(entry.target.id);
+-          if (active) active.classList.add("active");
++        if (action === "particles") {
++          spawnParticles();
++          showToast("Partikel-Effekt gestartet.");
+         }
+-      });
+-    }, {
+-      root: null,
+-      threshold: 0.45
+-    });
+ 
+-    sections.forEach(section => sectionObserver.observe(section));
++        if (action === "copy") {
++          const info = [
++            "ZFD Website Info",
++            `URL: ${location.href}`,
++            `Theme: ${html.dataset.theme}`,
++            `Besuche: ${localStorage.getItem("zfd-visits")}`,
++            `Zeit: ${new Date().toLocaleString("de-DE")}`
++          ].join("\n");
++          copyText(info, "Seiteninfo kopiert.");
++        }
+ 
+-    /* CARD SPOTLIGHT */
+-    const cards = document.querySelectorAll(".card");
+-    cards.forEach(card => {
+-      card.addEventListener("mousemove", e => {
+-        const rect = card.getBoundingClientRect();
+-        const x = e.clientX - rect.left;
+-        const y = e.clientY - rect.top;
+-        card.style.setProperty("--x", `${x}px`);
+-        card.style.setProperty("--y", `${y}px`);
++        if (action === "reset") {
++          document.body.classList.remove("party-mode", "focus-mode");
++          document.querySelectorAll(".particle").forEach(particle => particle.remove());
++          announcement.classList.remove("show");
++          announcement.textContent = "";
++          announcementInput.value = "";
++          projectNotes.value = "";
++          localStorage.removeItem("zfd-announcement");
++          localStorage.removeItem("zfd-notes");
++          showToast("Admin-Demo zurückgesetzt.");
++        }
+       });
+     });
+ 
+-    /* COPY EMAIL */
+-    copyEmailBtn.addEventListener("click", async () => {
+-      const email = "ysiszysisz@gmail.com";
+-      try {
+-        await navigator.clipboard.writeText(email);
+-        showToast("E-Mail-Adresse kopiert.");
+-      } catch (err) {
+-        const temp = document.createElement("textarea");
+-        temp.value = email;
+-        document.body.appendChild(temp);
+-        temp.select();
+-        document.execCommand("copy");
+-        temp.remove();
+-        showToast("E-Mail-Adresse kopiert.");
+-      }
++    document.getElementById("showAnnouncement").addEventListener("click", () => {
++      const text = announcementInput.value.trim() || "Neue Ankündigung aus dem Adminbereich!";
++      announcement.textContent = `📣 ${text}`;
++      announcement.classList.add("show");
++      localStorage.setItem("zfd-announcement", text);
++      showToast("Ankündigung angezeigt.");
+     });
+ 
+-    /* EASTER EGG */
+-    let clicks = 0;
+-    supportBtn.addEventListener("click", () => {
+-      clicks++;
+-
+-      if (clicks === 7) {
+-        alert("🇩🇪 Danke für deine Unterstützung!");
+-      }
+-
+-      if (clicks === 15) {
+-        alert("⚡ Du bist heute besonders motiviert.");
+-      }
+-
+-      if (clicks === 30) {
+-        alert("🚨 Okay okay... wir haben verstanden 😄");
+-      }
++    document.getElementById("hideAnnouncement").addEventListener("click", () => {
++      announcement.classList.remove("show");
++      showToast("Ankündigung ausgeblendet.");
+     });
+ 
+-    /* SECRET CODE */
+-    let typed = "";
+-    document.addEventListener("keydown", e => {
+-      if (e.ctrlKey || e.metaKey || e.altKey) return;
++    projectNotes.addEventListener("input", () => {
++      localStorage.setItem("zfd-notes", projectNotes.value);
++    });
+ 
+-      typed += e.key.toLowerCase();
++    document.getElementById("copyEmail").addEventListener("click", () => {
++      copyText("ysiszysisz@gmail.com", "E-Mail-Adresse kopiert.");
++    });
+ 
+-      if (typed.length > 20) {
+-        typed = typed.slice(-20);
+-      }
++    window.addEventListener("scroll", updateScrollProgress);
++    topBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+ 
+-      if (typed.includes("zfd")) {
+-        showToast("ZFD Modus aktiviert.");
+-        document.body.style.filter = "hue-rotate(15deg)";
+-        setTimeout(() => {
+-          document.body.style.filter = "";
+-        }, 1800);
+-        typed = "";
+-      }
++    const observer = new IntersectionObserver(entries => {
++      entries.forEach(entry => {
++        if (entry.isIntersecting) {
++          navLinks.forEach(link => link.classList.remove("active"));
++          const activeLink = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
++          if (activeLink) activeLink.classList.add("active");
++        }
++      });
++    }, { threshold: 0.45 });
+ 
+-      if (typed.includes("jakob") || typed.includes("jason")) {
+-        showToast("WiPo-Projekt erkannt.");
+-        typed = "";
+-      }
+-    });
++    document.querySelectorAll("main section[id]").forEach(section => observer.observe(section));
+ 
+-    /* CLOSE MOBILE NAV ON OUTSIDE CLICK */
+-    document.addEventListener("click", (e) => {
+-      const clickedInsideHeader = header.contains(e.target);
+-      if (!clickedInsideHeader) {
+-        header.classList.remove("nav-open");
+-        menuToggle.setAttribute("aria-expanded", "false");
+-        menuToggle.textContent = "☰";
+-      }
+-    });
+-/* =========================
+-   SECRET ADMIN PANEL V3 FULL
+-========================= */
+-
+-let zfd_keys = [];
+-const zfd_combo = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","b","p"];
+-
+-const zfd_admin = document.createElement("div");
+-zfd_admin.id = "zfd_admin_panel";
+-
+-zfd_admin.style = `
+-position:fixed;
+-inset:0;
+-background:rgba(0,0,0,0.85);
+-z-index:999999;
+-display:none;
+-backdrop-filter:blur(15px);
+-color:white;
+-font-family:'Orbitron',sans-serif;
+-`;
+-
+-zfd_admin.innerHTML = `
+-<div style="max-width:800px;margin:70px auto;padding:30px;background:#0f172a;border-radius:20px;box-shadow:0 0 50px rgba(56,189,248,0.25);">
+-
+-  <h1 style="color:#38bdf8;font-size:28px;">🧠 ZFD CONTROL CENTER</h1>
+-
+-  <p id="zfd_info" style="margin-top:10px;"></p>
+-
+-  <hr style="margin:15px 0;opacity:0.2">
+-
+-  <button onclick="toggleTheme()">🌗 Theme</button>
+-  <button onclick="showLogs()">📜 Logs</button>
+-  <button onclick="fakeHack()">💀 Hack Mode</button>
+-  <button onclick="addChaos()">🌪 Chaos</button>
+-  <button onclick="spawnParticles()">✨ Particles</button>
+-  <button onclick="toggleDarkForce()">🌑 Dark Force</button>
+-  <button onclick="speedMode()">⚡ Speed</button>
+-  <button onclick="clearAll()">🗑 Reset</button>
+-  <button onclick="zfd_admin.style.display='none'">❌ Close</button>
+-
+-  <div style="margin-top:20px;font-size:12px;opacity:0.6">
+-    SYSTEM v3.0 | CORE ACTIVE | ZFD SECURITY NODE ONLINE
+-  </div>
+-
+-</div>
+-`;
+-
+-document.body.appendChild(zfd_admin);
+-
+-/* OPEN PANEL */
+-function openZFDAdmin(){
+-  document.getElementById("zfd_info").innerHTML =
+-    "📈 Visits: " + (localStorage.getItem("zfd_visits") || 0) +
+-    "<br>🕒 Time: " + new Date().toLocaleString() +
+-    "<br>🌐 URL: " + location.href +
+-    "<br>🧠 Status: ONLINE";
+-
+-  zfd_admin.style.display = "block";
+-}
+-
+-/* KEY COMBO */
+-document.addEventListener("keydown",(e)=>{
+-  zfd_keys.push(e.key);
+-  zfd_keys = zfd_keys.slice(-6);
+-
+-  if(JSON.stringify(zfd_keys) === JSON.stringify(zfd_combo)){
+-    const code = prompt("Admin Code:");
+-    if(code === "hraPPur5!06122006"){
+-      openZFDAdmin();
+-    } else {
+-      alert("WRONG CODE");
+-    }
+-    zfd_keys = [];
+-  }
+-});
+-
+-/* =========================
+-   ADMIN FUNCTIONS
+-========================= */
+-
+-function toggleTheme(){
+-  document.documentElement.dataset.theme =
+-    document.documentElement.dataset.theme === "light" ? "dark" : "light";
+-}
+-
+-function clearAll(){
+-  localStorage.clear();
+-  alert("RESET DONE");
+-}
+-
+-function speedMode(){
+-  document.body.style.transition = "all 0.1s linear";
+-  alert("Speed Mode ON");
+-}
+-
+-function showLogs(){
+-  console.log("===== ZFD LOGS =====");
+-  console.log("Visits:", localStorage.getItem("zfd_visits"));
+-  console.log("Time:", new Date());
+-  alert("Logs opened in console");
+-}
+-
+-function fakeHack(){
+-  document.body.style.filter = "hue-rotate(180deg) contrast(1.5)";
+-  alert("SYSTEM BREACH SIMULATED");
+-}
+-
+-function addChaos(){
+-  setInterval(() => {
+-    document.body.style.transform = `rotate(${Math.random()*2-1}deg)`;
+-  }, 200);
+-  alert("CHAOS MODE ON");
+-}
+-
+-function spawnParticles(){
+-  for(let i=0;i<25;i++){
+-    let p = document.createElement("div");
+-    p.style = `
+-      position:fixed;
+-      width:6px;
+-      height:6px;
+-      background:#38bdf8;
+-      left:${Math.random()*100}vw;
+-      top:${Math.random()*100}vh;
+-      border-radius:50%;
+-      z-index:999999;
+-      animation: float 3s linear infinite;
+-    `;
+-    document.body.appendChild(p);
+-  }
+-  alert("Particles spawned");
+-}
+-
+-function toggleDarkForce(){
+-  document.body.style.background = "#000";
+-  document.body.style.filter = "brightness(0.7) contrast(2)";
+-  alert("Dark Force ON");
+-}
+-
+-/* VISITS */
+-let zfd_visits = localStorage.getItem("zfd_visits") || 0;
+-localStorage.setItem("zfd_visits", ++zfd_visits);
++    updateClock();
++    updateScrollProgress();
++    setInterval(updateClock, 1000);
+   </script>
+ </body>
+-</html>
+\ No newline at end of file
++</html>
+ 
+EOF
+)
