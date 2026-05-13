@@ -11,7 +11,7 @@
   <meta name="description" content="ZFD – Zukunft für Deutschland. Heimat. Freiheit. Zukunft.">
   <meta name="theme-color" content="#020617">
 
-  <!-- FONTS -->
+  <!-- FONT -->
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +20,7 @@
 
   <!-- AOS -->
 
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css"/>
 
   <style>
 
@@ -29,21 +29,15 @@
       --bg: #020617;
       --bg2: #0f172a;
 
-      --card: rgba(15, 23, 42, 0.7);
-
       --text: #f8fafc;
       --muted: #94a3b8;
 
       --primary: #2563eb;
       --primary2: #3b82f6;
 
+      --card: rgba(15,23,42,0.75);
+
       --border: rgba(255,255,255,0.08);
-
-      --success: #22c55e;
-      --danger: #ef4444;
-
-      --shadow:
-      0 10px 40px rgba(0,0,0,0.35);
 
     }
 
@@ -52,15 +46,12 @@
       --bg: #f8fafc;
       --bg2: #e2e8f0;
 
-      --card: rgba(255,255,255,0.7);
-
       --text: #020617;
       --muted: #475569;
 
-      --border: rgba(0,0,0,0.08);
+      --card: rgba(255,255,255,0.75);
 
-      --shadow:
-      0 10px 40px rgba(0,0,0,0.08);
+      --border: rgba(0,0,0,0.08);
 
     }
 
@@ -83,20 +74,13 @@
       font-family: "Inter", sans-serif;
 
       background:
-      radial-gradient(circle at top left, rgba(37,99,235,0.15), transparent 30%),
-      radial-gradient(circle at bottom right, rgba(59,130,246,0.12), transparent 30%),
+      radial-gradient(circle at top left, rgba(37,99,235,0.15), transparent 35%),
+      radial-gradient(circle at bottom right, rgba(59,130,246,0.12), transparent 35%),
       var(--bg);
 
       color: var(--text);
 
       overflow-x: hidden;
-
-    }
-
-    ::selection {
-
-      background: var(--primary);
-      color: white;
 
     }
 
@@ -108,20 +92,14 @@
 
     }
 
-    ::-webkit-scrollbar-track {
-
-      background: #0f172a;
-
-    }
-
     ::-webkit-scrollbar-thumb {
 
       background: linear-gradient(var(--primary), var(--primary2));
-      border-radius: 20px;
+      border-radius: 30px;
 
     }
 
-    /* BACKGROUND */
+    /* GRID BG */
 
     .bg-grid {
 
@@ -134,15 +112,16 @@
 
       background-size: 40px 40px;
 
-      z-index: -5;
+      z-index: -10;
 
-      mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+      mask-image: radial-gradient(circle at center, black 30%, transparent 100%);
 
     }
 
     .glow {
 
       position: fixed;
+
       width: 600px;
       height: 600px;
 
@@ -150,39 +129,35 @@
 
       filter: blur(120px);
 
-      z-index: -10;
+      opacity: 0.18;
 
-      opacity: 0.25;
+      z-index: -20;
+
+      animation: float 15s ease-in-out infinite;
 
     }
 
-    .glow1 {
+    .g1 {
 
       background: #2563eb;
       top: -200px;
       left: -150px;
 
-      animation: float 12s ease-in-out infinite;
-
     }
 
-    .glow2 {
+    .g2 {
 
       background: #1d4ed8;
-      bottom: -250px;
+      bottom: -200px;
       right: -150px;
-
-      animation: float 16s ease-in-out infinite;
 
     }
 
-    .glow3 {
+    .g3 {
 
-      background: #3b82f6;
+      background: #60a5fa;
       top: 40%;
       left: 40%;
-
-      animation: float 20s ease-in-out infinite;
 
     }
 
@@ -193,7 +168,7 @@
       }
 
       50% {
-        transform: translateY(-40px);
+        transform: translateY(-35px);
       }
 
       100% {
@@ -225,8 +200,8 @@
       margin: auto;
 
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
 
       padding: 18px 0;
 
@@ -234,10 +209,11 @@
 
     .logo {
 
-      font-size: 1.5rem;
+      font-size: 1.7rem;
       font-weight: 900;
 
       background: linear-gradient(to right, white, #60a5fa);
+
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
 
@@ -257,11 +233,10 @@
       color: var(--text);
 
       text-decoration: none;
+
       font-weight: 600;
 
       position: relative;
-
-      transition: 0.3s;
 
     }
 
@@ -303,7 +278,7 @@
 
       cursor: pointer;
 
-      font-size: 1.2rem;
+      font-size: 1.1rem;
 
       transition: 0.3s;
 
@@ -337,9 +312,9 @@
 
     .hero-badge {
 
-      background: rgba(37,99,235,0.15);
+      background: rgba(37,99,235,0.12);
 
-      border: 1px solid rgba(59,130,246,0.3);
+      border: 1px solid rgba(96,165,250,0.3);
 
       color: #93c5fd;
 
@@ -348,8 +323,6 @@
       border-radius: 999px;
 
       margin-bottom: 25px;
-
-      backdrop-filter: blur(10px);
 
       font-weight: 700;
 
@@ -375,30 +348,30 @@
 
     .hero h1 {
 
-      font-size: clamp(3rem, 9vw, 7rem);
+      font-size: clamp(3rem, 10vw, 7rem);
 
       font-weight: 900;
 
       line-height: 1;
 
-      background: linear-gradient(to bottom, #fff, #60a5fa);
+      margin-bottom: 25px;
+
+      background: linear-gradient(to bottom, white, #60a5fa);
 
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-
-      margin-bottom: 25px;
 
     }
 
     .hero p {
 
-      max-width: 900px;
-
-      font-size: 1.2rem;
+      max-width: 950px;
 
       color: var(--muted);
 
       line-height: 1.9;
+
+      font-size: 1.2rem;
 
       margin-bottom: 40px;
 
@@ -407,8 +380,8 @@
     .hero-buttons {
 
       display: flex;
-      flex-wrap: wrap;
       gap: 20px;
+      flex-wrap: wrap;
 
     }
 
@@ -416,7 +389,7 @@
 
       padding: 18px 34px;
 
-      border-radius: 14px;
+      border-radius: 16px;
 
       text-decoration: none;
 
@@ -427,29 +400,6 @@
       position: relative;
 
       overflow: hidden;
-
-    }
-
-    .btn::before {
-
-      content: "";
-
-      position: absolute;
-      top: 0;
-      left: -100%;
-
-      width: 100%;
-      height: 100%;
-
-      background: rgba(255,255,255,0.15);
-
-      transition: 0.5s;
-
-    }
-
-    .btn:hover::before {
-
-      left: 100%;
 
     }
 
@@ -464,76 +414,21 @@
 
     }
 
-    .btn-primary:hover {
-
-      transform: translateY(-5px) scale(1.03);
-
-    }
-
     .btn-secondary {
 
       border: 1px solid var(--border);
 
       color: var(--text);
 
-      background: rgba(255,255,255,0.03);
+      background: rgba(255,255,255,0.05);
 
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
 
     }
 
-    .btn-secondary:hover {
-
-      background: rgba(255,255,255,0.08);
+    .btn:hover {
 
       transform: translateY(-5px);
-
-    }
-
-    /* STATS */
-
-    .stats {
-
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-
-      gap: 20px;
-
-      width: min(1200px, 92%);
-      margin: 0 auto 120px;
-
-    }
-
-    .stat {
-
-      padding: 30px;
-
-      border-radius: 24px;
-
-      background: var(--card);
-
-      border: 1px solid var(--border);
-
-      backdrop-filter: blur(20px);
-
-      text-align: center;
-
-      box-shadow: var(--shadow);
-
-    }
-
-    .stat h3 {
-
-      font-size: 3rem;
-      color: #60a5fa;
-
-    }
-
-    .stat p {
-
-      color: var(--muted);
-
-      margin-top: 10px;
 
     }
 
@@ -541,10 +436,10 @@
 
     section {
 
-      padding: 120px 0;
-
       width: min(1400px, 92%);
       margin: auto;
+
+      padding: 120px 0;
 
     }
 
@@ -584,7 +479,8 @@
 
       border-radius: 30px;
 
-      box-shadow: var(--shadow);
+      box-shadow:
+      0 10px 40px rgba(0,0,0,0.35);
 
     }
 
@@ -600,17 +496,12 @@
 
     }
 
-    .about-box p + p {
-
-      margin-top: 25px;
-
-    }
-
     /* GRID */
 
     .grid {
 
       display: grid;
+
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 
       gap: 30px;
@@ -623,10 +514,6 @@
 
       position: relative;
 
-      padding: 35px;
-
-      border-radius: 28px;
-
       overflow: hidden;
 
       background: var(--card);
@@ -635,9 +522,14 @@
 
       backdrop-filter: blur(20px);
 
+      border-radius: 28px;
+
+      padding: 35px;
+
       transition: 0.4s;
 
-      box-shadow: var(--shadow);
+      box-shadow:
+      0 10px 40px rgba(0,0,0,0.25);
 
     }
 
@@ -650,7 +542,7 @@
 
       background:
       radial-gradient(circle at var(--x) var(--y),
-      rgba(59,130,246,0.18),
+      rgba(59,130,246,0.15),
       transparent 40%);
 
       opacity: 0;
@@ -667,15 +559,25 @@
 
     .card:hover {
 
-      transform: translateY(-12px);
+      transform: translateY(-10px);
 
-      border-color: rgba(96,165,250,0.4);
+      border-color: rgba(96,165,250,0.35);
 
     }
 
     .card h3 {
 
-      font-size: 1.5rem;
+      font-size: 1.6rem;
+
+      margin-bottom: 20px;
+
+    }
+
+    .card p {
+
+      color: var(--muted);
+
+      line-height: 1.8;
 
       margin-bottom: 25px;
 
@@ -710,17 +612,30 @@
       top: 0;
 
       color: #60a5fa;
+
       font-weight: bold;
+
+    }
+
+    .promise {
+
+      margin-top: 30px;
+
+      padding: 20px;
+
+      border-radius: 18px;
+
+      background: rgba(37,99,235,0.08);
+
+      border: 1px solid rgba(96,165,250,0.2);
+
+      line-height: 1.7;
 
     }
 
     .slogan {
 
-      margin-top: 30px;
-
-      padding-top: 20px;
-
-      border-top: 1px solid var(--border);
+      margin-top: 25px;
 
       font-style: italic;
 
@@ -741,15 +656,15 @@
 
     }
 
-    .value-box {
+    .value {
 
       padding: 18px 30px;
 
       border-radius: 999px;
 
-      background: rgba(37,99,235,0.15);
+      background: rgba(37,99,235,0.12);
 
-      border: 1px solid rgba(96,165,250,0.3);
+      border: 1px solid rgba(96,165,250,0.25);
 
       font-weight: 700;
 
@@ -757,50 +672,25 @@
 
     }
 
-    .value-box:hover {
+    .value:hover {
 
       transform: scale(1.08);
 
     }
 
-    /* TIMELINE */
+    /* GOALS */
 
-    .timeline {
+    .goal {
 
-      position: relative;
-
-      margin-top: 60px;
-
-      display: grid;
-      gap: 30px;
+      text-align: center;
 
     }
 
-    .timeline-item {
+    .goal h3 {
 
-      padding: 30px;
+      margin-bottom: 20px;
 
-      border-left: 4px solid #3b82f6;
-
-      background: var(--card);
-
-      border-radius: 20px;
-
-      border: 1px solid var(--border);
-
-    }
-
-    .timeline-item h3 {
-
-      margin-bottom: 10px;
-
-    }
-
-    .timeline-item p {
-
-      color: var(--muted);
-
-      line-height: 1.8;
+      font-size: 1.5rem;
 
     }
 
@@ -814,13 +704,14 @@
 
       border-radius: 30px;
 
-      background: linear-gradient(
+      background:
+      linear-gradient(
       145deg,
       rgba(37,99,235,0.2),
       rgba(15,23,42,0.8)
       );
 
-      border: 1px solid rgba(96,165,250,0.25);
+      border: 1px solid rgba(96,165,250,0.2);
 
       backdrop-filter: blur(25px);
 
@@ -844,33 +735,6 @@
 
     }
 
-    /* COUNTER */
-
-    .counter-box {
-
-      margin-top: 40px;
-
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-
-    }
-
-    .counter {
-
-      background: rgba(255,255,255,0.05);
-
-      border: 1px solid var(--border);
-
-      padding: 18px 25px;
-
-      border-radius: 18px;
-
-      font-weight: 700;
-
-    }
-
     /* FOOTER */
 
     footer {
@@ -885,7 +749,7 @@
 
     }
 
-    /* FLOAT BUTTON */
+    /* FLOAT BTN */
 
     .top-btn {
 
@@ -904,7 +768,7 @@
 
       color: white;
 
-      font-size: 1.4rem;
+      font-size: 1.3rem;
 
       cursor: pointer;
 
@@ -951,9 +815,9 @@
 
   <div class="bg-grid"></div>
 
-  <div class="glow glow1"></div>
-  <div class="glow glow2"></div>
-  <div class="glow glow3"></div>
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+  <div class="glow g3"></div>
 
   <!-- HEADER -->
 
@@ -971,7 +835,6 @@
         <a href="#programm">Programm</a>
         <a href="#ziele">Ziele</a>
         <a href="#werte">Werte</a>
-        <a href="#vision">Vision</a>
         <a href="#kontakt">Kontakt</a>
 
       </nav>
@@ -989,17 +852,18 @@
   <section class="hero" data-aos="fade-up">
 
     <div class="hero-badge">
-      🇩🇪 Neue Ideen für Deutschlands Zukunft
+      🇩🇪 Heimat. Freiheit. Zukunft.
     </div>
 
     <h1>
-      Zukunft für Deutschland
+      ZFD – Zukunft für Deutschland
     </h1>
 
     <p>
-      Die ZFD steht für ein modernes, sicheres und wirtschaftlich starkes Deutschland.
-      Wir verbinden Innovation mit Stabilität, Freiheit mit Verantwortung und Fortschritt
-      mit gesellschaftlichem Zusammenhalt.
+      Die ZFD steht für ein starkes, sicheres und modernes Deutschland.
+      Wir glauben an Freiheit, Verantwortung, Leistung und den Zusammenhalt unserer Gesellschaft.
+      Unser Ziel ist ein Staat, der seine Bürger schützt, Familien stärkt,
+      die Wirtschaft fördert und Zukunftschancen für kommende Generationen schafft.
     </p>
 
     <div class="hero-buttons">
@@ -1016,38 +880,12 @@
 
   </section>
 
-  <!-- STATS -->
-
-  <div class="stats">
-
-    <div class="stat">
-      <h3 id="counter1">0</h3>
-      <p>Neue Ideen</p>
-    </div>
-
-    <div class="stat">
-      <h3 id="counter2">0</h3>
-      <p>Politische Ziele</p>
-    </div>
-
-    <div class="stat">
-      <h3 id="counter3">0</h3>
-      <p>Zukunftsprojekte</p>
-    </div>
-
-    <div class="stat">
-      <h3 id="counter4">0</h3>
-      <p>Fokus auf Bürgernähe</p>
-    </div>
-
-  </div>
-
   <!-- ABOUT -->
 
   <section id="about">
 
     <h2 class="section-title">
-      Was ist die ZFD?
+      Parteiprogramm 2026
     </h2>
 
     <p class="section-subtitle">
@@ -1058,24 +896,30 @@
 
       <p>
         Deutschland steht vor großen Herausforderungen:
-        steigende Preise, internationale Krisen,
-        Wohnungsmangel, Digitalisierung,
-        gesellschaftliche Spannungen und wirtschaftlicher Wandel.
+        wirtschaftlicher Wandel, steigende Lebenshaltungskosten,
+        Digitalisierung, internationale Krisen
+        und gesellschaftliche Spannungen.
       </p>
 
       <p>
-        Die ZFD möchte Vertrauen zurückbringen.
-        Wir setzen auf Sicherheit, wirtschaftliche Stärke,
-        moderne Technologie und eine Politik,
-        die die Interessen der Bürger wieder stärker in den Mittelpunkt stellt.
+        Die ZFD setzt auf Innovation statt Stillstand.
+        Wir wollen Leistung fördern, Familien stärken,
+        Chancen schaffen und Vertrauen zurückbringen.
       </p>
 
       <p>
-        Unser Ziel ist ein Deutschland,
-        das Chancen schafft,
-        Leistung belohnt,
-        Familien stärkt
-        und Zukunftssicherheit bietet.
+        Unser Ziel ist ein sicheres,
+        modernes und wirtschaftlich starkes Deutschland,
+        das seine Bürger unterstützt
+        und gleichzeitig offen für Fortschritt bleibt.
+      </p>
+
+      <p>
+        Patriotismus und internationale Zusammenarbeit
+        schließen sich nicht aus.
+        Deutschland soll selbstbewusst auftreten,
+        seine Interessen vertreten und gleichzeitig
+        ein verlässlicher Partner in Europa bleiben.
       </p>
 
     </div>
@@ -1087,42 +931,52 @@
   <section id="programm">
 
     <h2 class="section-title">
-      Parteiprogramm 2026
+      Unser Parteiprogramm
     </h2>
 
     <p class="section-subtitle">
-      Moderne Ideen für eine starke Zukunft.
+      Moderne Ideen für Deutschlands Zukunft.
     </p>
 
     <div class="grid">
 
-      <!-- SECURITY -->
+      <!-- 1 -->
 
       <div class="card" data-aos="zoom-in">
 
-        <h3>🛡 Sicherheit & Ordnung</h3>
+        <h3>
+          🛡 1. Sicherheit & Ordnung
+        </h3>
+
+        <p>
+          Für sichere Straßen und einen starken Rechtsstaat
+        </p>
+
+        <p>
+          Sicherheit ist die Grundlage einer freien Gesellschaft.
+          Bürger müssen sich in ihren Städten, Bahnhöfen und Wohnvierteln wieder sicher fühlen können.
+        </p>
 
         <ul>
 
-          <li>Mehr Polizeipräsenz auf Straßen und Bahnhöfen</li>
+          <li>Mehr Polizeipräsenz auf Straßen, Bahnhöfen und öffentlichen Plätzen</li>
 
-          <li>Moderne Ausrüstung für Polizei und Rettungsdienste</li>
+          <li>Schnellere Abschiebung von Straftätern ohne Aufenthaltsrecht</li>
 
-          <li>Härtere Strafen für Gewalt- und Sexualdelikte</li>
+          <li>Konsequente Bekämpfung von Clan-, Banden- und organisierter Kriminalität</li>
 
-          <li>Null-Toleranz gegen Clan- und Bandenkriminalität</li>
+          <li>Härtere Strafen für Gewalt-, Sexual- und Wiederholungstäter</li>
 
-          <li>Mehr Videoüberwachung an Kriminalitätsschwerpunkten</li>
+          <li>Moderne Ausrüstung und bessere Unterstützung für Polizei, Feuerwehr und Rettungsdienste</li>
 
-          <li>Beschleunigte Gerichtsverfahren bei schweren Straftaten</li>
-
-          <li>Bessere Unterstützung für Opfer von Gewaltverbrechen</li>
-
-          <li>Stärkung der Cybersicherheit gegen digitale Angriffe</li>
-
-          <li>Mehr Schutz für Frauen im öffentlichen Raum</li>
+          <li>Null-Toleranz gegenüber Extremismus und Gewalt</li>
 
         </ul>
+
+        <div class="promise">
+          <strong>Unser Versprechen:</strong><br>
+          Ein Staat muss seine Bürger schützen – konsequent, gerecht und entschlossen.
+        </div>
 
         <div class="slogan">
           „Sicherheit ist Freiheit.“
@@ -1130,69 +984,43 @@
 
       </div>
 
-      <!-- IMMIGRATION -->
+      <!-- 2 -->
 
       <div class="card" data-aos="zoom-in">
 
-        <h3>🌍 Migration & Integration</h3>
+        <h3>
+          💼 2. Wirtschaft & Steuern
+        </h3>
+
+        <p>
+          Für Wohlstand, Innovation und faire Chancen
+        </p>
+
+        <p>
+          Deutschland braucht wieder wirtschaftliche Stärke,
+          damit Arbeitsplätze, Wohlstand und soziale Sicherheit erhalten bleiben.
+        </p>
 
         <ul>
 
-          <li>Klare Regeln für legale Einwanderung</li>
+          <li>Weniger Bürokratie für Unternehmen, Handwerk und Mittelstand</li>
 
-          <li>Schnellere Bearbeitung von Asylverfahren</li>
+          <li>Niedrigere Steuerbelastung für Familien und Arbeitnehmer</li>
 
-          <li>Konsequente Abschiebung schwerer Straftäter ohne Aufenthaltsrecht</li>
+          <li>Förderung deutscher Industrie, Technologie und Innovation</li>
 
-          <li>Verpflichtende Sprachkurse für bessere Integration</li>
+          <li>Bezahlbare Energiepreise für Bürger und Unternehmen</li>
 
-          <li>Integration durch Arbeit, Bildung und Respekt vor Gesetzen</li>
+          <li>Unterstützung regionaler Betriebe statt übermäßiger Konzernabhängigkeit</li>
 
-          <li>Bekämpfung von Extremismus jeder Art</li>
-
-          <li>Grenzschutz und bessere europäische Zusammenarbeit</li>
-
-          <li>Stärkere Kontrolle illegaler Migration</li>
-
-          <li>Förderung qualifizierter Fachkräfte</li>
-
-          <li>Mehr Unterstützung für gelungene Integration im Alltag</li>
+          <li>Stärkung von Ausbildung, Handwerk und Unternehmertum</li>
 
         </ul>
 
-        <div class="slogan">
-          „Integration braucht Regeln.“
+        <div class="promise">
+          <strong>Unser Versprechen:</strong><br>
+          Leistung und Arbeit müssen sich wieder lohnen.
         </div>
-
-      </div>
-
-      <!-- ECONOMY -->
-
-      <div class="card" data-aos="zoom-in">
-
-        <h3>💼 Wirtschaft & Innovation</h3>
-
-        <ul>
-
-          <li>Steuerentlastungen für Familien und Mittelstand</li>
-
-          <li>Weniger Bürokratie für Unternehmen</li>
-
-          <li>Förderung von KI, Forschung und Start-ups</li>
-
-          <li>Mehr Investitionen in deutsche Infrastruktur</li>
-
-          <li>Bezahlbare Energiepreise</li>
-
-          <li>Stärkung regionaler Produktion</li>
-
-          <li>Förderung von Handwerk und Ausbildung</li>
-
-          <li>Schnelleres Internet und moderne Digitalisierung</li>
-
-          <li>Mehr Unterstützung für junge Unternehmer</li>
-
-        </ul>
 
         <div class="slogan">
           „Arbeit muss sich wieder lohnen.“
@@ -1200,94 +1028,222 @@
 
       </div>
 
-      <!-- FAMILY -->
+      <!-- 3 -->
 
       <div class="card" data-aos="zoom-in">
 
-        <h3>🏫 Familie & Bildung</h3>
+        <h3>
+          🌍 3. Migration & Integration
+        </h3>
+
+        <p>
+          Für klare Regeln und gesellschaftlichen Zusammenhalt
+        </p>
+
+        <p>
+          Deutschland ist ein offenes Land – aber Integration braucht Ordnung,
+          Regeln und gegenseitigen Respekt.
+        </p>
 
         <ul>
 
-          <li>Mehr Unterstützung für Familien mit Kindern</li>
+          <li>Bessere Kontrolle der Außengrenzen</li>
 
-          <li>Moderne Schulen und digitale Ausstattung</li>
+          <li>Klare und nachvollziehbare Regeln für Einwanderung</li>
 
-          <li>Kleinere Klassen und mehr Lehrkräfte</li>
+          <li>Integration durch Sprache, Bildung, Arbeit und Respekt vor deutschen Gesetzen</li>
 
-          <li>Stärkung von Leistung und Disziplin im Unterricht</li>
+          <li>Konsequentes Vorgehen gegen Extremismus jeder Art</li>
 
-          <li>Mehr Fokus auf Mathematik, Technik und Informatik</li>
+          <li>Sozialleistungen stärker an Eigenleistung und Integration koppeln</li>
 
-          <li>Ausbau von Ausbildungs- und Studienmöglichkeiten</li>
-
-          <li>Bessere Förderung talentierter Schüler</li>
-
-          <li>Mehr Sport- und Freizeitangebote für Jugendliche</li>
+          <li>Schnellere Verfahren bei Asyl- und Aufenthaltsfragen</li>
 
         </ul>
 
+        <div class="promise">
+          <strong>Unser Versprechen:</strong><br>
+          Integration gelingt nur mit klaren Erwartungen und gegenseitigem Respekt.
+        </div>
+
         <div class="slogan">
-          „Starke Familien. Starke Zukunft.“
+          „Integration braucht Regeln.“
         </div>
 
       </div>
 
-      <!-- ENERGY -->
+      <!-- 4 -->
 
       <div class="card" data-aos="zoom-in">
 
-        <h3>⚡ Energie & Umwelt</h3>
+        <h3>
+          🏫 4. Familie & Bildung
+        </h3>
+
+        <p>
+          Für starke Familien und beste Zukunftschancen
+        </p>
+
+        <p>
+          Familien sind das Fundament unserer Gesellschaft.
+          Bildung entscheidet über die Zukunft unseres Landes.
+        </p>
 
         <ul>
 
-          <li>Versorgungssicherheit für Deutschland</li>
+          <li>Mehr finanzielle Unterstützung für Familien mit Kindern</li>
 
-          <li>Ausbau erneuerbarer Energien</li>
+          <li>Ausbau moderner Kitas und Schulen</li>
 
-          <li>Förderung moderner Forschungstechnologien</li>
+          <li>Fokus auf Leistung, Respekt und Disziplin im Unterricht</li>
 
-          <li>Umweltschutz mit wirtschaftlicher Vernunft</li>
+          <li>Mehr Digitalisierung und moderne Technologien an Schulen</li>
 
-          <li>Schutz von Natur und regionaler Landwirtschaft</li>
+          <li>Förderung von Ausbildung, Handwerk und dualem Studium</li>
 
-          <li>Moderne Stromnetze und Infrastruktur</li>
-
-          <li>Förderung nachhaltiger Innovationen</li>
+          <li>Bessere Chancen für junge Menschen unabhängig von Herkunft</li>
 
         </ul>
 
+        <div class="promise">
+          <strong>Unser Versprechen:</strong><br>
+          Jedes Kind verdient beste Bildung und echte Zukunftsperspektiven.
+        </div>
+
         <div class="slogan">
-          „Nachhaltigkeit mit Vernunft.“
+          „Starke Familien, starke Zukunft.“
         </div>
 
       </div>
 
-      <!-- DEMOCRACY -->
+      <!-- 5 -->
 
       <div class="card" data-aos="zoom-in">
 
-        <h3>🏛 Demokratie & Bürgernähe</h3>
+        <h3>
+          ⚡ 5. Energie & Umwelt
+        </h3>
+
+        <p>
+          Für bezahlbare Energie und verantwortungsvollen Umweltschutz
+        </p>
+
+        <p>
+          Klimaschutz darf Bürger und Wirtschaft nicht überfordern.
+          Deutschland braucht eine vernünftige und technologieoffene Energiepolitik.
+        </p>
 
         <ul>
 
-          <li>Mehr direkte Demokratie</li>
+          <li>Bezahlbare Energiepreise für Haushalte und Unternehmen</li>
+
+          <li>Ausbau erneuerbarer Energien und moderner Forschungstechnologien</li>
+
+          <li>Förderung innovativer Lösungen statt ideologischer Verbote</li>
+
+          <li>Schutz regionaler Landwirtschaft und natürlicher Lebensräume</li>
+
+          <li>Versorgungssicherheit und stabile Energieversorgung</li>
+
+          <li>Nachhaltigkeit mit wirtschaftlicher Vernunft verbinden</li>
+
+        </ul>
+
+        <div class="promise">
+          <strong>Unser Versprechen:</strong><br>
+          Umweltschutz und wirtschaftliche Stärke dürfen kein Widerspruch sein.
+        </div>
+
+        <div class="slogan">
+          „Umweltschutz mit Vernunft.“
+        </div>
+
+      </div>
+
+      <!-- 6 -->
+
+      <div class="card" data-aos="zoom-in">
+
+        <h3>
+          🏛 6. Demokratie & Bürgernähe
+        </h3>
+
+        <p>
+          Für mehr Mitsprache und Transparenz
+        </p>
+
+        <p>
+          Politik muss wieder näher an die Bürger rücken.
+          Entscheidungen sollen nachvollziehbar und demokratisch bleiben.
+        </p>
+
+        <ul>
+
+          <li>Mehr direkte Demokratie nach Schweizer Vorbild</li>
+
+          <li>Volksentscheide bei wichtigen nationalen Fragen</li>
+
+          <li>Mehr Transparenz bei Lobbyismus und Politikergehältern</li>
+
+          <li>Begrenzung von Amtszeiten für Spitzenpolitiker</li>
+
+          <li>Stärkung kommunaler Entscheidungen und regionaler Mitbestimmung</li>
 
           <li>Digitale Bürgerbeteiligung ausbauen</li>
 
-          <li>Mehr Transparenz in der Politik</li>
-
-          <li>Stärkere kommunale Entscheidungen</li>
-
-          <li>Klare Offenlegung von Lobbyismus</li>
-
-          <li>Modernisierung staatlicher Behörden</li>
-
-          <li>Einfachere digitale Verwaltungsprozesse</li>
-
         </ul>
+
+        <div class="promise">
+          <strong>Unser Versprechen:</strong><br>
+          Die Stimme der Bürger muss stärker gehört werden.
+        </div>
 
         <div class="slogan">
           „Mehr Macht für die Bürger.“
+        </div>
+
+      </div>
+
+      <!-- 7 -->
+
+      <div class="card" data-aos="zoom-in">
+
+        <h3>
+          🇩🇪 7. Deutschland & Europa
+        </h3>
+
+        <p>
+          Für ein starkes Deutschland in einem starken Europa
+        </p>
+
+        <p>
+          Deutschland soll seine Interessen selbstbewusst vertreten
+          und gleichzeitig ein verlässlicher Partner in Europa bleiben.
+        </p>
+
+        <ul>
+
+          <li>Stärkere Vertretung deutscher Interessen in Europa</li>
+
+          <li>Zusammenarbeit in Europa ohne übermäßige Zentralisierung</li>
+
+          <li>Unterstützung europäischer Sicherheit und Verteidigung</li>
+
+          <li>Schutz deutscher Kultur, Sprache und Traditionen</li>
+
+          <li>Ausbau nationaler Infrastruktur und Versorgungssicherheit</li>
+
+          <li>Förderung von Innovation, Forschung und Wettbewerbsfähigkeit</li>
+
+        </ul>
+
+        <div class="promise">
+          <strong>Unser Versprechen:</strong><br>
+          Patriotismus und internationale Zusammenarbeit schließen sich nicht aus.
+        </div>
+
+        <div class="slogan">
+          „Patriotisch. Demokratisch. Zukunftsorientiert.“
         </div>
 
       </div>
@@ -1296,46 +1252,52 @@
 
   </section>
 
-  <!-- TIMELINE -->
+  <!-- GOALS -->
 
-  <section id="vision">
+  <section id="ziele">
 
     <h2 class="section-title">
-      Unsere Vision für Deutschland
+      Unsere 3 zentralen Ziele
     </h2>
 
     <p class="section-subtitle">
-      Ein langfristiger Plan für Stabilität und Fortschritt.
+      Klare Prioritäten für Deutschlands Zukunft.
     </p>
 
-    <div class="timeline">
+    <div class="grid">
 
-      <div class="timeline-item" data-aos="fade-right">
+      <div class="card goal" data-aos="fade-up">
 
-        <h3>2026 – Sicherheit stärken</h3>
+        <h3>
+          1️⃣ Sichere Straßen
+        </h3>
 
         <p>
-          Ausbau von Polizei, Digitalisierung und Infrastruktur.
+          Ein starker Rechtsstaat schützt seine Bürger.
         </p>
 
       </div>
 
-      <div class="timeline-item" data-aos="fade-left">
+      <div class="card goal" data-aos="fade-up">
 
-        <h3>2028 – Wirtschaft modernisieren</h3>
+        <h3>
+          2️⃣ Bezahlbares Leben
+        </h3>
 
         <p>
-          Investitionen in Technologie, Innovation und Industrie.
+          Wohnen, Energie und Alltag müssen wieder bezahlbar werden.
         </p>
 
       </div>
 
-      <div class="timeline-item" data-aos="fade-right">
+      <div class="card goal" data-aos="fade-up">
 
-        <h3>2030 – Zukunft sichern</h3>
+        <h3>
+          3️⃣ Starke deutsche Wirtschaft
+        </h3>
 
         <p>
-          Ein modernes, starkes und wettbewerbsfähiges Deutschland.
+          Arbeitsplätze, Innovation und Wohlstand sichern unsere Zukunft.
         </p>
 
       </div>
@@ -1353,20 +1315,19 @@
     </h2>
 
     <p class="section-subtitle">
-      Die Grundlage unserer Politik.
+      Die Grundlage unserer Politik und unseres Handelns.
     </p>
 
     <div class="values">
 
-      <div class="value-box">Freiheit</div>
-      <div class="value-box">Sicherheit</div>
-      <div class="value-box">Innovation</div>
-      <div class="value-box">Heimat</div>
-      <div class="value-box">Verantwortung</div>
-      <div class="value-box">Leistung</div>
-      <div class="value-box">Zusammenhalt</div>
-      <div class="value-box">Demokratie</div>
-      <div class="value-box">Fortschritt</div>
+      <div class="value">Freiheit</div>
+      <div class="value">Sicherheit</div>
+      <div class="value">Verantwortung</div>
+      <div class="value">Demokratie</div>
+      <div class="value">Heimat</div>
+      <div class="value">Leistung</div>
+      <div class="value">Zusammenhalt</div>
+      <div class="value">Zukunft</div>
 
     </div>
 
@@ -1390,22 +1351,6 @@
         PayPal: ysiszysisz@gmail.com
       </div>
 
-      <div class="counter-box">
-
-        <div class="counter">
-          💬 Bürgerdialog
-        </div>
-
-        <div class="counter">
-          🇩🇪 Zukunftsorientiert
-        </div>
-
-        <div class="counter">
-          ⚡ Modern & Digital
-        </div>
-
-      </div>
-
     </div>
 
   </section>
@@ -1415,15 +1360,19 @@
   <footer>
 
     <p>
+      Unser Leitsatz
+    </p>
+
+    <h2 style="margin-top:15px;">
       „Heimat. Freiheit. Zukunft.“
+    </h2>
+
+    <p style="margin-top:20px;">
+      ZFD – Zukunft für Deutschland.
     </p>
 
-    <p style="margin-top:10px;">
+    <p style="margin-top:20px;">
       © 2026 ZFD – Zukunft für Deutschland
-    </p>
-
-    <p style="margin-top:10px;">
-      Entwickelt von <strong>Jakob</strong> & <strong>Jason</strong>
     </p>
 
   </footer>
@@ -1434,13 +1383,7 @@
     ↑
   </button>
 
-  <!-- AUDIO -->
-
-  <audio id="hoverSound">
-    <source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg">
-  </audio>
-
-  <!-- SCRIPT -->
+  <!-- AOS -->
 
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
@@ -1453,7 +1396,7 @@
 
     });
 
-    /* THEME */
+    /* THEME TOGGLE */
 
     const toggleBtn = document.getElementById("themeToggle");
     const html = document.documentElement;
@@ -1474,7 +1417,7 @@
 
     });
 
-    /* CARD LIGHT EFFECT */
+    /* CARD SPOTLIGHT */
 
     const cards = document.querySelectorAll(".card");
 
@@ -1494,37 +1437,7 @@
 
     });
 
-    /* COUNTERS */
-
-    function animateCounter(id, target) {
-
-      let count = 0;
-
-      const el = document.getElementById(id);
-
-      const interval = setInterval(() => {
-
-        count += Math.ceil(target / 80);
-
-        if(count >= target) {
-
-          count = target;
-          clearInterval(interval);
-
-        }
-
-        el.textContent = count + "+";
-
-      }, 20);
-
-    }
-
-    animateCounter("counter1", 250);
-    animateCounter("counter2", 120);
-    animateCounter("counter3", 75);
-    animateCounter("counter4", 100);
-
-    /* TOP BUTTON */
+    /* SCROLL BTN */
 
     const topBtn = document.getElementById("topBtn");
 
@@ -1553,7 +1466,7 @@
 
     });
 
-    /* SPAM BUTTON EASTER EGG */
+    /* EASTER EGG */
 
     let clicks = 0;
 
@@ -1565,7 +1478,7 @@
 
       if(clicks === 7) {
 
-        alert("🇩🇪 Danke für deine Unterstützung der ZFD!");
+        alert("🇩🇪 Danke für deine Unterstützung!");
 
       }
 
@@ -1583,7 +1496,7 @@
 
     });
 
-    /* SECRET KONAMI */
+    /* SECRET CODE */
 
     let typed = "";
 
@@ -1593,35 +1506,13 @@
 
       if(typed.includes("zfd")) {
 
-        document.body.style.filter = "hue-rotate(20deg)";
-
         alert("🇩🇪 ZFD Modus aktiviert.");
+
+        document.body.style.filter = "hue-rotate(15deg)";
 
         typed = "";
 
       }
-
-    });
-
-    /* CURSOR GLOW */
-
-    const glow = document.createElement("div");
-
-    glow.style.position = "fixed";
-    glow.style.width = "20px";
-    glow.style.height = "20px";
-    glow.style.borderRadius = "50%";
-    glow.style.background = "rgba(59,130,246,0.5)";
-    glow.style.pointerEvents = "none";
-    glow.style.filter = "blur(10px)";
-    glow.style.zIndex = "9999";
-
-    document.body.appendChild(glow);
-
-    document.addEventListener("mousemove", e => {
-
-      glow.style.left = e.clientX - 10 + "px";
-      glow.style.top = e.clientY - 10 + "px";
 
     });
 
